@@ -1,107 +1,220 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilo.css">
-    <title>SisCristóvão - Lançar Agendamento</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendamento - Clínica de Estética</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f8f4f6;
+}
+
+header{
+    background:#d63384;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    width:90%;
+    max-width:800px;
+    margin:30px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h2{
+    margin-bottom:20px;
+    color:#d63384;
+}
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#d63384;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#b8236d;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th{
+    background:#d63384;
+    color:white;
+    padding:10px;
+}
+
+table td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:center;
+}
+
+.excluir{
+    background:#dc3545;
+    padding:6px 10px;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
+
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Clientes</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="agendamentos.html">Agendamentos</a>
-        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-    </nav>
 
-    <header class="banner">
-        <h1>Controle de Agendamentos</h1>
-        <p>Abra ordens de serviço e reserve horários para atendimento</p>
-    </header>
+<header>
+<h1>Clínica de Estética Bella Pele</h1>
+<p>Sistema de Agendamento</p>
+</header>
 
-    <div class="container">
-        <div style="margin-bottom: 20px;">
-            <button onclick="window.location.href='consulta_agendamentos.html'" style="background: #555; width: auto; padding: 10px 20px;">
-                🔍 Ver Histórico de Agendamentos
-            </button>
-        </div>
+<div class="container">
 
-        <div class="card">
-            <h2>Nova Ordem de Serviço / Agendamento</h2>
+<div class="card">
 
-            <label for="selCliente">Cliente / Solicitante:</label>
-            <select id="selCliente">
-                <option value="">Selecione o Cliente...</option>
-            </select>
+<h2>Novo Agendamento</h2>
 
-            <label for="data_agendamento">Data e Hora do Atendimento:</label>
-            <input type="datetime-local" id="data_agendamento" required>
+<input type="text" id="nome" placeholder="Nome do Cliente">
 
-            <label for="responsavel">Aluno / Equipe Responsável:</label>
-            <input type="text" id="responsavel" placeholder="Ex: Grupo 2 (Ana e Pedro)" required>
+<select id="servico">
+<option>Limpeza de Pele</option>
+<option>Botox</option>
+<option>Preenchimento</option>
+<option>Drenagem Linfática</option>
+<option>Massagem Relaxante</option>
+<option>Depilação a Laser</option>
+<option>Peeling</option>
+</select>
 
-            <hr>
+<input type="date" id="data">
 
-            <h3>🛠️ Adicionar Serviços ao Agendamento</h3>
-            
-            <label for="selServico">Selecione o Serviço:</label>
-            <select id="selServico" onchange="atualizarDadosServico()">
-                <option value="">Selecione um serviço...</option>
-            </select>
+<input type="time" id="hora">
 
-            <div style="display: flex; gap: 15px; margin-top: 5px;">
-                <div style="flex: 1;">
-                    <label>Preço Sugerido (R$):</label>
-                    <input type="number" id="txtPreco" readonly style="background: #eee;">
-                </div>
-                <div style="flex: 1;">
-                    <label>Tempo Est. (Horas):</label>
-                    <input type="number" id="txtTempo" readonly style="background: #eee;">
-                </div>
-            </div>
+<button onclick="agendar()">Agendar</button>
 
-            <button type="button" onclick="adicionarServicoNaLista()" style="background-color: var(--primary-blue); margin-top: 15px;">
-                ➕ Incluir Serviço no Agendamento
-            </button>
-        </div>
+</div>
 
-        <div class="card" style="margin-top: 20px;">
-            <h2>Serviços Inclusos neste Agendamento</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Serviço</th>
-                        <th>Tempo Est.</th>
-                        <th>Preço (R$)</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-servicos-agendados">
-                    </tbody>
-            </table>
+<div class="card" style="margin-top:20px;">
 
-            <div style="text-align: right; margin-top: 15px;">
-                <h3 id="txtTotal">Total Geral: R$ 0.00</h3>
-                <h4 id="txtTempoTotal" style="color: var(--accent-red);">Tempo Total Estimado: 0h</h4>
-            </div>
+<h2>Agendamentos</h2>
 
-            <button type="button" onclick="finalizarAgendamento()" style="margin-top: 15px; background-color: var(--accent-red);">
-                💾 Salvar e Confirmar Agendamento
-            </button>
-        </div>
-    </div>
+<table>
 
-    <script>
-        let listaServicosDb = [];
-        let carrinhoServicos = [];
-        let totalGeral = 0;
-        let tempoTotalGeral = 0;
+<thead>
+<tr>
+<th>Cliente</th>
+<th>Serviço</th>
+<th>Data</th>
+<th>Hora</th>
+<th>Ação</th>
+</tr>
+</thead>
 
-        // Carrega os dados iniciais do banco ao abrir a página
-        window.onload = function() {
-            // Buscar clientes para o Select
-            fetch('/listar-clientes')
-                .then(res => res.json())
-                .then(clientes => {
-                    const sel = document.getElementById('selCliente');
-                    clientes.forEach(c => {
-                        sel.innerHTML += `<option value="${c.id}">${c.nome} (${c.cpf})
+<tbody id="listaAgendamentos">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+let agendamentos = [];
+
+function agendar(){
+
+let nome = document.getElementById("nome").value;
+let servico = document.getElementById("servico").value;
+let data = document.getElementById("data").value;
+let hora = document.getElementById("hora").value;
+
+if(nome=="" || data=="" || hora==""){
+    alert("Preencha todos os campos.");
+    return;
+}
+
+agendamentos.push({
+    nome,
+    servico,
+    data,
+    hora
+});
+
+document.getElementById("nome").value="";
+document.getElementById("data").value="";
+document.getElementById("hora").value="";
+
+mostrarAgendamentos();
+
+}
+
+function mostrarAgendamentos(){
+
+let tabela=document.getElementById("listaAgendamentos");
+tabela.innerHTML="";
+
+agendamentos.forEach((item,index)=>{
+
+tabela.innerHTML += `
+<tr>
+<td>${item.nome}</td>
+<td>${item.servico}</td>
+<td>${item.data}</td>
+<td>${item.hora}</td>
+<td>
+<button class="excluir" onclick="remover(${index})">
+Excluir
+</button>
+</td>
+</tr>
+`;
+
+});
+
+}
+
+function remover(index){
+agendamentos.splice(index,1);
+mostrarAgendamentos();
+}
+
+</script>
+
+</body>
+</html>
