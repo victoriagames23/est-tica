@@ -1,248 +1,325 @@
-/* ==========================================================================
-   PALETA DE CORES OFICIAL - COLÉGIO ESTADUAL SÃO CRISTÓVÃO
-   ========================================================================== */
-:root {
-    --primary-blue: #132960;   /* Azul escuro do escudo e estruturas */
-    --accent-red: #D31C24;     /* Vermelho vivo dos detalhes e textos */
-    --bg-white: #FFFFFF;       /* Branco puro para blocos e destaques */
-    --bg-light: #F0F3F8;       /* Cinza azulado bem claro para o fundo do site */
-    --text-dark: #1C1C1C;      /* Cinza quase preto para melhor leitura */
-    --text-muted: #555555;     /* Cinza médio para textos secundários */
+
+
+/* ==========================================
+   CLÍNICA DE ESTÉTICA - STYLE.CSS
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ==========================================================================
-   ESTRUTURA GERAL DA PÁGINA
-   ========================================================================== */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+body{
+    background:#f7f7f7;
+    color:#333;
 }
 
-/* O container principal estica para empurrar o rodapé para baixo */
-.container {
-    padding: 2rem 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-    flex: 1;
+/* Header */
+
+header{
+    background:linear-gradient(135deg,#d63384,#f06292);
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
-/* ==========================================================================
-   MENU DE NAVEGAÇÃO (NAV) - Estilo Azul Escuro com Hover Vermelho
-   ========================================================================== */
-nav {
-    background-color: var(--primary-blue);
-    padding: 1.1rem;
-    display: flex;
-    justify-content: space-around;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border-bottom: 4px solid var(--accent-red); /* Faixa vermelha de destaque */
+header h1{
+    font-size:32px;
+    margin-bottom:10px;
 }
 
-nav a {
-    color: var(--bg-white);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.05rem;
-    padding: 5px 12px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+header p{
+    font-size:18px;
 }
 
-nav a:hover {
-    background-color: var(--accent-red);
-    color: var(--bg-white);
+/* Container */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:30px auto;
 }
 
-/* ==========================================================================
-   HEADER / BANNER PRINCIPAL (Inspirado fielmente no design da placa)
-   ========================================================================== */
-.banner {
-    /* Base branca com as curvas geométricas vermelha e azul nas extremidades */
-    background: 
-        linear-gradient(115deg, var(--primary-blue) 12%, transparent 12.5%),
-        linear-gradient(295deg, var(--accent-red) 12%, transparent 12.5%),
-        linear-gradient(115deg, var(--accent-red) 14%, transparent 14.5%),
-        linear-gradient(295deg, var(--primary-blue) 14%, transparent 14.5%),
-        var(--bg-white);
-    
-    color: var(--primary-blue);
-    padding: 40px 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    margin-bottom: 15px;
-    border-bottom: 1px solid #DDD;
+/* Cards */
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
 }
 
-.banner h1 {
-    margin: 0;
-    font-size: 2.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--primary-blue);
+/* Títulos */
+
+h2{
+    color:#d63384;
+    margin-bottom:20px;
 }
 
-.banner p {
-    margin: 8px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--accent-red); /* O subtítulo imita a linha vermelha inferior da placa */
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+/* Grid */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
 }
 
-.banner img {
-    margin-top: 15px;
-    max-width: 100%;
-    height: auto;
-    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.1));
+/* Campos */
+
+input,
+select,
+textarea{
+
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    transition:.3s;
+
 }
 
-/* ==========================================================================
-   CARDS DE CONTEÚDO
-   ========================================================================== */
-.card {
-    background: var(--bg-white);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border-left: 6px solid var(--primary-blue); /* Detalhe azul na lateral esquerda */
-    margin-bottom: 25px;
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#d63384;
+    outline:none;
+    box-shadow:0 0 8px rgba(214,51,132,.25);
+
 }
 
-.card h1, .card h2, .card h3 {
-    color: var(--primary-blue);
-    margin-top: 0;
+/* Botões */
+
+button{
+
+    background:#d63384;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+
 }
 
-.card p {
-    line-height: 1.6;
-    color: var(--text-dark);
+button:hover{
+
+    background:#b91f6b;
+    transform:translateY(-2px);
+
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background: #E0E0E0;
-    margin: 1.5rem 0;
+.btn-verde{
+    background:#28a745;
 }
 
-/* ==========================================================================
-   FORMULÁRIOS E INPUTS
-   ========================================================================== */
-input, select, button {
-    width: 100%;
-    padding: 0.85rem;
-    margin: 0.6rem 0;
-    border: 2px solid #CBD5E1;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+.btn-verde:hover{
+    background:#1e7e34;
 }
 
-input:focus, select:focus {
-    outline: none;
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 3px rgba(19, 41, 96, 0.15);
+.btn-vermelho{
+    background:#dc3545;
 }
 
-/* Botão Principal em Vermelho Destaque (Estilo Escolar) */
-button, button[type="submit"] {
-    background-color: var(--accent-red);
-    color: var(--bg-white);
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 3px 6px rgba(211, 28, 36, 0.2);
+.btn-vermelho:hover{
+    background:#b21f2d;
 }
 
-button:hover {
-    background-color: #A81319; /* Vermelho um pouco mais escuro para o hover */
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(211, 28, 36, 0.3);
+.btn-azul{
+    background:#0d6efd;
 }
 
-/* ==========================================================================
-   TABELAS DE DADOS
-   ========================================================================== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.2rem;
-    background-color: var(--bg-white);
+.btn-azul:hover{
+    background:#0b5ed7;
 }
 
-th, td {
-    padding: 12px 15px;
-    text-align: left;
+/* Tabelas */
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+
 }
 
-thead tr {
-    background-color: var(--primary-blue);
-    color: var(--bg-white);
+table th{
+
+    background:#d63384;
+    color:white;
+    padding:14px;
+
 }
 
-th {
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
+table td{
+
+    padding:12px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+
 }
 
-tbody tr {
-    border-bottom: 1px solid #E2E8F0;
-    transition: background-color 0.2s ease;
+table tr:nth-child(even){
+
+    background:#fafafa;
+
 }
 
-/* Efeito zebra suave nas linhas da tabela */
-tbody tr:nth-of-type(even) {
-    background-color: #F8FAFC;
+table tr:hover{
+
+    background:#fff1f7;
+
 }
 
-tbody tr:hover {
-    background-color: #EDF2F7;
+/* Menu */
+
+nav{
+
+    background:white;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    padding:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
 }
 
-/* Botão de ação menor dentro das tabelas */
-td button {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-    width: auto;
-    margin: 0;
-    background-color: var(--primary-blue);
+nav a{
+
+    text-decoration:none;
+    color:#d63384;
+    font-weight:bold;
+    padding:10px 15px;
+    border-radius:8px;
+    transition:.3s;
+
 }
 
-td button:hover {
-    background-color: #0A1738;
+nav a:hover{
+
+    background:#d63384;
+    color:white;
+
 }
 
-/* ==========================================================================
-   RODAPÉ (FOOTER) - Estilo Dark Técnico
-   ========================================================================== */
-.rodape {
-    background-color: #1A1A1A; /* Fundo cinza escuro grafite */
-    color: #AEB0B5;
-    text-align: center;
-    padding: 25px 0;
-    margin-top: 40px;
-    width: 100%;
-    border-top: 4px solid var(--primary-blue); /* Linha azul de fechamento */
+/* Dashboard */
+
+.dashboard{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+
 }
 
-.container-rodape p {
-    margin: 6px 0;
-    font-size: 0.9rem;
+.box{
+
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
 }
 
-.container-rodape p:first-child {
-    color: var(--bg-white);
-    font-weight: bold;
+.box h3{
+
+    color:#d63384;
+    margin-bottom:10px;
+
+}
+
+.box span{
+
+    font-size:35px;
+    font-weight:bold;
+
+}
+
+/* Formulários */
+
+form{
+
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+}
+
+/* Alertas */
+
+.alert{
+
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+
+}
+
+.alert-success{
+
+    background:#d4edda;
+    color:#155724;
+
+}
+
+.alert-danger{
+
+    background:#f8d7da;
+    color:#721c24;
+
+}
+
+.alert-warning{
+
+    background:#fff3cd;
+    color:#856404;
+
+}
+
+/* Footer */
+
+footer{
+
+    background:#d63384;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+
+}
+
+/* Responsividade */
+
+@media(max-width:768px){
+
+header h1{
+    font-size:26px;
+}
+
+nav{
+
+    flex-direction:column;
+    align-items:center;
+
+}
+
+table{
+
+    font-size:13px;
+
+}
+
+button{
+
+    width:100%;
+
+}
+
 }
