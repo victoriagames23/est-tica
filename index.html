@@ -1,75 +1,163 @@
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilo.css">
-    <title>SisCristóvão - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica de Estética Bella Vita</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .hero{
+            background:linear-gradient(rgba(214,51,132,.85), rgba(214,51,132,.85)),
+            url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80");
+            background-size:cover;
+            background-position:center;
+            color:#fff;
+            text-align:center;
+            padding:90px 20px;
+            border-radius:15px;
+            margin-bottom:30px;
+        }
+
+        .hero h2{
+            color:white;
+            font-size:42px;
+            margin-bottom:15px;
+        }
+
+        .hero p{
+            font-size:20px;
+            max-width:700px;
+            margin:auto;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:20px;
+            margin-top:30px;
+        }
+
+        .card-home{
+            background:white;
+            border-radius:15px;
+            padding:30px;
+            text-align:center;
+            box-shadow:0 5px 15px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+
+        .card-home:hover{
+            transform:translateY(-6px);
+        }
+
+        .icone{
+            font-size:50px;
+            margin-bottom:15px;
+        }
+
+        .card-home h3{
+            color:#d63384;
+            margin-bottom:10px;
+        }
+
+        .card-home p{
+            color:#666;
+            margin-bottom:20px;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#d63384;
+            color:white;
+            text-decoration:none;
+            padding:12px 20px;
+            border-radius:8px;
+        }
+
+        .btn:hover{
+            background:#b61d69;
+        }
+    </style>
 </head>
+
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Clientes</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="agendamentos.html">Agendamentos</a>
-        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-    </nav>
 
-    <header class="banner">
-        <h1>SisCristóvão</h1>
-        <p>Controle de Serviços e Agendamentos Práticos</p>
-        <img src="imagens/banner.jtif" alt="SisCristóvão 1.0" width="300">
-    </header>
+<header>
+    <h1>Clínica de Estética Bella Vita</h1>
+    <p>Sistema de Gestão</p>
+</header>
 
-    <div class="container">
-        <div class="card">
-            <h1>Bem-vindo ao SisCristóvão 1.0</h1>
-            <p>Uma plataforma didática desenvolvida para gerenciar a prestação de serviços, organizar a alocação de equipes e otimizar o fluxo de agendamentos dos alunos do São Cristóvão.</p>
-            
-            <p>Este sistema conecta a interface Web ao banco de dados SQLite para simular um ambiente real de ordens de serviço e atendimento ao cliente.</p>
+<nav>
+    <a href="index.html">🏠 Início</a>
+    <a href="clientes.html">👤 Clientes</a>
+    <a href="agendamentos.html">📅 Agendamentos</a>
+    <a href="consultas_agendamentos.html">📋 Consultas</a>
+</nav>
+
+<div class="container">
+
+    <section class="hero">
+        <h2>Bem-vindo ao Sistema da Clínica</h2>
+        <p>
+            Gerencie clientes, agendamentos e consultas de forma simples,
+            organizada e segura.
+        </p>
+    </section>
+
+    <div class="cards">
+
+        <div class="card-home">
+            <div class="icone">👤</div>
+            <h3>Clientes</h3>
+            <p>Cadastre e consulte todos os clientes da clínica.</p>
+            <a href="clientes.html" class="btn">Acessar</a>
         </div>
 
-        <div class="card" style="margin-top: 20px;">
-            <h3>🚀 Módulos Práticos do Sistema:</h3>
-            <table border="1" style="width:100%; border-collapse: collapse; margin-top: 10px;">
-                <thead>
-                    <tr style="background-color: #eee;">
-                        <th>Módulo</th>
-                        <th>Descrição Operacional</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>👥 <strong>Clientes</strong></td>
-                        <td>Cadastro de solicitantes e gerenciamento de contatos para assistência técnica.</td>
-                    </tr>
-                    <tr>
-                        <td>🛠️ <strong>Serviços</strong></td>
-                        <td>Catálogo de serviços disponíveis, incluindo escopo, prazos estimados e valores.</td>
-                    </tr>
-                    <tr>
-                        <td>📅 <strong>Agendamentos</strong></td>
-                        <td>Abertura de ordens de serviço, reserva de horários e alocação de alunos responsáveis.</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card-home">
+            <div class="icone">📅</div>
+            <h3>Agendamentos</h3>
+            <p>Realize novos agendamentos de procedimentos.</p>
+            <a href="agendamentos.html" class="btn">Abrir Agenda</a>
         </div>
 
-        <div class="card" style="margin-top: 20px;">
-            <h3>📊 Estrutura Tecnológica</h3>
-            <ul>
-                <li><strong>Ambiente Escolar:</strong> Práticas de laboratório na Unidade São Cristóvão.</li>
-                <li><strong>Backend:</strong> Node.js com Express e API RESTful.</li>
-                <li><strong>Banco de Dados:</strong> SQLite (`siscristovao.db`) com relacionamentos mestre-detalhe.</li>
-            </ul>
+        <div class="card-home">
+            <div class="icone">📋</div>
+            <h3>Consultas</h3>
+            <p>Pesquise e acompanhe todos os agendamentos.</p>
+            <a href="consultas_agendamentos.html" class="btn">Consultar</a>
         </div>
+
+        <div class="card-home">
+            <div class="icone">💆</div>
+            <h3>Procedimentos</h3>
+            <p>Gerencie os tratamentos e serviços oferecidos.</p>
+            <a href="#" class="btn">Em breve</a>
+        </div>
+
+        <div class="card-home">
+            <div class="icone">💰</div>
+            <h3>Financeiro</h3>
+            <p>Controle pagamentos, recebimentos e relatórios.</p>
+            <a href="#" class="btn">Em breve</a>
+        </div>
+
+        <div class="card-home">
+            <div class="icone">📊</div>
+            <h3>Relatórios</h3>
+            <p>Visualize estatísticas e indicadores da clínica.</p>
+            <a href="#" class="btn">Em breve</a>
+        </div>
+
     </div>
 
-    <footer class="rodape">
-        <div class="container-rodape">
-            <p>&copy; 2026 SisCristóvão - Sistema de Controle de Serviços</p>
-            <p>Desenvolvido para fins didáticos - Alunos do São Cristóvão</p>
-        </div>
-    </footer>
+</div>
+
+<footer>
+    <p>&copy; 2026 Clínica de Estética Bella Vita - Todos os direitos reservados.</p>
+</footer>
+
 </body>
 </html>
