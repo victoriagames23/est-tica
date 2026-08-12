@@ -1,269 +1,1526 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Consulta de Agendamentos</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Agendamentos | Bella Pele</title>
+
 
 <style>
+
+/* ================================
+   VARIÁVEIS
+================================ */
+
+:root{
+
+    --rosa:#d63384;
+    --rosa-escuro:#b8236d;
+    --rosa-claro:#fce4ef;
+
+    --fundo:#f8f5f7;
+    --branco:#fff;
+
+    --texto:#333;
+    --cinza:#777;
+    --borda:#ddd;
+
+    --verde:#198754;
+    --azul:#0d6efd;
+    --vermelho:#dc3545;
+    --roxo:#6f42c1;
+
+    --sombra:
+        0 8px 25px rgba(0,0,0,.08);
+}
+
+
+/* ================================
+   RESET
+================================ */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 }
+
+
+/* ================================
+   BODY
+================================ */
 
 body{
-    background:#f8f5f7;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8fb,
+            #f5f1f3
+        );
+
+    color:var(--texto);
+
+    min-height:100vh;
 }
+
+
+/* ================================
+   HEADER
+================================ */
 
 header{
-    background:#d63384;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d63384,
+            #e85d9e
+        );
+
     color:white;
+
     text-align:center;
-    padding:20px;
+
+    padding:30px 20px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(214,51,132,.25);
 }
 
+header h1{
+
+    font-size:30px;
+
+    margin-bottom:8px;
+}
+
+header p{
+
+    opacity:.9;
+}
+
+
+/* ================================
+   CONTAINER
+================================ */
+
 .container{
-    width:95%;
-    max-width:1200px;
+
+    width:92%;
+
+    max-width:1250px;
+
     margin:30px auto;
 }
 
-.card{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,.1);
-}
 
-.filtros{
+/* ================================
+   RESUMO
+================================ */
+
+.resumo{
+
     display:grid;
-    grid-template-columns:2fr 1fr auto;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
     gap:15px;
+
     margin-bottom:20px;
 }
 
-input{
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:8px;
+.resumo-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:14px;
+
+    box-shadow:var(--sombra);
 }
 
-button{
-    background:#d63384;
-    color:white;
+.resumo-card span{
+
+    display:block;
+
+    color:var(--cinza);
+
+    font-size:14px;
+
+    margin-bottom:8px;
+}
+
+.resumo-card strong{
+
+    font-size:28px;
+}
+
+.total strong{
+    color:var(--rosa);
+}
+
+.agendado strong{
+    color:var(--azul);
+}
+
+.confirmado strong{
+    color:var(--verde);
+}
+
+.concluido strong{
+    color:var(--roxo);
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    box-shadow:var(--sombra);
+}
+
+
+/* ================================
+   CABEÇALHO DO CARD
+================================ */
+
+.card-topo{
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.card-topo h2{
+
+    color:var(--rosa);
+}
+
+
+/* ================================
+   FILTROS
+================================ */
+
+.filtros{
+
+    display:grid;
+
+    grid-template-columns:
+        2fr
+        1fr
+        1fr
+        auto
+        auto;
+
+    gap:12px;
+
+    margin-bottom:20px;
+}
+
+input,
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    border:
+        1px solid
+        var(--borda);
+
+    border-radius:9px;
+
+    outline:none;
+
+    font-size:14px;
+
+    background:white;
+
+    transition:.2s;
+}
+
+input:focus,
+select:focus{
+
+    border-color:
+        var(--rosa);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(214,51,132,.1);
+}
+
+
+/* ================================
+   BOTÕES
+================================ */
+
+.btn{
+
     border:none;
-    padding:10px 18px;
+
+    padding:
+        11px 16px;
+
     border-radius:8px;
+
     cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.2s;
 }
 
-button:hover{
-    background:#b42b70;
+.btn:hover{
+
+    transform:
+        translateY(-1px);
+}
+
+.btn-pesquisar{
+
+    background:
+        var(--rosa);
+
+    color:white;
+}
+
+.btn-pesquisar:hover{
+
+    background:
+        var(--rosa-escuro);
+}
+
+.btn-limpar{
+
+    background:#eee;
+
+    color:#555;
+}
+
+.btn-limpar:hover{
+
+    background:#ddd;
+}
+
+
+/* ================================
+   TABELA
+================================ */
+
+.tabela-container{
+
+    width:100%;
+
+    overflow-x:auto;
 }
 
 table{
+
     width:100%;
-    border-collapse:collapse;
+
+    border-collapse:
+        collapse;
+
+    min-width:900px;
 }
 
 th{
-    background:#d63384;
+
+    background:
+        var(--rosa);
+
     color:white;
+
+    padding:13px;
 }
 
-th,td{
-    border:1px solid #ddd;
-    padding:12px;
+td{
+
+    padding:13px;
+
+    border-bottom:
+        1px solid #eee;
+
     text-align:center;
 }
 
+tbody tr:hover{
+
+    background:#fff8fb;
+}
+
+
+/* ================================
+   STATUS
+================================ */
+
+.status{
+
+    display:inline-block;
+
+    padding:
+        6px 11px;
+
+    border-radius:
+        20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+.status-agendado{
+
+    background:#dbeafe;
+
+    color:#0756b5;
+}
+
+.status-confirmado{
+
+    background:#d1e7dd;
+
+    color:#0f5132;
+}
+
+.status-concluido{
+
+    background:#ede3ff;
+
+    color:#5b2a9d;
+}
+
+.status-cancelado{
+
+    background:#f8d7da;
+
+    color:#842029;
+}
+
+
+/* ================================
+   AÇÕES
+================================ */
+
+.acoes{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:6px;
+}
+
+.acao{
+
+    border:none;
+
+    padding:
+        7px 10px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+.editar{
+
+    background:
+        var(--azul);
+}
+
+.editar:hover{
+
+    background:#0a58ca;
+}
+
 .excluir{
-    background:#dc3545;
+
+    background:
+        var(--vermelho);
 }
 
 .excluir:hover{
+
     background:#b02a37;
+}
+
+
+/* ================================
+   NENHUM RESULTADO
+================================ */
+
+.sem-resultado{
+
+    text-align:center;
+
+    padding:45px;
+
+    color:var(--cinza);
+}
+
+.sem-resultado .icone{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+}
+
+
+/* ================================
+   RODAPÉ
+================================ */
+
+.rodape{
+
+    text-align:center;
+
+    color:var(--cinza);
+
+    font-size:13px;
+
+    padding:
+        20px 0 30px;
+}
+
+
+/* ================================
+   RESPONSIVO
+================================ */
+
+@media(max-width:1000px){
+
+    .filtros{
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
 }
 
 @media(max-width:700px){
 
-.filtros{
-grid-template-columns:1fr;
+    header h1{
+
+        font-size:23px;
+    }
+
+    .container{
+
+        width:95%;
+
+        margin-top:20px;
+    }
+
+    .resumo{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .card{
+
+        padding:18px;
+    }
+
+    .filtros{
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .card-topo{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+    }
+
 }
 
-table{
-font-size:13px;
-}
+@media(max-width:450px){
+
+    .resumo{
+
+        grid-template-columns:
+            1fr;
+    }
 
 }
+
 </style>
 
 </head>
+
+
 <body>
 
+
+<!-- =================================
+     CABEÇALHO
+================================= -->
+
 <header>
-<h1>Consulta de Agendamentos</h1>
-<p>Clínica de Estética</p>
+
+    <h1>
+        ✨ Clínica de Estética Bella Pele
+    </h1>
+
+    <p>
+        Central de Agendamentos
+    </p>
+
 </header>
+
 
 <div class="container">
 
+
+<!-- =================================
+     RESUMO
+================================= -->
+
+<div class="resumo">
+
+    <div class="resumo-card total">
+
+        <span>
+            Total
+        </span>
+
+        <strong id="total">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="resumo-card agendado">
+
+        <span>
+            Agendados
+        </span>
+
+        <strong id="agendados">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="resumo-card confirmado">
+
+        <span>
+            Confirmados
+        </span>
+
+        <strong id="confirmados">
+            0
+        </strong>
+
+    </div>
+
+
+    <div class="resumo-card concluido">
+
+        <span>
+            Concluídos
+        </span>
+
+        <strong id="concluidos">
+            0
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- =================================
+     CARD PRINCIPAL
+================================= -->
+
 <div class="card">
 
-<div class="filtros">
 
-<input
-type="text"
-id="pesquisa"
-placeholder="Pesquisar pelo nome do cliente">
+    <div class="card-topo">
 
-<input
-type="date"
-id="filtroData">
+        <h2>
+            📋 Lista de Agendamentos
+        </h2>
 
-<button onclick="filtrar()">
-Pesquisar
-</button>
+    </div>
+
+
+    <!-- =================================
+         FILTROS
+    ================================= -->
+
+    <div class="filtros">
+
+
+        <input
+            type="search"
+            id="pesquisa"
+            placeholder="🔎 Pesquisar cliente ou serviço..."
+        >
+
+
+        <input
+            type="date"
+            id="filtroData"
+        >
+
+
+        <select id="filtroStatus">
+
+            <option value="">
+                Todos os status
+            </option>
+
+            <option value="Agendado">
+                Agendado
+            </option>
+
+            <option value="Confirmado">
+                Confirmado
+            </option>
+
+            <option value="Concluído">
+                Concluído
+            </option>
+
+            <option value="Cancelado">
+                Cancelado
+            </option>
+
+        </select>
+
+
+        <button
+            class="btn btn-pesquisar"
+            onclick="filtrar()"
+        >
+            🔎 Pesquisar
+        </button>
+
+
+        <button
+            class="btn btn-limpar"
+            onclick="limparFiltros()"
+        >
+            Limpar
+        </button>
+
+
+    </div>
+
+
+    <!-- =================================
+         TABELA
+    ================================= -->
+
+    <div class="tabela-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Cliente
+                    </th>
+
+                    <th>
+                        Serviço
+                    </th>
+
+                    <th>
+                        Data
+                    </th>
+
+                    <th>
+                        Horário
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Ações
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="lista">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
 
 </div>
 
-<table>
 
-<thead>
+<div class="rodape">
 
-<tr>
-<th>Cliente</th>
-<th>Serviço</th>
-<th>Data</th>
-<th>Horário</th>
-<th>Status</th>
-<th>Ação</th>
-</tr>
-
-</thead>
-
-<tbody id="lista">
-
-</tbody>
-
-</table>
+    Bella Pele © 2026
+    — Sistema de Agendamentos
 
 </div>
 
+
 </div>
+
 
 <script>
 
+/* =========================================
+   DADOS
+========================================= */
+
 let agendamentos =
-JSON.parse(localStorage.getItem("agendamentos")) || [];
+    JSON.parse(
+        localStorage.getItem(
+            "agendamentos"
+        )
+    ) || [];
+
+
+/* =========================================
+   SALVAR
+========================================= */
 
 function salvar(){
-localStorage.setItem(
-"agendamentos",
-JSON.stringify(agendamentos)
-);
+
+    localStorage.setItem(
+        "agendamentos",
+        JSON.stringify(
+            agendamentos
+        )
+    );
+
 }
+
+
+/* =========================================
+   FORMATAR DATA
+========================================= */
+
+function formatarData(data){
+
+    if(!data){
+
+        return "-";
+
+    }
+
+    const partes =
+        data.split("-");
+
+    if(partes.length !== 3){
+
+        return data;
+
+    }
+
+    return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+    );
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+function obterStatus(item){
+
+    return item.status ||
+        "Agendado";
+
+}
+
+
+function classeStatus(status){
+
+    if(status === "Confirmado"){
+
+        return "status-confirmado";
+
+    }
+
+    if(status === "Concluído"){
+
+        return "status-concluido";
+
+    }
+
+    if(status === "Cancelado"){
+
+        return "status-cancelado";
+
+    }
+
+    return "status-agendado";
+
+}
+
+
+/* =========================================
+   ATUALIZAR RESUMO
+========================================= */
+
+function atualizarResumo(){
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        agendamentos.length;
+
+
+    document.getElementById(
+        "agendados"
+    ).textContent =
+        agendamentos.filter(
+            item =>
+                obterStatus(item)
+                === "Agendado"
+        ).length;
+
+
+    document.getElementById(
+        "confirmados"
+    ).textContent =
+        agendamentos.filter(
+            item =>
+                obterStatus(item)
+                === "Confirmado"
+        ).length;
+
+
+    document.getElementById(
+        "concluidos"
+    ).textContent =
+        agendamentos.filter(
+            item =>
+                obterStatus(item)
+                === "Concluído"
+        ).length;
+
+}
+
+
+/* =========================================
+   CARREGAR
+========================================= */
 
 function carregar(lista){
 
-const tbody =
-document.getElementById("lista");
+    const tbody =
+        document.getElementById(
+            "lista"
+        );
 
-tbody.innerHTML="";
+    tbody.innerHTML = "";
 
-if(lista.length===0){
 
-tbody.innerHTML=
-`<tr>
-<td colspan="6">
-Nenhum agendamento encontrado.
-</td>
-</tr>`;
+    /* NENHUM RESULTADO */
 
-return;
+    if(lista.length === 0){
+
+        const linha =
+            document.createElement(
+                "tr"
+            );
+
+        linha.innerHTML = `
+            <td colspan="6">
+
+                <div class="sem-resultado">
+
+                    <div class="icone">
+                        📅
+                    </div>
+
+                    <strong>
+                        Nenhum agendamento encontrado
+                    </strong>
+
+                    <p>
+                        Tente alterar os filtros.
+                    </p>
+
+                </div>
+
+            </td>
+        `;
+
+        tbody.appendChild(
+            linha
+        );
+
+        atualizarResumo();
+
+        return;
+
+    }
+
+
+    /* ORDENAR */
+
+    lista.sort(
+        (a,b) => {
+
+            const dataA =
+                `${a.data || ""} ${a.hora || ""}`;
+
+            const dataB =
+                `${b.data || ""} ${b.hora || ""}`;
+
+            return dataA.localeCompare(
+                dataB
+            );
+
+        }
+    );
+
+
+    /* CRIAR LINHAS */
+
+    lista.forEach(
+        item => {
+
+            const indice =
+                agendamentos.indexOf(
+                    item
+                );
+
+
+            const linha =
+                document.createElement(
+                    "tr"
+                );
+
+
+            /* CLIENTE */
+
+            const tdNome =
+                document.createElement(
+                    "td"
+                );
+
+            tdNome.textContent =
+                item.nome || "-";
+
+
+            /* SERVIÇO */
+
+            const tdServico =
+                document.createElement(
+                    "td"
+                );
+
+            tdServico.textContent =
+                item.servico || "-";
+
+
+            /* DATA */
+
+            const tdData =
+                document.createElement(
+                    "td"
+                );
+
+            tdData.textContent =
+                formatarData(
+                    item.data
+                );
+
+
+            /* HORA */
+
+            const tdHora =
+                document.createElement(
+                    "td"
+                );
+
+            tdHora.textContent =
+                item.hora || "-";
+
+
+            /* STATUS */
+
+            const tdStatus =
+                document.createElement(
+                    "td"
+                );
+
+
+            const status =
+                obterStatus(item);
+
+
+            const span =
+                document.createElement(
+                    "span"
+                );
+
+
+            span.textContent =
+                status;
+
+
+            span.className =
+                `status ${classeStatus(status)}`;
+
+
+            tdStatus.appendChild(
+                span
+            );
+
+
+            /* AÇÕES */
+
+            const tdAcoes =
+                document.createElement(
+                    "td"
+                );
+
+
+            const acoes =
+                document.createElement(
+                    "div"
+                );
+
+
+            acoes.className =
+                "acoes";
+
+
+            /* EDITAR */
+
+            const btnEditar =
+                document.createElement(
+                    "button"
+                );
+
+
+            btnEditar.textContent =
+                "✏️ Editar";
+
+            btnEditar.className =
+                "acao editar";
+
+
+            btnEditar.onclick =
+                function(){
+
+                    editarStatus(
+                        indice
+                    );
+
+                };
+
+
+            /* EXCLUIR */
+
+            const btnExcluir =
+                document.createElement(
+                    "button"
+                );
+
+
+            btnExcluir.textContent =
+                "🗑️ Excluir";
+
+            btnExcluir.className =
+                "acao excluir";
+
+
+            btnExcluir.onclick =
+                function(){
+
+                    excluir(
+                        indice
+                    );
+
+                };
+
+
+            acoes.appendChild(
+                btnEditar
+            );
+
+            acoes.appendChild(
+                btnExcluir
+            );
+
+
+            tdAcoes.appendChild(
+                acoes
+            );
+
+
+            /* LINHA */
+
+            linha.appendChild(
+                tdNome
+            );
+
+            linha.appendChild(
+                tdServico
+            );
+
+            linha.appendChild(
+                tdData
+            );
+
+            linha.appendChild(
+                tdHora
+            );
+
+            linha.appendChild(
+                tdStatus
+            );
+
+            linha.appendChild(
+                tdAcoes
+            );
+
+
+            tbody.appendChild(
+                linha
+            );
+
+        }
+    );
+
+
+    atualizarResumo();
 
 }
 
-lista.forEach((item,index)=>{
 
-tbody.innerHTML += `
-<tr>
-
-<td>${item.nome}</td>
-
-<td>${item.servico}</td>
-
-<td>${item.data}</td>
-
-<td>${item.hora}</td>
-
-<td>${item.status || "Agendado"}</td>
-
-<td>
-
-<button
-class="excluir"
-onclick="excluir(${index})">
-
-Excluir
-
-</button>
-
-</td>
-
-</tr>
-`;
-
-});
-
-}
+/* =========================================
+   FILTRAR
+========================================= */
 
 function filtrar(){
 
-const nome =
-document.getElementById("pesquisa")
-.value.toLowerCase();
+    const nome =
+        document
+        .getElementById(
+            "pesquisa"
+        )
+        .value
+        .trim()
+        .toLowerCase();
 
-const data =
-document.getElementById("filtroData")
-.value;
 
-const resultado =
-agendamentos.filter(a=>{
+    const data =
+        document
+        .getElementById(
+            "filtroData"
+        )
+        .value;
 
-const okNome =
-a.nome.toLowerCase().includes(nome);
 
-const okData =
-data==="" || a.data===data;
+    const status =
+        document
+        .getElementById(
+            "filtroStatus"
+        )
+        .value;
 
-return okNome && okData;
 
-});
+    const resultado =
+        agendamentos.filter(
+            item => {
 
-carregar(resultado);
+                const nomeCliente =
+                    (
+                        item.nome || ""
+                    )
+                    .toLowerCase();
+
+
+                const servico =
+                    (
+                        item.servico || ""
+                    )
+                    .toLowerCase();
+
+
+                const okNome =
+                    nome === "" ||
+                    nomeCliente.includes(
+                        nome
+                    ) ||
+                    servico.includes(
+                        nome
+                    );
+
+
+                const okData =
+                    data === "" ||
+                    item.data === data;
+
+
+                const okStatus =
+                    status === "" ||
+                    obterStatus(item)
+                    === status;
+
+
+                return (
+                    okNome &&
+                    okData &&
+                    okStatus
+                );
+
+            }
+        );
+
+
+    carregar(resultado);
 
 }
+
+
+/* =========================================
+   LIMPAR FILTROS
+========================================= */
+
+function limparFiltros(){
+
+    document.getElementById(
+        "pesquisa"
+    ).value = "";
+
+
+    document.getElementById(
+        "filtroData"
+    ).value = "";
+
+
+    document.getElementById(
+        "filtroStatus"
+    ).value = "";
+
+
+    carregar(
+        [...agendamentos]
+    );
+
+}
+
+
+/* =========================================
+   EDITAR STATUS
+========================================= */
+
+function editarStatus(indice){
+
+    const item =
+        agendamentos[indice];
+
+
+    const statusAtual =
+        obterStatus(item);
+
+
+    const novoStatus =
+        prompt(
+            "Digite o novo status:\n\n" +
+            "Agendado\n" +
+            "Confirmado\n" +
+            "Concluído\n" +
+            "Cancelado",
+            statusAtual
+        );
+
+
+    if(novoStatus === null){
+
+        return;
+
+    }
+
+
+    const statusValidos = [
+
+        "Agendado",
+
+        "Confirmado",
+
+        "Concluído",
+
+        "Cancelado"
+
+    ];
+
+
+    if(
+        !statusValidos.includes(
+            novoStatus
+        )
+    ){
+
+        alert(
+            "Status inválido."
+        );
+
+        return;
+
+    }
+
+
+    agendamentos[indice].status =
+        novoStatus;
+
+
+    salvar();
+
+
+    filtrar();
+
+}
+
+
+/* =========================================
+   EXCLUIR
+========================================= */
 
 function excluir(indice){
 
-if(confirm("Excluir este agendamento?")){
+    const item =
+        agendamentos[indice];
 
-agendamentos.splice(indice,1);
 
-salvar();
+    if(!item){
 
-carregar(agendamentos);
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+            `Deseja realmente excluir o agendamento de "${item.nome}"?`
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    agendamentos.splice(
+        indice,
+        1
+    );
+
+
+    salvar();
+
+
+    filtrar();
 
 }
 
-}
 
-carregar(agendamentos);
+/* =========================================
+   PESQUISA AUTOMÁTICA
+========================================= */
+
+document
+.getElementById("pesquisa")
+.addEventListener(
+    "input",
+    filtrar
+);
+
+
+document
+.getElementById("filtroData")
+.addEventListener(
+    "change",
+    filtrar
+);
+
+
+document
+.getElementById("filtroStatus")
+.addEventListener(
+    "change",
+    filtrar
+);
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+carregar(
+    [...agendamentos]
+);
 
 </script>
 
 </body>
+
 </html>
