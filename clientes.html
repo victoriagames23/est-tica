@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro de Clientes - Clínica de Estética</title>
+
+<title>Clientes | Bella Pele</title>
 
 <style>
+
+:root{
+    --primary:#d63384;
+    --primary-dark:#b8236d;
+    --primary-light:#fce4ef;
+    --background:#f7f3f5;
+    --white:#fff;
+    --text:#333;
+    --muted:#777;
+    --border:#ddd;
+    --danger:#dc3545;
+    --danger-dark:#b02a37;
+    --blue:#0d6efd;
+    --blue-dark:#0a58ca;
+    --success:#198754;
+    --success-bg:#d1e7dd;
+    --error-bg:#f8d7da;
+    --shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
 *{
     margin:0;
     padding:0;
@@ -14,247 +36,1410 @@
 }
 
 body{
-    background:#f6f2f4;
+    background:linear-gradient(135deg,#fff8fb,#f5f1f3);
+    color:var(--text);
+    min-height:100vh;
 }
+
+/* =========================
+   CABEÇALHO
+========================= */
 
 header{
-    background:#d63384;
-    color:#fff;
-    padding:20px;
+    background:linear-gradient(135deg,#d63384,#e85d9e);
+    color:white;
+    padding:30px 20px;
     text-align:center;
+    box-shadow:0 4px 15px rgba(214,51,132,.25);
 }
 
+header h1{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+header p{
+    opacity:.9;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
 .container{
-    width:90%;
-    max-width:1100px;
+    width:92%;
+    max-width:1200px;
     margin:30px auto;
 }
 
+/* =========================
+   CARDS
+========================= */
+
 .card{
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    background:var(--white);
+    padding:25px;
+    border-radius:16px;
+    box-shadow:var(--shadow);
     margin-bottom:20px;
 }
 
 h2{
-    color:#d63384;
+    color:var(--primary);
     margin-bottom:20px;
 }
 
+/* =========================
+   MENSAGENS
+========================= */
+
+.mensagem{
+    display:none;
+    padding:14px 16px;
+    border-radius:9px;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+.mensagem.sucesso{
+    display:block;
+    background:var(--success-bg);
+    color:#0f5132;
+}
+
+.mensagem.erro{
+    display:block;
+    background:var(--error-bg);
+    color:#842029;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    outline:none;
+    font-size:15px;
+    background:white;
+    transition:.2s;
+}
+
+input:focus,
+select:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(214,51,132,.1);
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn{
+    width:100%;
+    padding:13px;
+    background:var(--primary);
+    color:white;
+    border:none;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:var(--primary-dark);
+    transform:translateY(-1px);
+}
+
+.btn-cancelar{
+    background:#777;
+    margin-top:8px;
+}
+
+.btn-cancelar:hover{
+    background:#555;
+}
+
+/* =========================
+   TOPO DA LISTA
+========================= */
+
+.topo-lista{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     gap:15px;
 }
 
-input, select{
+.contador{
+    background:var(--primary-light);
+    color:var(--primary);
+    padding:9px 16px;
+    border-radius:20px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+/* =========================
+   PESQUISA
+========================= */
+
+.busca-container{
+    margin-top:15px;
+    position:relative;
+}
+
+.busca-container span{
+    position:absolute;
+    left:14px;
+    top:12px;
+}
+
+#busca{
+    padding-left:40px;
+}
+
+/* =========================
+   TABELA
+========================= */
+
+.tabela-container{
     width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:8px;
-}
-
-button{
-    background:#d63384;
-    color:#fff;
-    border:none;
-    padding:12px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-button:hover{
-    background:#b3266c;
+    overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
     margin-top:20px;
+    min-width:1000px;
 }
 
 th{
-    background:#d63384;
+    background:var(--primary);
     color:white;
+    padding:13px;
 }
 
-th, td{
+td{
     padding:12px;
-    border:1px solid #ddd;
+    border-bottom:1px solid #eee;
     text-align:center;
 }
 
-.btnExcluir{
-    background:#dc3545;
-    padding:8px 12px;
+tbody tr:hover{
+    background:#fff8fb;
 }
 
-.btnExcluir:hover{
-    background:#b91d2c;
+/* =========================
+   BOTÕES DE AÇÃO
+========================= */
+
+.acoes{
+    display:flex;
+    justify-content:center;
+    gap:6px;
 }
+
+.acao{
+    border:none;
+    color:white;
+    padding:7px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.editar{
+    background:var(--blue);
+}
+
+.editar:hover{
+    background:var(--blue-dark);
+}
+
+.excluir{
+    background:var(--danger);
+}
+
+.excluir:hover{
+    background:var(--danger-dark);
+}
+
+/* =========================
+   SEM CLIENTES
+========================= */
+
+.sem-clientes{
+    text-align:center;
+    color:var(--muted);
+    padding:35px;
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.rodape{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    padding:10px 0 30px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:700px){
+
+    header h1{
+        font-size:23px;
+    }
+
+    .container{
+        width:95%;
+        margin-top:20px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .campo.full{
+        grid-column:auto;
+    }
+
+    .topo-lista{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .contador{
+        width:100%;
+        text-align:center;
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>Clínica de Estética</h1>
-<p>Cadastro de Clientes</p>
+
+    <h1>✨ Clínica de Estética Bella Pele</h1>
+
+    <p>Gerenciamento de Clientes</p>
+
 </header>
+
 
 <div class="container">
 
-<div class="card">
+    <!-- MENSAGEM -->
 
-<h2>Novo Cliente</h2>
+    <div id="mensagem" class="mensagem"></div>
 
-<div class="grid">
 
-<input type="text" id="nome" placeholder="Nome Completo">
+    <!-- FORMULÁRIO -->
 
-<input type="text" id="telefone" placeholder="Telefone">
+    <div class="card">
 
-<input type="email" id="email" placeholder="E-mail">
+        <h2 id="tituloFormulario">
+            👤 Novo Cliente
+        </h2>
 
-<input type="date" id="nascimento">
+        <form id="formCliente">
 
-<select id="sexo">
-<option>Feminino</option>
-<option>Masculino</option>
-<option>Outro</option>
-</select>
+            <div class="grid">
 
-<input type="text" id="procedimento" placeholder="Procedimento de Interesse">
+                <div class="campo full">
+
+                    <label for="nome">
+                        Nome completo *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Digite o nome completo"
+                        maxlength="100"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="telefone">
+                        Telefone *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone"
+                        placeholder="(00) 00000-0000"
+                        maxlength="15"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="cliente@email.com"
+                        maxlength="120"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="nascimento">
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="nascimento"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="sexo">
+                        Sexo
+                    </label>
+
+                    <select id="sexo">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="Feminino">
+                            Feminino
+                        </option>
+
+                        <option value="Masculino">
+                            Masculino
+                        </option>
+
+                        <option value="Outro">
+                            Outro
+                        </option>
+
+                        <option value="Prefiro não informar">
+                            Prefiro não informar
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo full">
+
+                    <label for="procedimento">
+                        Procedimento de interesse
+                    </label>
+
+                    <input
+                        type="text"
+                        id="procedimento"
+                        placeholder="Ex.: Botox, Limpeza de Pele..."
+                        maxlength="100"
+                    >
+
+                </div>
+
+
+                <div class="campo full">
+
+                    <button
+                        type="submit"
+                        class="btn"
+                        id="btnSalvar"
+                    >
+                        Cadastrar Cliente
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-cancelar"
+                        id="btnCancelar"
+                        style="display:none;"
+                    >
+                        Cancelar edição
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- LISTAGEM -->
+
+    <div class="card">
+
+        <div class="topo-lista">
+
+            <h2>
+                📋 Clientes Cadastrados
+            </h2>
+
+            <div class="contador">
+
+                <span id="contador">0</span>
+
+                cliente(s)
+
+            </div>
+
+        </div>
+
+
+        <div class="busca-container">
+
+            <span>🔎</span>
+
+            <input
+                type="search"
+                id="busca"
+                placeholder="Buscar por nome, telefone ou e-mail..."
+            >
+
+        </div>
+
+
+        <div class="tabela-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Nome</th>
+
+                        <th>Telefone</th>
+
+                        <th>E-mail</th>
+
+                        <th>Nascimento</th>
+
+                        <th>Idade</th>
+
+                        <th>Sexo</th>
+
+                        <th>Procedimento</th>
+
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="listaClientes"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="rodape">
+
+        Bella Pele © 2026 — Sistema de Clientes
+
+    </div>
 
 </div>
 
-<br>
-
-<button onclick="cadastrarCliente()">Cadastrar Cliente</button>
-
-</div>
-
-<div class="card">
-
-<h2>Clientes Cadastrados</h2>
-
-<table>
-
-<thead>
-
-<tr>
-<th>Nome</th>
-<th>Telefone</th>
-<th>E-mail</th>
-<th>Nascimento</th>
-<th>Sexo</th>
-<th>Procedimento</th>
-<th>Ação</th>
-</tr>
-
-</thead>
-
-<tbody id="listaClientes">
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
 
 <script>
 
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+/* ==========================================
+   CONFIGURAÇÃO
+========================================== */
+
+const STORAGE_KEY = "bellaPeleClientes";
+
+let clientes =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+    ) || [];
+
+let indiceEdicao = null;
+
+
+/* ==========================================
+   ELEMENTOS
+========================================== */
+
+const form =
+    document.getElementById("formCliente");
+
+const nome =
+    document.getElementById("nome");
+
+const telefone =
+    document.getElementById("telefone");
+
+const email =
+    document.getElementById("email");
+
+const nascimento =
+    document.getElementById("nascimento");
+
+const sexo =
+    document.getElementById("sexo");
+
+const procedimento =
+    document.getElementById("procedimento");
+
+const lista =
+    document.getElementById("listaClientes");
+
+const busca =
+    document.getElementById("busca");
+
+const contador =
+    document.getElementById("contador");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const btnSalvar =
+    document.getElementById("btnSalvar");
+
+const btnCancelar =
+    document.getElementById("btnCancelar");
+
+const tituloFormulario =
+    document.getElementById("tituloFormulario");
+
+
+/* ==========================================
+   SALVAR
+========================================== */
 
 function salvar(){
-    localStorage.setItem("clientes", JSON.stringify(clientes));
-}
 
-function cadastrarCliente(){
-
-let nome = document.getElementById("nome").value;
-let telefone = document.getElementById("telefone").value;
-let email = document.getElementById("email").value;
-let nascimento = document.getElementById("nascimento").value;
-let sexo = document.getElementById("sexo").value;
-let procedimento = document.getElementById("procedimento").value;
-
-if(nome=="" || telefone==""){
-    alert("Preencha pelo menos o nome e telefone.");
-    return;
-}
-
-clientes.push({
-    nome,
-    telefone,
-    email,
-    nascimento,
-    sexo,
-    procedimento
-});
-
-salvar();
-
-document.getElementById("nome").value="";
-document.getElementById("telefone").value="";
-document.getElementById("email").value="";
-document.getElementById("nascimento").value="";
-document.getElementById("procedimento").value="";
-
-listarClientes();
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(clientes)
+    );
 
 }
+
+
+/* ==========================================
+   MENSAGEM
+========================================== */
+
+function mostrarMensagem(
+    texto,
+    tipo = "sucesso"
+){
+
+    mensagem.textContent = texto;
+
+    mensagem.className =
+        `mensagem ${tipo}`;
+
+    setTimeout(() => {
+
+        mensagem.className = "mensagem";
+
+    },3000);
+
+}
+
+
+/* ==========================================
+   GERAR ID
+========================================== */
+
+function gerarId(){
+
+    return (
+        Date.now().toString(36) +
+        Math.random()
+            .toString(36)
+            .substring(2)
+    );
+
+}
+
+
+/* ==========================================
+   MÁSCARA DE TELEFONE
+========================================== */
+
+telefone.addEventListener(
+    "input",
+    function(){
+
+        let valor =
+            telefone.value.replace(/\D/g,"");
+
+        valor =
+            valor.substring(0,11);
+
+        if(valor.length <= 10){
+
+            valor =
+                valor.replace(
+                    /^(\d{2})(\d)/,
+                    "($1) $2"
+                );
+
+            valor =
+                valor.replace(
+                    /(\d{4})(\d)/,
+                    "$1-$2"
+                );
+
+        }else{
+
+            valor =
+                valor.replace(
+                    /^(\d{2})(\d)/,
+                    "($1) $2"
+                );
+
+            valor =
+                valor.replace(
+                    /(\d{5})(\d)/,
+                    "$1-$2"
+                );
+
+        }
+
+        telefone.value = valor;
+
+    }
+);
+
+
+/* ==========================================
+   FORMATAR DATA
+========================================== */
+
+function formatarData(data){
+
+    if(!data){
+        return "-";
+    }
+
+    const partes =
+        data.split("-");
+
+    return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+    );
+
+}
+
+
+/* ==========================================
+   CALCULAR IDADE
+========================================== */
+
+function calcularIdade(data){
+
+    if(!data){
+        return "-";
+    }
+
+    const nascimento =
+        new Date(
+            data + "T00:00:00"
+        );
+
+    const hoje =
+        new Date();
+
+    let idade =
+        hoje.getFullYear() -
+        nascimento.getFullYear();
+
+    const mes =
+        hoje.getMonth() -
+        nascimento.getMonth();
+
+    if(
+        mes < 0 ||
+        (
+            mes === 0 &&
+            hoje.getDate() <
+            nascimento.getDate()
+        )
+    ){
+
+        idade--;
+
+    }
+
+    return idade >= 0
+        ? idade
+        : "-";
+
+}
+
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+form.addEventListener(
+    "submit",
+    function(event){
+
+        event.preventDefault();
+
+
+        const nomeValor =
+            nome.value.trim();
+
+        const telefoneValor =
+            telefone.value.trim();
+
+        const emailValor =
+            email.value.trim();
+
+        const nascimentoValor =
+            nascimento.value;
+
+        const sexoValor =
+            sexo.value;
+
+        const procedimentoValor =
+            procedimento.value.trim();
+
+
+        /* VALIDAR CAMPOS */
+
+        if(
+            !nomeValor ||
+            !telefoneValor
+        ){
+
+            mostrarMensagem(
+                "Preencha o nome e o telefone.",
+                "erro"
+            );
+
+            return;
+        }
+
+
+        /* VALIDAR TELEFONE */
+
+        const numeroTelefone =
+            telefoneValor.replace(
+                /\D/g,
+                ""
+            );
+
+        if(
+            numeroTelefone.length < 10
+        ){
+
+            mostrarMensagem(
+                "Digite um telefone válido.",
+                "erro"
+            );
+
+            return;
+        }
+
+
+        /* VALIDAR E-MAIL */
+
+        if(
+            emailValor &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(emailValor)
+        ){
+
+            mostrarMensagem(
+                "Digite um e-mail válido.",
+                "erro"
+            );
+
+            return;
+        }
+
+
+        /* VALIDAR NASCIMENTO */
+
+        if(nascimentoValor){
+
+            const dataNascimento =
+                new Date(
+                    nascimentoValor +
+                    "T00:00:00"
+                );
+
+            const hoje =
+                new Date();
+
+            if(
+                dataNascimento > hoje
+            ){
+
+                mostrarMensagem(
+                    "A data de nascimento não pode ser futura.",
+                    "erro"
+                );
+
+                return;
+            }
+
+        }
+
+
+        /* VERIFICAR DUPLICIDADE */
+
+        const telefoneExiste =
+            clientes.some(
+                (cliente,index) => {
+
+                    if(
+                        index === indiceEdicao
+                    ){
+                        return false;
+                    }
+
+                    return (
+                        cliente.telefone
+                            .replace(/\D/g,"")
+                        ===
+                        numeroTelefone
+                    );
+
+                }
+            );
+
+
+        if(telefoneExiste){
+
+            mostrarMensagem(
+                "Já existe um cliente cadastrado com este telefone.",
+                "erro"
+            );
+
+            return;
+        }
+
+
+        /* OBJETO CLIENTE */
+
+        const cliente = {
+
+            id:
+                indiceEdicao !== null
+                ? clientes[indiceEdicao].id
+                : gerarId(),
+
+            nome: nomeValor,
+
+            telefone: telefoneValor,
+
+            email: emailValor,
+
+            nascimento:
+                nascimentoValor,
+
+            sexo:
+                sexoValor,
+
+            procedimento:
+                procedimentoValor,
+
+            criadoEm:
+                indiceEdicao !== null
+                ? clientes[indiceEdicao].criadoEm
+                : new Date().toISOString()
+
+        };
+
+
+        /* EDITAR */
+
+        if(indiceEdicao !== null){
+
+            clientes[indiceEdicao] =
+                cliente;
+
+            mostrarMensagem(
+                "Cliente atualizado com sucesso!"
+            );
+
+        }
+
+        /* CADASTRAR */
+
+        else{
+
+            clientes.push(cliente);
+
+            mostrarMensagem(
+                "Cliente cadastrado com sucesso!"
+            );
+
+        }
+
+
+        salvar();
+
+        limparFormulario();
+
+        listarClientes();
+
+    }
+);
+
+
+/* ==========================================
+   LIMPAR FORMULÁRIO
+========================================== */
+
+function limparFormulario(){
+
+    form.reset();
+
+    indiceEdicao = null;
+
+    btnSalvar.textContent =
+        "Cadastrar Cliente";
+
+    btnCancelar.style.display =
+        "none";
+
+    tituloFormulario.textContent =
+        "👤 Novo Cliente";
+
+}
+
+
+/* ==========================================
+   LISTAR CLIENTES
+========================================== */
 
 function listarClientes(){
 
-let tabela=document.getElementById("listaClientes");
+    const termo =
+        busca.value
+            .trim()
+            .toLowerCase();
 
-tabela.innerHTML="";
 
-clientes.forEach((cliente,index)=>{
+    lista.innerHTML = "";
 
-tabela.innerHTML += `
-<tr>
-<td>${cliente.nome}</td>
-<td>${cliente.telefone}</td>
-<td>${cliente.email}</td>
-<td>${cliente.nascimento}</td>
-<td>${cliente.sexo}</td>
-<td>${cliente.procedimento}</td>
-<td>
-<button class="btnExcluir" onclick="excluir(${index})">
-Excluir
-</button>
-</td>
-</tr>
-`;
 
-});
+    let filtrados =
+        clientes.filter(
+            cliente => {
+
+                return (
+
+                    cliente.nome
+                        .toLowerCase()
+                        .includes(termo)
+
+                    ||
+
+                    cliente.telefone
+                        .toLowerCase()
+                        .includes(termo)
+
+                    ||
+
+                    cliente.email
+                        .toLowerCase()
+                        .includes(termo)
+
+                    ||
+
+                    cliente.procedimento
+                        .toLowerCase()
+                        .includes(termo)
+
+                );
+
+            }
+        );
+
+
+    /* ORDENAR */
+
+    filtrados.sort(
+        (a,b) =>
+            a.nome.localeCompare(
+                b.nome,
+                "pt-BR"
+            )
+    );
+
+
+    contador.textContent =
+        filtrados.length;
+
+
+    /* NENHUM CLIENTE */
+
+    if(filtrados.length === 0){
+
+        const tr =
+            document.createElement("tr");
+
+        const td =
+            document.createElement("td");
+
+        td.colSpan = 8;
+
+        td.className =
+            "sem-clientes";
+
+        td.textContent =
+            termo
+            ? "Nenhum cliente encontrado."
+            : "Nenhum cliente cadastrado.";
+
+        tr.appendChild(td);
+
+        lista.appendChild(tr);
+
+        return;
+    }
+
+
+    /* CRIAR LINHAS */
+
+    filtrados.forEach(
+        cliente => {
+
+            const index =
+                clientes.findIndex(
+                    item =>
+                        item.id ===
+                        cliente.id
+                );
+
+
+            const tr =
+                document.createElement("tr");
+
+
+            const tdNome =
+                document.createElement("td");
+
+            tdNome.textContent =
+                cliente.nome;
+
+
+            const tdTelefone =
+                document.createElement("td");
+
+            tdTelefone.textContent =
+                cliente.telefone;
+
+
+            const tdEmail =
+                document.createElement("td");
+
+            tdEmail.textContent =
+                cliente.email || "-";
+
+
+            const tdNascimento =
+                document.createElement("td");
+
+            tdNascimento.textContent =
+                formatarData(
+                    cliente.nascimento
+                );
+
+
+            const tdIdade =
+                document.createElement("td");
+
+            tdIdade.textContent =
+                calcularIdade(
+                    cliente.nascimento
+                );
+
+
+            const tdSexo =
+                document.createElement("td");
+
+            tdSexo.textContent =
+                cliente.sexo || "-";
+
+
+            const tdProcedimento =
+                document.createElement("td");
+
+            tdProcedimento.textContent =
+                cliente.procedimento || "-";
+
+
+            /* AÇÕES */
+
+            const tdAcoes =
+                document.createElement("td");
+
+            const acoes =
+                document.createElement("div");
+
+            acoes.className =
+                "acoes";
+
+
+            const editar =
+                document.createElement("button");
+
+            editar.textContent =
+                "✏️ Editar";
+
+            editar.className =
+                "acao editar";
+
+            editar.onclick =
+                () => editarCliente(index);
+
+
+            const excluir =
+                document.createElement("button");
+
+            excluir.textContent =
+                "🗑️ Excluir";
+
+            excluir.className =
+                "acao excluir";
+
+            excluir.onclick =
+                () => excluirCliente(index);
+
+
+            acoes.appendChild(
+                editar
+            );
+
+            acoes.appendChild(
+                excluir
+            );
+
+            tdAcoes.appendChild(
+                acoes
+            );
+
+
+            tr.appendChild(tdNome);
+            tr.appendChild(tdTelefone);
+            tr.appendChild(tdEmail);
+            tr.appendChild(tdNascimento);
+            tr.appendChild(tdIdade);
+            tr.appendChild(tdSexo);
+            tr.appendChild(tdProcedimento);
+            tr.appendChild(tdAcoes);
+
+
+            lista.appendChild(tr);
+
+        }
+    );
 
 }
 
-function excluir(index){
 
-if(confirm("Deseja excluir este cliente?")){
+/* ==========================================
+   EDITAR
+========================================== */
 
-clientes.splice(index,1);
+function editarCliente(index){
 
-salvar();
+    const cliente =
+        clientes[index];
 
-listarClientes();
+
+    nome.value =
+        cliente.nome;
+
+    telefone.value =
+        cliente.telefone;
+
+    email.value =
+        cliente.email;
+
+    nascimento.value =
+        cliente.nascimento;
+
+    sexo.value =
+        cliente.sexo;
+
+    procedimento.value =
+        cliente.procedimento;
+
+
+    indiceEdicao =
+        index;
+
+
+    btnSalvar.textContent =
+        "Salvar alterações";
+
+    btnCancelar.style.display =
+        "block";
+
+    tituloFormulario.textContent =
+        "✏️ Editar Cliente";
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
 
 }
 
+
+/* ==========================================
+   CANCELAR EDIÇÃO
+========================================== */
+
+btnCancelar.addEventListener(
+    "click",
+    function(){
+
+        limparFormulario();
+
+        mostrarMensagem(
+            "Edição cancelada."
+        );
+
+    }
+);
+
+
+/* ==========================================
+   EXCLUIR
+========================================== */
+
+function excluirCliente(index){
+
+    const cliente =
+        clientes[index];
+
+
+    const confirmar =
+        confirm(
+            `Deseja realmente excluir "${cliente.nome}"?`
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    clientes.splice(
+        index,
+        1
+    );
+
+
+    salvar();
+
+    listarClientes();
+
+
+    mostrarMensagem(
+        "Cliente excluído com sucesso!"
+    );
+
 }
+
+
+/* ==========================================
+   BUSCA
+========================================== */
+
+busca.addEventListener(
+    "input",
+    listarClientes
+);
+
+
+/* ==========================================
+   INICIAR SISTEMA
+========================================== */
 
 listarClientes();
 
 </script>
 
 </body>
+
 </html>
