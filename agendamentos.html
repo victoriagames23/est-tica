@@ -3,77 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Agendamento | Bella Pele</title>
-
+<title>Agendamento | Bella Pele Estética</title>
 <style>
     :root {
         --primary: #d63384;
-        --primary-dark: #b8236d;
-        --secondary: #f8f4f6;
-        --white: #ffffff;
-        --text: #333;
-        --muted: #777;
-        --border: #ddd;
-        --danger: #dc3545;
-        --success: #198754;
-        --shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        --primary-hover: #b8236d;
+        --bg-gradient: linear-gradient(135deg, #fff4f8 0%, #f7e8f0 100%);
+        --surface: #ffffff;
+        --text-main: #2d3748;
+        --text-muted: #718096;
+        --border: #edf2f7;
+        --border-input: #cbd5e0;
+        --danger: #e53e3e;
+        --danger-hover: #c53030;
+        --success: #38a169;
+        --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+        --shadow-md: 0 10px 25px -5px rgba(214, 51, 132, 0.12);
+        --radius: 12px;
     }
 
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     body {
-        background: linear-gradient(135deg, #fff5f9, #f8f4f6);
-        color: var(--text);
+        background: var(--bg-gradient);
+        color: var(--text-main);
         min-height: 100vh;
+        padding-bottom: 40px;
     }
 
     header {
         background: linear-gradient(135deg, #d63384, #e85d9e);
         color: white;
-        padding: 30px 20px;
+        padding: 35px 20px;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(214, 51, 132, .25);
+        box-shadow: 0 4px 20px rgba(214, 51, 132, 0.2);
     }
 
     header h1 {
-        font-size: 28px;
-        margin-bottom: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
     }
 
     header p {
-        opacity: .9;
+        opacity: 0.9;
+        font-size: 0.95rem;
     }
 
     .container {
         width: 92%;
-        max-width: 1000px;
-        margin: 30px auto;
+        max-width: 950px;
+        margin: -20px auto 0;
     }
 
     .card {
-        background: var(--white);
-        padding: 25px;
-        border-radius: 16px;
-        box-shadow: var(--shadow);
-        margin-bottom: 20px;
+        background: var(--surface);
+        padding: 28px;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-md);
+        margin-bottom: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
     .card h2 {
         color: var(--primary);
         margin-bottom: 20px;
-        font-size: 22px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        gap: 16px;
     }
 
     .campo {
@@ -86,199 +96,190 @@
     }
 
     label {
-        font-weight: bold;
-        margin-bottom: 7px;
-        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        font-size: 0.88rem;
+        color: var(--text-main);
     }
 
-    input,
-    select {
+    input, select {
         width: 100%;
-        padding: 12px;
-        border-radius: 9px;
-        border: 1px solid var(--border);
-        font-size: 15px;
+        padding: 11px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border-input);
+        font-size: 0.95rem;
         outline: none;
-        transition: .2s;
-        background: white;
+        transition: all 0.2s ease;
+        background: #fff;
     }
 
-    input:focus,
-    select:focus {
+    input:focus, select:focus {
         border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(214, 51, 132, .1);
+        box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.15);
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
     }
 
     .btn {
-        width: 100%;
-        padding: 13px;
+        flex: 1;
+        padding: 12px;
         background: var(--primary);
         color: white;
         border: none;
-        border-radius: 9px;
+        border-radius: 8px;
         cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        transition: .2s;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: all 0.2s ease;
     }
 
     .btn:hover {
-        background: var(--primary-dark);
+        background: var(--primary-hover);
         transform: translateY(-1px);
     }
 
-    .btn-cancelar {
-        background: #777;
-        margin-top: 8px;
+    .btn-secondary {
+        background: #718096;
     }
 
-    .btn-cancelar:hover {
-        background: #555;
+    .btn-secondary:hover {
+        background: #4a5568;
+    }
+
+    .btn-export {
+        background: #4a5568;
+        font-size: 0.82rem;
+        padding: 6px 12px;
+        width: auto;
     }
 
     .mensagem {
         display: none;
-        padding: 12px 15px;
-        border-radius: 9px;
+        padding: 14px;
+        border-radius: 8px;
         margin-bottom: 20px;
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 0.9rem;
     }
 
     .mensagem.sucesso {
         display: block;
-        background: #d1e7dd;
-        color: #0f5132;
+        background: #def7ec;
+        color: #03543f;
+        border: 1px solid #bcf0da;
     }
 
     .mensagem.erro {
         display: block;
-        background: #f8d7da;
-        color: #842029;
+        background: #fde8e8;
+        color: #9b1c1c;
+        border: 1px solid #fbd5d5;
     }
 
     .topo-agendamentos {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 15px;
-        margin-bottom: 15px;
+        gap: 12px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
     }
 
     .contador {
-        background: #fce3ef;
+        background: #fce8f3;
         color: var(--primary);
-        padding: 8px 14px;
+        padding: 6px 14px;
         border-radius: 20px;
-        font-weight: bold;
-        white-space: nowrap;
+        font-weight: 700;
+        font-size: 0.85rem;
     }
 
-    .busca {
+    .controles-tabela {
+        display: flex;
+        gap: 10px;
         margin-bottom: 15px;
     }
 
     .tabela-container {
         overflow-x: auto;
+        border-radius: 8px;
+        border: 1px solid var(--border);
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
-        min-width: 700px;
+        min-width: 650px;
+        background: white;
     }
 
     th {
-        background: var(--primary);
-        color: white;
-        padding: 12px;
-        text-align: center;
+        background: #f8fafc;
+        color: var(--text-muted);
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--border);
     }
 
     td {
-        padding: 12px;
-        border-bottom: 1px solid #eee;
-        text-align: center;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.92rem;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
     }
 
     tbody tr:hover {
-        background: #fff8fb;
+        background: #fff8fc;
     }
 
     .acoes {
         display: flex;
-        justify-content: center;
-        gap: 6px;
+        gap: 8px;
     }
 
     .acao {
         border: none;
         color: white;
-        padding: 7px 10px;
+        padding: 6px 12px;
         border-radius: 6px;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition: opacity 0.2s;
     }
 
-    .editar {
-        background: #0d6efd;
-    }
-
-    .editar:hover {
-        background: #0b5ed7;
-    }
-
-    .excluir {
-        background: var(--danger);
-    }
-
-    .excluir:hover {
-        background: #bb2d3b;
-    }
+    .editar { background: #3182ce; }
+    .excluir { background: var(--danger); }
+    .acao:hover { opacity: 0.85; }
 
     .sem-agendamentos {
         text-align: center;
-        color: var(--muted);
-        padding: 30px;
+        color: var(--text-muted);
+        padding: 40px 20px;
     }
 
     .rodape {
         text-align: center;
-        color: var(--muted);
-        font-size: 13px;
-        padding: 10px 0 30px;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        margin-top: 20px;
     }
 
-    @media (max-width: 650px) {
-        header h1 {
-            font-size: 22px;
-        }
-
-        .container {
-            width: 95%;
-            margin-top: 20px;
-        }
-
-        .card {
-            padding: 18px;
-        }
-
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .campo.full {
-            grid-column: auto;
-        }
-
-        .topo-agendamentos {
-            align-items: flex-start;
-            flex-direction: column;
-        }
-
-        .contador {
-            width: 100%;
-            text-align: center;
-        }
+    @media (max-width: 640px) {
+        .form-grid { grid-template-columns: 1fr; }
+        .container { width: 95%; margin-top: 10px; }
+        .card { padding: 18px; }
+        .topo-agendamentos { flex-direction: column; align-items: flex-start; }
     }
 </style>
 </head>
@@ -286,46 +287,36 @@
 <body>
 
 <header>
-    <h1>✨ Clínica de Estética Bella Pele</h1>
-    <p>Sistema de Agendamento</p>
+    <h1>✨ Clínica Bella Pele</h1>
+    <p>Painel de Agendamentos Estéticos</p>
 </header>
 
 <div class="container">
 
-    <div id="mensagem" class="mensagem"></div>
+    <div id="mensagem" class="mensagem" role="alert"></div>
 
     <!-- FORMULÁRIO -->
     <div class="card">
-
         <h2 id="tituloFormulario">📅 Novo Agendamento</h2>
 
-        <form id="formAgendamento">
-
+        <form id="formAgendamento" novalidate>
             <div class="form-grid">
-
                 <div class="campo full">
                     <label for="nome">Nome do Cliente</label>
-                    <input
-                        type="text"
-                        id="nome"
-                        placeholder="Digite o nome do cliente"
-                        maxlength="100"
-                        required
-                    >
+                    <input type="text" id="nome" placeholder="Ex: Maria Silva" maxlength="100" required>
                 </div>
 
                 <div class="campo full">
                     <label for="servico">Serviço</label>
-
                     <select id="servico" required>
-                        <option value="">Selecione um serviço</option>
+                        <option value="">Selecione um procedimento...</option>
                         <option value="Limpeza de Pele">Limpeza de Pele</option>
                         <option value="Botox">Botox</option>
                         <option value="Preenchimento">Preenchimento</option>
                         <option value="Drenagem Linfática">Drenagem Linfática</option>
                         <option value="Massagem Relaxante">Massagem Relaxante</option>
                         <option value="Depilação a Laser">Depilação a Laser</option>
-                        <option value="Peeling">Peeling</option>
+                        <option value="Peeling Químico">Peeling Químico</option>
                     </select>
                 </div>
 
@@ -339,462 +330,277 @@
                     <input type="time" id="hora" required>
                 </div>
 
-                <div class="campo full">
-
-                    <button type="submit" class="btn" id="btnSalvar">
-                        Agendar
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-cancelar"
-                        id="btnCancelar"
-                        style="display:none;"
-                    >
-                        Cancelar edição
-                    </button>
-
+                <div class="campo full btn-group">
+                    <button type="submit" class="btn" id="btnSalvar">Confirmar Agendamento</button>
+                    <button type="button" class="btn btn-secondary" id="btnCancelar" style="display:none;">Cancelar</button>
                 </div>
-
             </div>
-
         </form>
-
     </div>
-
 
     <!-- LISTA -->
     <div class="card">
-
         <div class="topo-agendamentos">
-
-            <h2>📋 Agendamentos</h2>
-
-            <div class="contador">
-                <span id="contador">0</span> agendamento(s)
+            <h2>📋 Agendamentos Confirmados</h2>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button id="btnExportar" class="btn btn-export">📥 Exportar CSV</button>
+                <div class="contador"><span id="contador">0</span> registro(s)</div>
             </div>
-
         </div>
 
-        <input
-            type="search"
-            id="busca"
-            class="busca"
-            placeholder="🔎 Buscar cliente..."
-        >
+        <div class="controles-tabela">
+            <input type="search" id="busca" placeholder="🔎 Buscar por nome do cliente...">
+        </div>
 
         <div class="tabela-container">
-
             <table>
-
                 <thead>
                     <tr>
                         <th>Cliente</th>
                         <th>Serviço</th>
                         <th>Data</th>
                         <th>Hora</th>
-                        <th>Ação</th>
+                        <th style="width: 140px;">Ações</th>
                     </tr>
                 </thead>
-
                 <tbody id="listaAgendamentos"></tbody>
-
             </table>
-
         </div>
-
     </div>
 
     <div class="rodape">
-        Bella Pele © 2026 — Sistema de Agendamento
+        Bella Pele © 2026 — Gestão Simplificada
     </div>
-
 </div>
 
-
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const STORAGE_KEY = "bellaPeleAgendamentos_v2";
 
-const STORAGE_KEY = "bellaPeleAgendamentos";
+    let agendamentos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let indiceEdicao = null;
 
-let agendamentos = JSON.parse(
-    localStorage.getItem(STORAGE_KEY)
-) || [];
+    // Elementos DOM
+    const form = document.getElementById("formAgendamento");
+    const nomeInput = document.getElementById("nome");
+    const servicoInput = document.getElementById("servico");
+    const dataInput = document.getElementById("data");
+    const horaInput = document.getElementById("hora");
+    const lista = document.getElementById("listaAgendamentos");
+    const contador = document.getElementById("contador");
+    const busca = document.getElementById("busca");
+    const mensagem = document.getElementById("mensagem");
+    const btnSalvar = document.getElementById("btnSalvar");
+    const btnCancelar = document.getElementById("btnCancelar");
+    const btnExportar = document.getElementById("btnExportar");
+    const tituloFormulario = document.getElementById("tituloFormulario");
 
-let indiceEdicao = null;
+    // Travar datas passadas no seletor
+    const hoje = new Date().toISOString().split("T")[0];
+    dataInput.min = hoje;
 
+    // Higienizador XSS simples
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
 
-// ELEMENTOS
-const form = document.getElementById("formAgendamento");
-const nomeInput = document.getElementById("nome");
-const servicoInput = document.getElementById("servico");
-const dataInput = document.getElementById("data");
-const horaInput = document.getElementById("hora");
+    function salvarLocalStorage() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(agendamentos));
+    }
 
-const lista = document.getElementById("listaAgendamentos");
-const contador = document.getElementById("contador");
-const busca = document.getElementById("busca");
+    function mostrarMensagem(texto, tipo = "sucesso") {
+        mensagem.textContent = texto;
+        mensagem.className = `mensagem ${tipo}`;
+        setTimeout(() => { mensagem.className = "mensagem"; }, 3500);
+    }
 
-const mensagem = document.getElementById("mensagem");
-const btnSalvar = document.getElementById("btnSalvar");
-const btnCancelar = document.getElementById("btnCancelar");
-const tituloFormulario = document.getElementById("tituloFormulario");
+    function formatarDataBR(dataIso) {
+        if (!dataIso) return "";
+        const [ano, mes, dia] = dataIso.split("-");
+        return `${dia}/${mes}/${ano}`;
+    }
 
+    function existeConflito(data, hora, ignorarIndex = null) {
+        return agendamentos.some((item, index) => {
+            if (index === ignorarIndex) return false;
+            return item.data === data && item.hora === hora;
+        });
+    }
 
-// DATA MÍNIMA = HOJE
-const hoje = new Date().toISOString().split("T")[0];
-dataInput.min = hoje;
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
+        const nome = nomeInput.value.trim();
+        const servico = servicoInput.value;
+        const data = dataInput.value;
+        const hora = horaInput.value;
 
-// SALVAR NO LOCAL STORAGE
-function salvarLocalStorage() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(agendamentos)
-    );
-
-}
-
-
-// MENSAGEM
-function mostrarMensagem(texto, tipo = "sucesso") {
-
-    mensagem.textContent = texto;
-
-    mensagem.className = `mensagem ${tipo}`;
-
-    setTimeout(() => {
-        mensagem.className = "mensagem";
-    }, 3000);
-
-}
-
-
-// FORMATA DATA
-function formatarData(data) {
-
-    if (!data) return "";
-
-    const partes = data.split("-");
-
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
-
-}
-
-
-// VERIFICA CONFLITO DE HORÁRIO
-function existeConflito(data, hora, ignorarIndex = null) {
-
-    return agendamentos.some((item, index) => {
-
-        if (index === ignorarIndex) {
-            return false;
+        if (!nome || !servico || !data || !hora) {
+            mostrarMensagem("Por favor, preencha todos os campos obrigatórios.", "erro");
+            return;
         }
 
-        return item.data === data && item.hora === hora;
+        if (data < hoje && indiceEdicao === null) {
+            mostrarMensagem("Selecione a data de hoje ou uma data futura.", "erro");
+            return;
+        }
 
+        if (existeConflito(data, hora, indiceEdicao)) {
+            mostrarMensagem("Este horário já está reservado. Escolha outro horário.", "erro");
+            return;
+        }
+
+        const dadosAgendamento = { nome, servico, data, hora };
+
+        if (indiceEdicao !== null) {
+            agendamentos[indiceEdicao] = dadosAgendamento;
+            mostrarMensagem("Agendamento atualizado com sucesso!");
+            resetarEstadoEdicao();
+        } else {
+            agendamentos.push(dadosAgendamento);
+            mostrarMensagem("Agendamento realizado com sucesso!");
+        }
+
+        salvarLocalStorage();
+        limparFormulario();
+        renderizarTabela();
     });
 
-}
-
-
-// AGENDAR / EDITAR
-form.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const nome = nomeInput.value.trim();
-    const servico = servicoInput.value;
-    const data = dataInput.value;
-    const hora = horaInput.value;
-
-    if (!nome || !servico || !data || !hora) {
-
-        mostrarMensagem(
-            "Preencha todos os campos.",
-            "erro"
-        );
-
-        return;
+    function limparFormulario() {
+        form.reset();
     }
 
-
-    // IMPEDIR DATA PASSADA
-    if (data < hoje && indiceEdicao === null) {
-
-        mostrarMensagem(
-            "Não é possível realizar um agendamento para uma data passada.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    // VERIFICAR HORÁRIO OCUPADO
-    if (existeConflito(data, hora, indiceEdicao)) {
-
-        mostrarMensagem(
-            "Já existe um agendamento para esse horário.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    const novoAgendamento = {
-        nome: nome,
-        servico: servico,
-        data: data,
-        hora: hora
-    };
-
-
-    // EDIÇÃO
-    if (indiceEdicao !== null) {
-
-        agendamentos[indiceEdicao] = novoAgendamento;
-
-        mostrarMensagem(
-            "Agendamento atualizado com sucesso!"
-        );
-
+    function resetarEstadoEdicao() {
         indiceEdicao = null;
-
-        btnSalvar.textContent = "Agendar";
+        btnSalvar.textContent = "Confirmar Agendamento";
         btnCancelar.style.display = "none";
         tituloFormulario.textContent = "📅 Novo Agendamento";
-
     }
 
-    // NOVO AGENDAMENTO
-    else {
+    btnCancelar.addEventListener("click", () => {
+        limparFormulario();
+        resetarEstadoEdicao();
+    });
 
-        agendamentos.push(novoAgendamento);
+    function renderizarTabela() {
+        const termo = busca.value.trim().toLowerCase();
 
-        mostrarMensagem(
-            "Agendamento realizado com sucesso!"
+        // Ordenar por Data e Hora asc.
+        const ordenados = [...agendamentos].sort((a, b) => 
+            `${a.data} ${a.hora}`.localeCompare(`${b.data} ${b.hora}`)
         );
 
-    }
+        const filtrados = ordenados.filter(item => 
+            item.nome.toLowerCase().includes(termo) || 
+            item.servico.toLowerCase().includes(termo)
+        );
 
+        contador.textContent = filtrados.length;
+        lista.innerHTML = "";
 
-    salvarLocalStorage();
+        if (filtrados.length === 0) {
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="5" class="sem-agendamentos">
+                        Nenhum agendamento encontrado.
+                    </td>
+                </tr>`;
+            return;
+        }
 
-    limparFormulario();
+        filtrados.forEach(item => {
+            const indexOriginal = agendamentos.indexOf(item);
+            const tr = document.createElement("tr");
 
-    mostrarAgendamentos();
-
-});
-
-
-// LIMPAR FORMULÁRIO
-function limparFormulario() {
-
-    nomeInput.value = "";
-    servicoInput.value = "";
-    dataInput.value = "";
-    horaInput.value = "";
-
-}
-
-
-// MOSTRAR AGENDAMENTOS
-function mostrarAgendamentos() {
-
-    const termo = busca.value
-        .trim()
-        .toLowerCase();
-
-
-    // ORDENA POR DATA E HORA
-    const ordenados = [...agendamentos].sort((a, b) => {
-
-        const dataA = `${a.data} ${a.hora}`;
-        const dataB = `${b.data} ${b.hora}`;
-
-        return dataA.localeCompare(dataB);
-
-    });
-
-
-    lista.innerHTML = "";
-
-
-    const filtrados = ordenados.filter(item => {
-
-        return item.nome
-            .toLowerCase()
-            .includes(termo);
-
-    });
-
-
-    contador.textContent = filtrados.length;
-
-
-    if (filtrados.length === 0) {
-
-        lista.innerHTML = `
-            <tr>
-                <td colspan="5" class="sem-agendamentos">
-                    Nenhum agendamento encontrado.
+            tr.innerHTML = `
+                <td><strong>${escapeHTML(item.nome)}</strong></td>
+                <td>${escapeHTML(item.servico)}</td>
+                <td>${formatarDataBR(item.data)}</td>
+                <td>${escapeHTML(item.hora)}</td>
+                <td>
+                    <div class="acoes">
+                        <button class="acao editar" data-index="${indexOriginal}">Editar</button>
+                        <button class="acao excluir" data-index="${indexOriginal}">Excluir</button>
+                    </div>
                 </td>
-            </tr>
-        `;
+            `;
 
-        return;
+            lista.appendChild(tr);
+        });
     }
 
+    // Event Delegation para Botões de Ação na Tabela
+    lista.addEventListener("click", (e) => {
+        const target = e.target;
+        if (!target.classList.contains("acao")) return;
 
-    filtrados.forEach(item => {
+        const index = parseInt(target.getAttribute("data-index"), 10);
 
-        const indexOriginal =
-            agendamentos.indexOf(item);
-
-
-        const tr = document.createElement("tr");
-
-
-        const tdNome = document.createElement("td");
-        tdNome.textContent = item.nome;
-
-
-        const tdServico = document.createElement("td");
-        tdServico.textContent = item.servico;
-
-
-        const tdData = document.createElement("td");
-        tdData.textContent = formatarData(item.data);
-
-
-        const tdHora = document.createElement("td");
-        tdHora.textContent = item.hora;
-
-
-        const tdAcoes = document.createElement("td");
-
-        const divAcoes = document.createElement("div");
-        divAcoes.className = "acoes";
-
-
-        const btnEditar = document.createElement("button");
-
-        btnEditar.textContent = "Editar";
-        btnEditar.className = "acao editar";
-
-        btnEditar.addEventListener("click", () => {
-            editar(indexOriginal);
-        });
-
-
-        const btnExcluir = document.createElement("button");
-
-        btnExcluir.textContent = "Excluir";
-        btnExcluir.className = "acao excluir";
-
-        btnExcluir.addEventListener("click", () => {
-            remover(indexOriginal);
-        });
-
-
-        divAcoes.appendChild(btnEditar);
-        divAcoes.appendChild(btnExcluir);
-
-        tdAcoes.appendChild(divAcoes);
-
-
-        tr.appendChild(tdNome);
-        tr.appendChild(tdServico);
-        tr.appendChild(tdData);
-        tr.appendChild(tdHora);
-        tr.appendChild(tdAcoes);
-
-        lista.appendChild(tr);
-
+        if (target.classList.contains("editar")) {
+            prepararEdicao(index);
+        } else if (target.classList.contains("excluir")) {
+            removerAgendamento(index);
+        }
     });
 
-}
+    function prepararEdicao(index) {
+        const item = agendamentos[index];
 
+        nomeInput.value = item.nome;
+        servicoInput.value = item.servico;
+        dataInput.value = item.data;
+        horaInput.value = item.hora;
 
-// EDITAR
-function editar(index) {
+        indiceEdicao = index;
 
-    const item = agendamentos[index];
+        btnSalvar.textContent = "Salvar Alterações";
+        btnCancelar.style.display = "block";
+        tituloFormulario.textContent = "✏️ Editar Agendamento";
 
-    nomeInput.value = item.nome;
-    servicoInput.value = item.servico;
-    dataInput.value = item.data;
-    horaInput.value = item.hora;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
-    indiceEdicao = index;
+    function removerAgendamento(index) {
+        const cliente = agendamentos[index].nome;
+        
+        if (confirm(`Tem certeza que deseja cancelar o agendamento de "${cliente}"?`)) {
+            agendamentos.splice(index, 1);
+            salvarLocalStorage();
+            renderizarTabela();
+            mostrarMensagem("Agendamento removido com sucesso.");
+            if (indiceEdicao === index) resetarEstadoEdicao();
+        }
+    }
 
-    btnSalvar.textContent = "Salvar alterações";
+    // Exportação em CSV
+    btnExportar.addEventListener("click", () => {
+        if (agendamentos.length === 0) {
+            mostrarMensagem("Não há dados para exportar.", "erro");
+            return;
+        }
 
-    btnCancelar.style.display = "block";
+        let csv = "Cliente,Servico,Data,Hora\n";
+        agendamentos.forEach(item => {
+            csv += `"${item.nome}","${item.servico}","${formatarDataBR(item.data)}","${item.hora}"\n`;
+        });
 
-    tituloFormulario.textContent = "✏️ Editar Agendamento";
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", `agendamentos_bella_pele_${hoje}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     });
 
-}
+    // Busca com evento de escuta
+    busca.addEventListener("input", renderizarTabela);
 
-
-// CANCELAR EDIÇÃO
-btnCancelar.addEventListener("click", function() {
-
-    indiceEdicao = null;
-
-    limparFormulario();
-
-    btnSalvar.textContent = "Agendar";
-
-    btnCancelar.style.display = "none";
-
-    tituloFormulario.textContent = "📅 Novo Agendamento";
-
+    // Render Inicial
+    renderizarTabela();
 });
-
-
-// EXCLUIR
-function remover(index) {
-
-    const cliente = agendamentos[index].nome;
-
-    const confirmar = confirm(
-        `Deseja realmente excluir o agendamento de ${cliente}?`
-    );
-
-
-    if (!confirmar) {
-        return;
-    }
-
-
-    agendamentos.splice(index, 1);
-
-    salvarLocalStorage();
-
-    mostrarAgendamentos();
-
-    mostrarMensagem(
-        "Agendamento excluído com sucesso!"
-    );
-
-}
-
-
-// BUSCA
-busca.addEventListener("input", mostrarAgendamentos);
-
-
-// PRIMEIRA RENDERIZAÇÃO
-mostrarAgendamentos();
-
 </script>
 
 </body>
