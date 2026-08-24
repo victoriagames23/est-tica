@@ -1,6 +1,147 @@
-{
-  "dependencies": {
-    "express": "^5.2.1",
-    "sqlite3": "^6.0.1"
-  }
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="estilo.css">
+    <title>EstéticaGlow - Novo Agendamento</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="clientes.html">Clientes</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="agendamentos.html">Agendamentos</a>
+        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
+    </nav>
+
+    <header class="banner">
+        <h1>Agendamento de Atendimento</h1>
+        <p>Selecione o cliente e os procedimentos desejados</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Realizar Agendamento</h2>
+            <form id="form-agendamento">
+                <label for="cliente">Cliente:</label>
+                <select id="cliente" required>
+                    <option value="" disabled selected>Carregando clientes...</option>
+                </select>
+
+                <label for="responsavel">Profissional / Esteticista:</label>
+                <input type="text" id="responsavel" placeholder="Ex: Dra. Juliana" required>
+
+                <label for="data">Data do Agendamento:</label>
+                <input type="date" id="data" required>
+
+                <h3>Procedimentos</h3>
+                <div id="lista-procedimentos-checkboxes">
+                    <!-- Checkboxes de serviços serão injetados aqui -->
+                </div>
+
+                <hr style="margin: 20px 0;">
+
+                <p><strong>Duração Total:</strong> <span id="tempo-total">0</span> min</p>
+                <p><strong>Valor Total:</strong> R$ <span id="valor-total">0.00</span></p>
+
+                <button type="submit" style="margin-top: 15px;">Finalizar Agendamento</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let servicosDisponiveis = [];
+        let servicosSelecionados = [];
+
+        // 1. Carrega Clientes no Select
+        fetch('/listar-clientes')
+            .then(res => res.json())
+            .then(clientes => {
+                const selectCliente = document.getElementById('cliente');
+                selectCliente.innerHTML = '<option value="" disabled selected>Selecione um cliente</option>';
+                clientes.forEach(c => {
+                    selectCliente.innerHTML += `<option value="${c.id}">${c.nome} - CPF: ${c.cpf}</option>`;
+                });
+            });
+
+        // 2. Carrega Serviços com Checkboxes
+        fetch('/listar-servicos')
+            .then(res => res.json())
+            .then(servicos => {
+                servicosDisponiveis = servicos;
+                const container = document.getElementById('lista-procedimentos-checkboxes');
+                container.innerHTML = '';
+
+                servicos.forEach(s => {
+                    container.innerHTML += `
+                        <div style="margin-bottom: 8px;">
+                            <input type="checkbox" id="servico-${s.id}" value="${s.id}" onchange="atualizarTotais()">
+                            <label for="servico-${s.id}">
+                                <strong>${s.descricao}</strong> (${s.categoria}) - R$ ${s.preco.toFixed(2)} [${s.tempo_estimado} min]
+                            </label>
+                        </div>`;
+                });
+            });
+
+        // 3. Atualiza o cálculo de preço e tempo em tempo real
+        function atualizarTotais() {
+            let total = 0;
+            let tempo = 0;
+            servicosSelecionados = [];
+
+            servicosDisponiveis.forEach(s => {
+                const checkbox = document.getElementById(`servico-${s.id}`);
+                if (checkbox && checkbox.checked) {
+                    total += s.preco;
+                    tempo += s.tempo_estimado;
+                    servicosSelecionados.push({ id: s.id, preco: s.preco });
+                }
+            });
+
+            document.getElementById('valor-total').innerText = total.toFixed(2);
+            document.getElementById('tempo-total').innerText = tempo;
+        }
+
+        // 4. Envia a requisição JSON para /finalizar-agendamento
+        document.getElementById('form-agendamento').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (servicosSelecionados.length === 0) {
+                alert('Selecione ao menos um procedimento!');
+                return;
+            }
+
+            const payload = {
+                cliente_id: document.getElementById('cliente').value,
+                responsavel: document.getElementById('responsavel').value,
+                data: document.getElementById('data').value,
+                total: parseFloat(document.getElementById('valor-total').innerText),
+                tempo_total: parseInt(document.getElementById('tempo-total').innerText),
+                servicos: servicosSelecionados
+            };
+
+            fetch('/finalizar-agendamento', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Agendamento realizado com sucesso!');
+                    window.location.href = 'consulta_agendamentos.html';
+                } else {
+                    alert('Erro ao agendar: ' + data.error);
+                }
+            })
+            .catch(err => console.error('Erro na requisição:', err));
+        });
+    </script>
+</body>
+
+<footer class="rodape">
+    <div class="container-rodape">
+        <p>&copy; 2026 EstéticaGlow - Sistema de Gestão de Estética</p>
+    </div>
+</footer>
+</html>
