@@ -1,126 +1,371 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clientes | Bella Pele</title>
+<title>Bella Beauty | Estética & Beleza</title>
 
 <style>
-
 :root{
-    --primary:#d63384;
-    --primary-dark:#b8236d;
-    --primary-light:#fce4ef;
-    --background:#f7f3f5;
-    --white:#fff;
-    --text:#333;
-    --muted:#777;
-    --border:#ddd;
-    --danger:#dc3545;
-    --danger-dark:#b02a37;
-    --blue:#0d6efd;
-    --blue-dark:#0a58ca;
-    --success:#198754;
-    --success-bg:#d1e7dd;
-    --error-bg:#f8d7da;
-    --shadow:0 8px 25px rgba(0,0,0,.08);
+    --rosa:#d94f8a;
+    --rosa-escuro:#a82f65;
+    --rosa-claro:#fff0f6;
+    --nude:#fdf7f4;
+    --dourado:#c99a5b;
+    --texto:#30262b;
+    --cinza:#756c70;
+    --branco:#fff;
+    --borda:#eee1e7;
+    --verde:#25a463;
+    --vermelho:#d94b4b;
+    --sombra:0 15px 40px rgba(100,40,70,.10);
+    --raio:20px;
 }
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:linear-gradient(135deg,#fff8fb,#f5f1f3);
-    color:var(--text);
-    min-height:100vh;
+    background:var(--nude);
+    color:var(--texto);
 }
-
-/* =========================
-   CABEÇALHO
-========================= */
-
-header{
-    background:linear-gradient(135deg,#d63384,#e85d9e);
-    color:white;
-    padding:30px 20px;
-    text-align:center;
-    box-shadow:0 4px 15px rgba(214,51,132,.25);
-}
-
-header h1{
-    font-size:30px;
-    margin-bottom:8px;
-}
-
-header p{
-    opacity:.9;
-}
-
-/* =========================
-   CONTAINER
-========================= */
 
 .container{
     width:92%;
-    max-width:1200px;
-    margin:30px auto;
+    max-width:1150px;
+    margin:auto;
+}
+
+section{
+    padding:80px 0;
 }
 
 /* =========================
-   CARDS
+   NAVEGAÇÃO
 ========================= */
 
-.card{
-    background:var(--white);
-    padding:25px;
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    margin-bottom:20px;
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--borda);
 }
 
-h2{
-    color:var(--primary);
-    margin-bottom:20px;
+.nav{
+    min-height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-/* =========================
-   MENSAGENS
-========================= */
-
-.mensagem{
-    display:none;
-    padding:14px 16px;
-    border-radius:9px;
-    margin-bottom:20px;
+.logo{
+    color:var(--rosa);
+    font-family:Georgia,serif;
+    font-size:1.6rem;
     font-weight:bold;
 }
 
-.mensagem.sucesso{
-    display:block;
-    background:var(--success-bg);
-    color:#0f5132;
+.logo span{
+    color:var(--dourado);
 }
 
-.mensagem.erro{
-    display:block;
-    background:var(--error-bg);
-    color:#842029;
+.menu{
+    display:flex;
+    gap:28px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:var(--texto);
+    font-weight:600;
+    transition:.2s;
+}
+
+.menu a:hover{
+    color:var(--rosa);
 }
 
 /* =========================
-   FORMULÁRIO
+   HERO
 ========================= */
 
-.grid{
+.hero{
+    min-height:680px;
+    display:flex;
+    align-items:center;
+    color:white;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(60,15,35,.82),
+        rgba(150,35,85,.48)
+    ),
+    url("https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.hero-content{
+    max-width:680px;
+}
+
+.hero-small{
+    color:#ffd7e7;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:.8rem;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(3rem,7vw,5.5rem);
+    line-height:1;
+    margin-bottom:25px;
+}
+
+.hero p{
+    font-size:1.15rem;
+    line-height:1.7;
+    margin-bottom:32px;
+    color:#fff4f8;
+}
+
+.botoes{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:14px 25px;
+    border:0;
+    border-radius:30px;
+    background:var(--rosa);
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn:hover{
+    background:var(--rosa-escuro);
+    transform:translateY(-2px);
+}
+
+.btn-branco{
+    background:white;
+    color:var(--rosa);
+}
+
+.btn-branco:hover{
+    background:#fff1f7;
+}
+
+/* =========================
+   TÍTULOS
+========================= */
+
+.titulo{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.titulo span{
+    color:var(--rosa);
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:.78rem;
+    font-weight:bold;
+}
+
+.titulo h2{
+    font-family:Georgia,serif;
+    font-size:2.5rem;
+    margin-top:8px;
+}
+
+.titulo p{
+    max-width:650px;
+    margin:12px auto 0;
+    color:var(--cinza);
+    line-height:1.7;
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.sobre{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:16px;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.sobre-img{
+    position:relative;
+}
+
+.sobre-img img{
+    width:100%;
+    height:520px;
+    object-fit:cover;
+    border-radius:30px;
+    box-shadow:var(--sombra);
+}
+
+.sobre-badge{
+    position:absolute;
+    right:-20px;
+    bottom:25px;
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:var(--sombra);
+    color:var(--rosa);
+    font-weight:bold;
+}
+
+.sobre h2{
+    font-family:Georgia,serif;
+    font-size:2.7rem;
+    color:var(--rosa-escuro);
+    margin:12px 0 20px;
+}
+
+.sobre p{
+    color:var(--cinza);
+    line-height:1.8;
+    margin-bottom:16px;
+}
+
+/* =========================
+   SERVIÇOS
+========================= */
+
+.servicos{
+    background:white;
+}
+
+.servicos-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.servico{
+    background:var(--nude);
+    border:1px solid var(--borda);
+    border-radius:var(--raio);
+    overflow:hidden;
+    transition:.3s;
+}
+
+.servico:hover{
+    transform:translateY(-7px);
+    box-shadow:var(--sombra);
+}
+
+.servico img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.servico-info{
+    padding:23px;
+}
+
+.servico-info h3{
+    color:var(--rosa-escuro);
+    font-size:1.25rem;
+    margin-bottom:10px;
+}
+
+.servico-info p{
+    color:var(--cinza);
+    line-height:1.6;
+    min-height:76px;
+}
+
+.preco{
+    color:var(--rosa);
+    font-size:1.1rem;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+/* =========================
+   DIFERENCIAIS
+========================= */
+
+.diferenciais{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.diferencial{
+    background:white;
+    padding:28px 20px;
+    text-align:center;
+    border-radius:var(--raio);
+    box-shadow:var(--sombra);
+}
+
+.icone{
+    font-size:2.5rem;
+    margin-bottom:12px;
+}
+
+.diferencial h3{
+    color:var(--rosa-escuro);
+    margin-bottom:8px;
+}
+
+.diferencial p{
+    color:var(--cinza);
+    line-height:1.5;
+}
+
+/* =========================
+   AGENDAMENTO
+========================= */
+
+.agendamento{
+    background:
+    linear-gradient(135deg,#fff1f7,#fbe5ee);
+}
+
+.card{
+    background:white;
+    padding:38px;
+    border-radius:25px;
+    box-shadow:var(--sombra);
+    max-width:850px;
+    margin:auto;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
 }
 
 .campo{
@@ -133,207 +378,273 @@ h2{
 }
 
 label{
-    font-size:14px;
-    font-weight:bold;
+    font-weight:700;
     margin-bottom:7px;
 }
 
 input,
 select{
     width:100%;
-    padding:12px;
-    border:1px solid var(--border);
-    border-radius:9px;
+    padding:14px;
+    border:1px solid var(--borda);
+    border-radius:10px;
     outline:none;
-    font-size:15px;
+    font-size:1rem;
     background:white;
-    transition:.2s;
 }
 
 input:focus,
 select:focus{
-    border-color:var(--primary);
-    box-shadow:0 0 0 3px rgba(214,51,132,.1);
+    border-color:var(--rosa);
+    box-shadow:0 0 0 3px rgba(217,79,138,.12);
 }
 
-/* =========================
-   BOTÕES
-========================= */
-
-.btn{
-    width:100%;
-    padding:13px;
-    background:var(--primary);
-    color:white;
-    border:none;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.btn:hover{
-    background:var(--primary-dark);
-    transform:translateY(-1px);
+.form-botoes{
+    display:flex;
+    gap:10px;
+    margin-top:8px;
 }
 
 .btn-cancelar{
     background:#777;
-    margin-top:8px;
+    display:none;
 }
 
-.btn-cancelar:hover{
-    background:#555;
+.mensagem{
+    display:none;
+    max-width:850px;
+    margin:0 auto 20px;
+    padding:14px 18px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.mensagem.sucesso{
+    display:block;
+    background:#e2f7eb;
+    color:#177345;
+}
+
+.mensagem.erro{
+    display:block;
+    background:#fde5e5;
+    color:#a72e2e;
 }
 
 /* =========================
-   TOPO DA LISTA
+   LISTA
 ========================= */
+
+.lista{
+    background:white;
+}
 
 .topo-lista{
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:15px;
+    margin-bottom:20px;
 }
 
 .contador{
-    background:var(--primary-light);
-    color:var(--primary);
+    background:var(--rosa-claro);
+    color:var(--rosa);
     padding:9px 16px;
-    border-radius:20px;
+    border-radius:30px;
     font-weight:bold;
-    white-space:nowrap;
 }
 
-/* =========================
-   PESQUISA
-========================= */
-
-.busca-container{
-    margin-top:15px;
-    position:relative;
+.busca{
+    margin-bottom:20px;
 }
 
-.busca-container span{
-    position:absolute;
-    left:14px;
-    top:12px;
-}
-
-#busca{
-    padding-left:40px;
-}
-
-/* =========================
-   TABELA
-========================= */
-
-.tabela-container{
+.busca input{
     width:100%;
+}
+
+.tabela{
     overflow-x:auto;
+    border:1px solid var(--borda);
+    border-radius:14px;
 }
 
 table{
     width:100%;
+    min-width:700px;
     border-collapse:collapse;
-    margin-top:20px;
-    min-width:1000px;
 }
 
 th{
-    background:var(--primary);
-    color:white;
-    padding:13px;
+    background:#fff7fa;
+    color:var(--cinza);
+    padding:15px;
+    text-align:left;
+    font-size:.8rem;
+    text-transform:uppercase;
 }
 
 td{
-    padding:12px;
-    border-bottom:1px solid #eee;
-    text-align:center;
+    padding:15px;
+    border-top:1px solid var(--borda);
 }
-
-tbody tr:hover{
-    background:#fff8fb;
-}
-
-/* =========================
-   BOTÕES DE AÇÃO
-========================= */
 
 .acoes{
     display:flex;
-    justify-content:center;
-    gap:6px;
+    gap:7px;
 }
 
 .acao{
-    border:none;
+    border:0;
     color:white;
-    padding:7px 10px;
-    border-radius:6px;
+    padding:7px 12px;
+    border-radius:7px;
     cursor:pointer;
-    font-size:13px;
+    font-weight:bold;
 }
 
 .editar{
-    background:var(--blue);
-}
-
-.editar:hover{
-    background:var(--blue-dark);
+    background:#3b82c4;
 }
 
 .excluir{
-    background:var(--danger);
+    background:var(--vermelho);
 }
 
-.excluir:hover{
-    background:var(--danger-dark);
+.vazio{
+    text-align:center;
+    color:var(--cinza);
+    padding:40px;
 }
 
 /* =========================
-   SEM CLIENTES
+   DEPOIMENTOS
 ========================= */
 
-.sem-clientes{
-    text-align:center;
-    color:var(--muted);
-    padding:35px;
+.depoimentos{
+    background:var(--rosa-claro);
+}
+
+.depoimentos-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.depoimento{
+    background:white;
+    padding:28px;
+    border-radius:var(--raio);
+    box-shadow:var(--sombra);
+}
+
+.estrelas{
+    color:#e3a534;
+    margin-bottom:15px;
+}
+
+.depoimento p{
+    color:var(--cinza);
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+.cliente{
+    font-weight:bold;
+    color:var(--rosa-escuro);
 }
 
 /* =========================
-   RODAPÉ
+   CONTATO
 ========================= */
 
-.rodape{
+.contato-box{
+    background:
+    linear-gradient(
+        135deg,
+        var(--rosa-escuro),
+        var(--rosa)
+    );
+    color:white;
+    border-radius:30px;
+    padding:60px 25px;
     text-align:center;
-    color:var(--muted);
-    font-size:13px;
-    padding:10px 0 30px;
+}
+
+.contato-box h2{
+    font-family:Georgia,serif;
+    font-size:2.7rem;
+    margin-bottom:15px;
+}
+
+.contato-box p{
+    margin-bottom:28px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#321d27;
+    color:#e9dce2;
+    padding:35px 20px;
+    text-align:center;
+}
+
+footer strong{
+    color:#ff9bc2;
+}
+
+footer p+p{
+    margin-top:7px;
+    font-size:.9rem;
 }
 
 /* =========================
    RESPONSIVO
 ========================= */
 
-@media(max-width:700px){
+@media(max-width:900px){
 
-    header h1{
-        font-size:23px;
+    .servicos-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .container{
-        width:95%;
-        margin-top:20px;
+    .diferenciais{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .card{
-        padding:18px;
+    .sobre{
+        grid-template-columns:1fr;
     }
 
-    .grid{
+    .depoimentos-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .menu{
+        display:none;
+    }
+
+    .hero{
+        min-height:600px;
+    }
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+    .servicos-grid,
+    .diferenciais{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
         grid-template-columns:1fr;
     }
 
@@ -341,256 +652,620 @@ tbody tr:hover{
         grid-column:auto;
     }
 
+    .form-botoes{
+        flex-direction:column;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    .sobre-img img{
+        height:400px;
+    }
+
+    .sobre-badge{
+        right:10px;
+    }
+
     .topo-lista{
         flex-direction:column;
         align-items:flex-start;
     }
 
-    .contador{
-        width:100%;
-        text-align:center;
-    }
-
 }
 
 </style>
-
 </head>
 
 <body>
 
-<header>
+<!-- =========================
+     MENU
+========================= -->
 
-    <h1>✨ Clínica de Estética Bella Pele</h1>
+<nav>
+    <div class="container nav">
 
-    <p>Gerenciamento de Clientes</p>
+        <div class="logo">
+            Bella <span>Beauty</span>
+        </div>
 
-</header>
-
-
-<div class="container">
-
-    <!-- MENSAGEM -->
-
-    <div id="mensagem" class="mensagem"></div>
-
-
-    <!-- FORMULÁRIO -->
-
-    <div class="card">
-
-        <h2 id="tituloFormulario">
-            👤 Novo Cliente
-        </h2>
-
-        <form id="formCliente">
-
-            <div class="grid">
-
-                <div class="campo full">
-
-                    <label for="nome">
-                        Nome completo *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nome"
-                        placeholder="Digite o nome completo"
-                        maxlength="100"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="telefone">
-                        Telefone *
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="telefone"
-                        placeholder="(00) 00000-0000"
-                        maxlength="15"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="email">
-                        E-mail
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="cliente@email.com"
-                        maxlength="120"
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="nascimento">
-                        Data de nascimento
-                    </label>
-
-                    <input
-                        type="date"
-                        id="nascimento"
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="sexo">
-                        Sexo
-                    </label>
-
-                    <select id="sexo">
-
-                        <option value="">
-                            Selecione
-                        </option>
-
-                        <option value="Feminino">
-                            Feminino
-                        </option>
-
-                        <option value="Masculino">
-                            Masculino
-                        </option>
-
-                        <option value="Outro">
-                            Outro
-                        </option>
-
-                        <option value="Prefiro não informar">
-                            Prefiro não informar
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="campo full">
-
-                    <label for="procedimento">
-                        Procedimento de interesse
-                    </label>
-
-                    <input
-                        type="text"
-                        id="procedimento"
-                        placeholder="Ex.: Botox, Limpeza de Pele..."
-                        maxlength="100"
-                    >
-
-                </div>
-
-
-                <div class="campo full">
-
-                    <button
-                        type="submit"
-                        class="btn"
-                        id="btnSalvar"
-                    >
-                        Cadastrar Cliente
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-cancelar"
-                        id="btnCancelar"
-                        style="display:none;"
-                    >
-                        Cancelar edição
-                    </button>
-
-                </div>
-
-            </div>
-
-        </form>
+        <ul class="menu">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#agendamento">Agendamento</a></li>
+            <li><a href="#depoimentos">Clientes</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
 
     </div>
+</nav>
 
 
-    <!-- LISTAGEM -->
+<!-- =========================
+     INÍCIO
+========================= -->
 
-    <div class="card">
+<header class="hero" id="inicio">
 
-        <div class="topo-lista">
+    <div class="container">
 
-            <h2>
-                📋 Clientes Cadastrados
-            </h2>
+        <div class="hero-content">
 
-            <div class="contador">
+            <div class="hero-small">
+                Estética • Beleza • Bem-estar
+            </div>
 
-                <span id="contador">0</span>
+            <h1>
+                Sua beleza merece cuidado especial.
+            </h1>
 
-                cliente(s)
+            <p>
+                Tratamentos estéticos personalizados para
+                realçar sua beleza natural e proporcionar
+                momentos de autocuidado.
+            </p>
+
+            <div class="botoes">
+
+                <a href="#agendamento" class="btn">
+                    Agendar horário
+                </a>
+
+                <a href="#servicos" class="btn btn-branco">
+                    Conhecer serviços
+                </a>
 
             </div>
 
         </div>
 
+    </div>
 
-        <div class="busca-container">
+</header>
 
-            <span>🔎</span>
+
+<main>
+
+
+<!-- =========================
+     SOBRE
+========================= -->
+
+<section id="sobre">
+
+    <div class="container">
+
+        <div class="sobre">
+
+            <div class="sobre-img">
+
+                <img
+                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1000&q=85"
+                    alt="Tratamento de estética facial"
+                >
+
+                <div class="sobre-badge">
+                    ✨ Beleza & autoestima
+                </div>
+
+            </div>
+
+            <div>
+
+                <span style="color:var(--rosa);font-weight:bold;">
+                    SOBRE A BELLA BEAUTY
+                </span>
+
+                <h2>
+                    Um espaço criado para você.
+                </h2>
+
+                <p>
+                    A Bella Beauty nasceu para transformar
+                    momentos de cuidado em experiências
+                    especiais.
+                </p>
+
+                <p>
+                    Trabalhamos com tratamentos de estética
+                    facial e corporal, sempre buscando oferecer
+                    conforto, acolhimento e atendimento
+                    personalizado.
+                </p>
+
+                <p>
+                    Porque cuidar da sua beleza também é
+                    cuidar da sua autoestima.
+                </p>
+
+                <a href="#agendamento" class="btn">
+                    Quero conhecer
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVIÇOS
+========================= -->
+
+<section id="servicos" class="servicos">
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>Nossos tratamentos</span>
+
+            <h2>
+                Serviços de estética
+            </h2>
+
+            <p>
+                Escolha o tratamento ideal para cuidar
+                de você.
+            </p>
+
+        </div>
+
+
+        <div class="servicos-grid">
+
+
+            <article class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80"
+                    alt="Limpeza de pele"
+                >
+
+                <div class="servico-info">
+
+                    <h3>Limpeza de Pele</h3>
+
+                    <p>
+                        Higienização profunda para uma pele
+                        mais limpa, macia e revitalizada.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 120
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=80"
+                    alt="Tratamento facial"
+                >
+
+                <div class="servico-info">
+
+                    <h3>Tratamento Facial</h3>
+
+                    <p>
+                        Cuidados personalizados para hidratação,
+                        luminosidade e revitalização.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 150
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80"
+                    alt="Massagem relaxante"
+                >
+
+                <div class="servico-info">
+
+                    <h3>Massagem Relaxante</h3>
+
+                    <p>
+                        Uma experiência relaxante para aliviar
+                        tensões e promover bem-estar.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 90
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80"
+                    alt="Drenagem corporal"
+                >
+
+                <div class="servico-info">
+
+                    <h3>Drenagem Linfática</h3>
+
+                    <p>
+                        Massagem corporal com movimentos suaves
+                        para uma experiência de bem-estar.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 100
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80"
+                    alt="Peeling facial"
+                >
+
+                <div class="servico-info">
+
+                    <h3>Peeling Facial</h3>
+
+                    <p>
+                        Tratamento estético para melhorar
+                        a textura e aparência da pele.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 180
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=900&q=80"
+                    alt="Depilação"
+                >
+
+                <div class="servico-info">
+
+                    <h3>Depilação</h3>
+
+                    <p>
+                        Cuidados de depilação com foco em
+                        conforto e qualidade.
+                    </p>
+
+                    <div class="preco">
+                        Consulte valores
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DIFERENCIAIS
+========================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>Por que escolher a Bella Beauty?</span>
+
+            <h2>
+                Cuidado em cada detalhe
+            </h2>
+
+        </div>
+
+
+        <div class="diferenciais">
+
+            <div class="diferencial">
+                <div class="icone">💆‍♀️</div>
+                <h3>Atendimento</h3>
+                <p>
+                    Atendimento acolhedor e personalizado.
+                </p>
+            </div>
+
+            <div class="diferencial">
+                <div class="icone">✨</div>
+                <h3>Qualidade</h3>
+                <p>
+                    Procedimentos realizados com atenção.
+                </p>
+            </div>
+
+            <div class="diferencial">
+                <div class="icone">🌸</div>
+                <h3>Conforto</h3>
+                <p>
+                    Ambiente preparado para seu relaxamento.
+                </p>
+            </div>
+
+            <div class="diferencial">
+                <div class="icone">💖</div>
+                <h3>Autoestima</h3>
+                <p>
+                    Seu bem-estar é uma das nossas prioridades.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AGENDAMENTO
+========================= -->
+
+<section id="agendamento" class="agendamento">
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>Reserve seu horário</span>
+
+            <h2>
+                Agende seu atendimento
+            </h2>
+
+            <p>
+                Preencha os dados abaixo e escolha
+                seu melhor horário.
+            </p>
+
+        </div>
+
+
+        <div id="mensagem" class="mensagem"></div>
+
+
+        <div class="card">
+
+            <form id="formAgendamento">
+
+                <div class="form-grid">
+
+                    <div class="campo full">
+
+                        <label for="nome">
+                            Nome completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            maxlength="100"
+                            placeholder="Digite seu nome"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo full">
+
+                        <label for="servico">
+                            Procedimento
+                        </label>
+
+                        <select id="servico" required>
+
+                            <option value="">
+                                Selecione um procedimento
+                            </option>
+
+                            <option>
+                                Limpeza de Pele
+                            </option>
+
+                            <option>
+                                Tratamento Facial
+                            </option>
+
+                            <option>
+                                Massagem Relaxante
+                            </option>
+
+                            <option>
+                                Drenagem Linfática
+                            </option>
+
+                            <option>
+                                Peeling Facial
+                            </option>
+
+                            <option>
+                                Depilação
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="data">
+                            Data
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="hora">
+                            Horário
+                        </label>
+
+                        <input
+                            type="time"
+                            id="hora"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo full form-botoes">
+
+                        <button
+                            class="btn"
+                            type="submit"
+                            id="btnSalvar"
+                        >
+                            Confirmar agendamento
+                        </button>
+
+                        <button
+                            class="btn btn-cancelar"
+                            type="button"
+                            id="btnCancelar"
+                        >
+                            Cancelar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LISTA DE AGENDAMENTOS
+========================= -->
+
+<section class="lista">
+
+    <div class="container">
+
+        <div class="topo-lista">
+
+            <div class="titulo"
+                 style="text-align:left;margin:0">
+
+                <span>Área administrativa</span>
+
+                <h2>
+                    Agendamentos
+                </h2>
+
+            </div>
+
+            <div class="contador">
+                <span id="contador">0</span>
+                registro(s)
+            </div>
+
+        </div>
+
+
+        <div class="busca">
 
             <input
                 type="search"
                 id="busca"
-                placeholder="Buscar por nome, telefone ou e-mail..."
+                placeholder="🔎 Buscar por cliente ou procedimento..."
             >
 
         </div>
 
 
-        <div class="tabela-container">
+        <div class="tabela">
 
             <table>
 
                 <thead>
 
                     <tr>
-
-                        <th>Nome</th>
-
-                        <th>Telefone</th>
-
-                        <th>E-mail</th>
-
-                        <th>Nascimento</th>
-
-                        <th>Idade</th>
-
-                        <th>Sexo</th>
-
+                        <th>Cliente</th>
                         <th>Procedimento</th>
-
+                        <th>Data</th>
+                        <th>Horário</th>
                         <th>Ações</th>
-
                     </tr>
 
                 </thead>
 
-                <tbody id="listaClientes"></tbody>
+                <tbody id="listaAgendamentos"></tbody>
 
             </table>
 
@@ -598,25 +1273,155 @@ tbody tr:hover{
 
     </div>
 
+</section>
 
-    <div class="rodape">
 
-        Bella Pele © 2026 — Sistema de Clientes
+<!-- =========================
+     DEPOIMENTOS
+========================= -->
+
+<section id="depoimentos" class="depoimentos">
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>Experiências</span>
+
+            <h2>
+                O que nossas clientes dizem
+            </h2>
+
+        </div>
+
+
+        <div class="depoimentos-grid">
+
+            <div class="depoimento">
+
+                <div class="estrelas">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Adorei o atendimento! O ambiente é lindo
+                    e saí de lá me sentindo maravilhosa."
+                </p>
+
+                <div class="cliente">
+                    — Mariana
+                </div>
+
+            </div>
+
+
+            <div class="depoimento">
+
+                <div class="estrelas">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Profissionais muito atenciosas.
+                    Com certeza voltarei para outros tratamentos."
+                </p>
+
+                <div class="cliente">
+                    — Juliana
+                </div>
+
+            </div>
+
+
+            <div class="depoimento">
+
+                <div class="estrelas">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "A experiência foi maravilhosa.
+                    Recomendo muito a Bella Beauty!"
+                </p>
+
+                <div class="cliente">
+                    — Camila
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+</section>
+
+
+<!-- =========================
+     CONTATO
+========================= -->
+
+<section id="contato">
+
+    <div class="container">
+
+        <div class="contato-box">
+
+            <h2>
+                Vamos cuidar de você?
+            </h2>
+
+            <p>
+                Agende seu horário e venha viver
+                uma experiência de beleza e bem-estar.
+            </p>
+
+            <!-- TROQUE PELO WHATSAPP REAL -->
+
+            <a
+                href="https://wa.me/5500000000000"
+                target="_blank"
+                class="btn btn-branco"
+            >
+                💬 Falar pelo WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     RODAPÉ
+========================= -->
+
+<footer>
+
+    <p>
+        <strong>Bella Beauty Estética</strong> © 2026
+    </p>
+
+    <p>
+        Beleza • Cuidado • Autoestima
+    </p>
+
+</footer>
 
 
 <script>
 
-/* ==========================================
-   CONFIGURAÇÃO
-========================================== */
+/* =================================
+   SISTEMA DE AGENDAMENTO
+================================= */
 
-const STORAGE_KEY = "bellaPeleClientes";
+const STORAGE_KEY =
+    "bella_beauty_agendamentos";
 
-let clientes =
+let agendamentos =
     JSON.parse(
         localStorage.getItem(STORAGE_KEY)
     ) || [];
@@ -624,39 +1429,35 @@ let clientes =
 let indiceEdicao = null;
 
 
-/* ==========================================
-   ELEMENTOS
-========================================== */
+/* ELEMENTOS */
 
 const form =
-    document.getElementById("formCliente");
+    document.getElementById(
+        "formAgendamento"
+    );
 
 const nome =
     document.getElementById("nome");
 
-const telefone =
-    document.getElementById("telefone");
+const servico =
+    document.getElementById("servico");
 
-const email =
-    document.getElementById("email");
+const data =
+    document.getElementById("data");
 
-const nascimento =
-    document.getElementById("nascimento");
-
-const sexo =
-    document.getElementById("sexo");
-
-const procedimento =
-    document.getElementById("procedimento");
+const hora =
+    document.getElementById("hora");
 
 const lista =
-    document.getElementById("listaClientes");
-
-const busca =
-    document.getElementById("busca");
+    document.getElementById(
+        "listaAgendamentos"
+    );
 
 const contador =
     document.getElementById("contador");
+
+const busca =
+    document.getElementById("busca");
 
 const mensagem =
     document.getElementById("mensagem");
@@ -667,125 +1468,85 @@ const btnSalvar =
 const btnCancelar =
     document.getElementById("btnCancelar");
 
-const tituloFormulario =
-    document.getElementById("tituloFormulario");
+
+/* DATA ATUAL */
+
+const hoje =
+    new Date()
+    .toISOString()
+    .split("T")[0];
+
+data.min = hoje;
 
 
-/* ==========================================
-   SALVAR
-========================================== */
+/* SALVAR */
 
-function salvar(){
+function salvarDados(){
 
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(clientes)
+        JSON.stringify(agendamentos)
     );
 
 }
 
 
-/* ==========================================
-   MENSAGEM
-========================================== */
+/* ESCAPAR HTML */
+
+function escapeHTML(texto){
+
+    return texto.replace(
+        /[&<>'"]/g,
+        caractere => {
+
+            const mapa = {
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                "'":"&#39;",
+                '"':"&quot;"
+            };
+
+            return mapa[caractere];
+
+        }
+    );
+
+}
+
+
+/* MENSAGEM */
 
 function mostrarMensagem(
     texto,
-    tipo = "sucesso"
+    tipo="sucesso"
 ){
 
     mensagem.textContent = texto;
 
     mensagem.className =
-        `mensagem ${tipo}`;
+        "mensagem " + tipo;
 
     setTimeout(() => {
 
-        mensagem.className = "mensagem";
+        mensagem.className =
+            "mensagem";
 
-    },3000);
-
-}
-
-
-/* ==========================================
-   GERAR ID
-========================================== */
-
-function gerarId(){
-
-    return (
-        Date.now().toString(36) +
-        Math.random()
-            .toString(36)
-            .substring(2)
-    );
+    },3500);
 
 }
 
 
-/* ==========================================
-   MÁSCARA DE TELEFONE
-========================================== */
+/* FORMATAR DATA */
 
-telefone.addEventListener(
-    "input",
-    function(){
+function formatarData(dataISO){
 
-        let valor =
-            telefone.value.replace(/\D/g,"");
-
-        valor =
-            valor.substring(0,11);
-
-        if(valor.length <= 10){
-
-            valor =
-                valor.replace(
-                    /^(\d{2})(\d)/,
-                    "($1) $2"
-                );
-
-            valor =
-                valor.replace(
-                    /(\d{4})(\d)/,
-                    "$1-$2"
-                );
-
-        }else{
-
-            valor =
-                valor.replace(
-                    /^(\d{2})(\d)/,
-                    "($1) $2"
-                );
-
-            valor =
-                valor.replace(
-                    /(\d{5})(\d)/,
-                    "$1-$2"
-                );
-
-        }
-
-        telefone.value = valor;
-
-    }
-);
-
-
-/* ==========================================
-   FORMATAR DATA
-========================================== */
-
-function formatarData(data){
-
-    if(!data){
-        return "-";
+    if(!dataISO){
+        return "";
     }
 
     const partes =
-        data.split("-");
+        dataISO.split("-");
 
     return (
         partes[2] +
@@ -798,55 +1559,33 @@ function formatarData(data){
 }
 
 
-/* ==========================================
-   CALCULAR IDADE
-========================================== */
+/* VERIFICAR HORÁRIO */
 
-function calcularIdade(data){
+function horarioOcupado(
+    dataAtual,
+    horaAtual,
+    ignorar=null
+){
 
-    if(!data){
-        return "-";
-    }
+    return agendamentos.some(
+        (item,index) => {
 
-    const nascimento =
-        new Date(
-            data + "T00:00:00"
-        );
+            if(index === ignorar){
+                return false;
+            }
 
-    const hoje =
-        new Date();
+            return (
+                item.data === dataAtual &&
+                item.hora === horaAtual
+            );
 
-    let idade =
-        hoje.getFullYear() -
-        nascimento.getFullYear();
-
-    const mes =
-        hoje.getMonth() -
-        nascimento.getMonth();
-
-    if(
-        mes < 0 ||
-        (
-            mes === 0 &&
-            hoje.getDate() <
-            nascimento.getDate()
-        )
-    ){
-
-        idade--;
-
-    }
-
-    return idade >= 0
-        ? idade
-        : "-";
+        }
+    );
 
 }
 
 
-/* ==========================================
-   FORMULÁRIO
-========================================== */
+/* ENVIAR FORMULÁRIO */
 
 form.addEventListener(
     "submit",
@@ -854,213 +1593,116 @@ form.addEventListener(
 
         event.preventDefault();
 
-
         const nomeValor =
             nome.value.trim();
 
-        const telefoneValor =
-            telefone.value.trim();
+        const servicoValor =
+            servico.value;
 
-        const emailValor =
-            email.value.trim();
+        const dataValor =
+            data.value;
 
-        const nascimentoValor =
-            nascimento.value;
+        const horaValor =
+            hora.value;
 
-        const sexoValor =
-            sexo.value;
-
-        const procedimentoValor =
-            procedimento.value.trim();
-
-
-        /* VALIDAR CAMPOS */
 
         if(
             !nomeValor ||
-            !telefoneValor
+            !servicoValor ||
+            !dataValor ||
+            !horaValor
         ){
 
             mostrarMensagem(
-                "Preencha o nome e o telefone.",
+                "Preencha todos os campos.",
                 "erro"
             );
 
             return;
+
         }
 
-
-        /* VALIDAR TELEFONE */
-
-        const numeroTelefone =
-            telefoneValor.replace(
-                /\D/g,
-                ""
-            );
 
         if(
-            numeroTelefone.length < 10
+            dataValor < hoje &&
+            indiceEdicao === null
         ){
 
             mostrarMensagem(
-                "Digite um telefone válido.",
+                "Escolha uma data atual ou futura.",
                 "erro"
             );
 
             return;
+
         }
 
-
-        /* VALIDAR E-MAIL */
 
         if(
-            emailValor &&
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-                .test(emailValor)
+            horarioOcupado(
+                dataValor,
+                horaValor,
+                indiceEdicao
+            )
         ){
 
             mostrarMensagem(
-                "Digite um e-mail válido.",
+                "Esse horário já está reservado.",
                 "erro"
             );
 
             return;
-        }
-
-
-        /* VALIDAR NASCIMENTO */
-
-        if(nascimentoValor){
-
-            const dataNascimento =
-                new Date(
-                    nascimentoValor +
-                    "T00:00:00"
-                );
-
-            const hoje =
-                new Date();
-
-            if(
-                dataNascimento > hoje
-            ){
-
-                mostrarMensagem(
-                    "A data de nascimento não pode ser futura.",
-                    "erro"
-                );
-
-                return;
-            }
 
         }
 
 
-        /* VERIFICAR DUPLICIDADE */
+        const agendamento = {
 
-        const telefoneExiste =
-            clientes.some(
-                (cliente,index) => {
+            nome:nomeValor,
 
-                    if(
-                        index === indiceEdicao
-                    ){
-                        return false;
-                    }
+            servico:servicoValor,
 
-                    return (
-                        cliente.telefone
-                            .replace(/\D/g,"")
-                        ===
-                        numeroTelefone
-                    );
+            data:dataValor,
 
-                }
-            );
-
-
-        if(telefoneExiste){
-
-            mostrarMensagem(
-                "Já existe um cliente cadastrado com este telefone.",
-                "erro"
-            );
-
-            return;
-        }
-
-
-        /* OBJETO CLIENTE */
-
-        const cliente = {
-
-            id:
-                indiceEdicao !== null
-                ? clientes[indiceEdicao].id
-                : gerarId(),
-
-            nome: nomeValor,
-
-            telefone: telefoneValor,
-
-            email: emailValor,
-
-            nascimento:
-                nascimentoValor,
-
-            sexo:
-                sexoValor,
-
-            procedimento:
-                procedimentoValor,
-
-            criadoEm:
-                indiceEdicao !== null
-                ? clientes[indiceEdicao].criadoEm
-                : new Date().toISOString()
+            hora:horaValor
 
         };
 
 
-        /* EDITAR */
-
         if(indiceEdicao !== null){
 
-            clientes[indiceEdicao] =
-                cliente;
+            agendamentos[
+                indiceEdicao
+            ] = agendamento;
 
             mostrarMensagem(
-                "Cliente atualizado com sucesso!"
+                "Agendamento atualizado com sucesso!"
+            );
+
+        }else{
+
+            agendamentos.push(
+                agendamento
+            );
+
+            mostrarMensagem(
+                "Agendamento realizado com sucesso!"
             );
 
         }
 
-        /* CADASTRAR */
 
-        else{
-
-            clientes.push(cliente);
-
-            mostrarMensagem(
-                "Cliente cadastrado com sucesso!"
-            );
-
-        }
-
-
-        salvar();
+        salvarDados();
 
         limparFormulario();
 
-        listarClientes();
+        renderizar();
 
     }
 );
 
 
-/* ==========================================
-   LIMPAR FORMULÁRIO
-========================================== */
+/* LIMPAR */
 
 function limparFormulario(){
 
@@ -1069,275 +1711,171 @@ function limparFormulario(){
     indiceEdicao = null;
 
     btnSalvar.textContent =
-        "Cadastrar Cliente";
+        "Confirmar agendamento";
 
     btnCancelar.style.display =
         "none";
 
-    tituloFormulario.textContent =
-        "👤 Novo Cliente";
-
 }
 
 
-/* ==========================================
-   LISTAR CLIENTES
-========================================== */
+/* CANCELAR */
 
-function listarClientes(){
+btnCancelar.addEventListener(
+    "click",
+    limparFormulario
+);
+
+
+/* RENDERIZAR TABELA */
+
+function renderizar(){
 
     const termo =
         busca.value
-            .trim()
-            .toLowerCase();
+        .trim()
+        .toLowerCase();
+
+
+    const resultados =
+        agendamentos
+
+        .map(
+            (item,index) => ({
+                ...item,
+                index
+            })
+        )
+
+        .filter(item =>
+
+            item.nome
+            .toLowerCase()
+            .includes(termo)
+
+            ||
+
+            item.servico
+            .toLowerCase()
+            .includes(termo)
+
+        )
+
+        .sort(
+            (a,b) =>
+
+            `${a.data} ${a.hora}`
+            .localeCompare(
+                `${b.data} ${b.hora}`
+            )
+        );
+
+
+    contador.textContent =
+        resultados.length;
 
 
     lista.innerHTML = "";
 
 
-    let filtrados =
-        clientes.filter(
-            cliente => {
+    if(resultados.length === 0){
 
-                return (
+        lista.innerHTML = `
+            <tr>
+                <td
+                    colspan="5"
+                    class="vazio"
+                >
+                    Nenhum agendamento encontrado.
+                </td>
+            </tr>
+        `;
 
-                    cliente.nome
-                        .toLowerCase()
-                        .includes(termo)
+        return;
 
-                    ||
-
-                    cliente.telefone
-                        .toLowerCase()
-                        .includes(termo)
-
-                    ||
-
-                    cliente.email
-                        .toLowerCase()
-                        .includes(termo)
-
-                    ||
-
-                    cliente.procedimento
-                        .toLowerCase()
-                        .includes(termo)
-
-                );
-
-            }
-        );
+    }
 
 
-    /* ORDENAR */
-
-    filtrados.sort(
-        (a,b) =>
-            a.nome.localeCompare(
-                b.nome,
-                "pt-BR"
-            )
-    );
-
-
-    contador.textContent =
-        filtrados.length;
-
-
-    /* NENHUM CLIENTE */
-
-    if(filtrados.length === 0){
+    resultados.forEach(item => {
 
         const tr =
             document.createElement("tr");
 
-        const td =
-            document.createElement("td");
 
-        td.colSpan = 8;
+        tr.innerHTML = `
 
-        td.className =
-            "sem-clientes";
+            <td>
+                <strong>
+                    ${escapeHTML(item.nome)}
+                </strong>
+            </td>
 
-        td.textContent =
-            termo
-            ? "Nenhum cliente encontrado."
-            : "Nenhum cliente cadastrado.";
+            <td>
+                ${escapeHTML(item.servico)}
+            </td>
 
-        tr.appendChild(td);
+            <td>
+                ${formatarData(item.data)}
+            </td>
+
+            <td>
+                ${escapeHTML(item.hora)}
+            </td>
+
+            <td>
+
+                <div class="acoes">
+
+                    <button
+                        class="acao editar"
+                        onclick="editarAgendamento(${item.index})"
+                    >
+                        Editar
+                    </button>
+
+                    <button
+                        class="acao excluir"
+                        onclick="excluirAgendamento(${item.index})"
+                    >
+                        Excluir
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
 
         lista.appendChild(tr);
 
-        return;
-    }
-
-
-    /* CRIAR LINHAS */
-
-    filtrados.forEach(
-        cliente => {
-
-            const index =
-                clientes.findIndex(
-                    item =>
-                        item.id ===
-                        cliente.id
-                );
-
-
-            const tr =
-                document.createElement("tr");
-
-
-            const tdNome =
-                document.createElement("td");
-
-            tdNome.textContent =
-                cliente.nome;
-
-
-            const tdTelefone =
-                document.createElement("td");
-
-            tdTelefone.textContent =
-                cliente.telefone;
-
-
-            const tdEmail =
-                document.createElement("td");
-
-            tdEmail.textContent =
-                cliente.email || "-";
-
-
-            const tdNascimento =
-                document.createElement("td");
-
-            tdNascimento.textContent =
-                formatarData(
-                    cliente.nascimento
-                );
-
-
-            const tdIdade =
-                document.createElement("td");
-
-            tdIdade.textContent =
-                calcularIdade(
-                    cliente.nascimento
-                );
-
-
-            const tdSexo =
-                document.createElement("td");
-
-            tdSexo.textContent =
-                cliente.sexo || "-";
-
-
-            const tdProcedimento =
-                document.createElement("td");
-
-            tdProcedimento.textContent =
-                cliente.procedimento || "-";
-
-
-            /* AÇÕES */
-
-            const tdAcoes =
-                document.createElement("td");
-
-            const acoes =
-                document.createElement("div");
-
-            acoes.className =
-                "acoes";
-
-
-            const editar =
-                document.createElement("button");
-
-            editar.textContent =
-                "✏️ Editar";
-
-            editar.className =
-                "acao editar";
-
-            editar.onclick =
-                () => editarCliente(index);
-
-
-            const excluir =
-                document.createElement("button");
-
-            excluir.textContent =
-                "🗑️ Excluir";
-
-            excluir.className =
-                "acao excluir";
-
-            excluir.onclick =
-                () => excluirCliente(index);
-
-
-            acoes.appendChild(
-                editar
-            );
-
-            acoes.appendChild(
-                excluir
-            );
-
-            tdAcoes.appendChild(
-                acoes
-            );
-
-
-            tr.appendChild(tdNome);
-            tr.appendChild(tdTelefone);
-            tr.appendChild(tdEmail);
-            tr.appendChild(tdNascimento);
-            tr.appendChild(tdIdade);
-            tr.appendChild(tdSexo);
-            tr.appendChild(tdProcedimento);
-            tr.appendChild(tdAcoes);
-
-
-            lista.appendChild(tr);
-
-        }
-    );
+    });
 
 }
 
 
-/* ==========================================
-   EDITAR
-========================================== */
+/* EDITAR */
 
-function editarCliente(index){
+function editarAgendamento(index){
 
-    const cliente =
-        clientes[index];
+    const item =
+        agendamentos[index];
+
+    if(!item){
+        return;
+    }
 
 
     nome.value =
-        cliente.nome;
+        item.nome;
 
-    telefone.value =
-        cliente.telefone;
+    servico.value =
+        item.servico;
 
-    email.value =
-        cliente.email;
+    data.value =
+        item.data;
 
-    nascimento.value =
-        cliente.nascimento;
-
-    sexo.value =
-        cliente.sexo;
-
-    procedimento.value =
-        cliente.procedimento;
+    hora.value =
+        item.hora;
 
 
     indiceEdicao =
@@ -1347,55 +1885,35 @@ function editarCliente(index){
     btnSalvar.textContent =
         "Salvar alterações";
 
+
     btnCancelar.style.display =
-        "block";
-
-    tituloFormulario.textContent =
-        "✏️ Editar Cliente";
+        "inline-block";
 
 
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
+    document
+        .getElementById("agendamento")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 
 }
 
 
-/* ==========================================
-   CANCELAR EDIÇÃO
-========================================== */
+/* EXCLUIR */
 
-btnCancelar.addEventListener(
-    "click",
-    function(){
+function excluirAgendamento(index){
 
-        limparFormulario();
+    const item =
+        agendamentos[index];
 
-        mostrarMensagem(
-            "Edição cancelada."
-        );
-
+    if(!item){
+        return;
     }
-);
-
-
-/* ==========================================
-   EXCLUIR
-========================================== */
-
-function excluirCliente(index){
-
-    const cliente =
-        clientes[index];
 
 
     const confirmar =
         confirm(
-            `Deseja realmente excluir "${cliente.nome}"?`
+            `Deseja excluir o agendamento de "${item.nome}"?`
         );
 
 
@@ -1404,42 +1922,44 @@ function excluirCliente(index){
     }
 
 
-    clientes.splice(
+    agendamentos.splice(
         index,
         1
     );
 
 
-    salvar();
+    salvarDados();
 
-    listarClientes();
+    renderizar();
+
+
+    if(indiceEdicao === index){
+
+        limparFormulario();
+
+    }
 
 
     mostrarMensagem(
-        "Cliente excluído com sucesso!"
+        "Agendamento excluído com sucesso."
     );
 
 }
 
 
-/* ==========================================
-   BUSCA
-========================================== */
+/* BUSCA */
 
 busca.addEventListener(
     "input",
-    listarClientes
+    renderizar
 );
 
 
-/* ==========================================
-   INICIAR SISTEMA
-========================================== */
+/* INICIAR */
 
-listarClientes();
+renderizar();
 
 </script>
 
 </body>
-
 </html>
