@@ -1,1526 +1,2262 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>Agendamentos | Bella Pele</title>
-
+<title>Bella Beauty | Estética & Beleza</title>
 
 <style>
-
-/* ================================
-   VARIÁVEIS
-================================ */
-
-:root{
-
-    --rosa:#d63384;
-    --rosa-escuro:#b8236d;
-    --rosa-claro:#fce4ef;
-
-    --fundo:#f8f5f7;
-    --branco:#fff;
-
-    --texto:#333;
-    --cinza:#777;
-    --borda:#ddd;
-
-    --verde:#198754;
-    --azul:#0d6efd;
-    --vermelho:#dc3545;
-    --roxo:#6f42c1;
-
-    --sombra:
-        0 8px 25px rgba(0,0,0,.08);
+:root {
+    --rosa: #d63384;
+    --rosa-escuro: #a91f63;
+    --rosa-claro: #fde8f2;
+    --nude: #fff8f5;
+    --creme: #fffdfb;
+    --dourado: #c59a5b;
+    --vinho: #6d2142;
+    --texto: #30272c;
+    --cinza: #756d72;
+    --branco: #fff;
+    --verde: #26965f;
+    --vermelho: #d64040;
+    --azul: #3c82c4;
+    --borda: #eadde3;
+    --sombra: 0 15px 40px rgba(105, 35, 65, .10);
+    --raio: 18px;
 }
 
-
-/* ================================
-   RESET
-================================ */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
-/* ================================
-   BODY
-================================ */
+body {
+    background: var(--creme);
+    color: var(--texto);
+}
 
-body{
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borda);
+}
+
+.nav {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+    min-height: 70px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--rosa);
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.logo span {
+    color: var(--dourado);
+}
+
+nav ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 600;
+    transition: .2s;
+}
+
+nav a:hover {
+    color: var(--rosa);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 650px;
 
     background:
         linear-gradient(
-            135deg,
-            #fff8fb,
-            #f5f1f3
-        );
+            rgba(89, 19, 51, .60),
+            rgba(211, 51, 132, .45)
+        ),
+        url("https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
 
-    color:var(--texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    min-height:100vh;
+    text-align: center;
+    color: white;
+    padding: 40px 20px;
 }
 
+.hero-content {
+    max-width: 850px;
+}
 
-/* ================================
-   HEADER
-================================ */
+.hero-small {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: .85rem;
+    margin-bottom: 20px;
+}
 
-header{
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    margin-bottom: 20px;
+}
 
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    border: none;
+    border-radius: 30px;
+    padding: 14px 25px;
+    background: var(--rosa);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    transition: .25s;
+}
+
+.btn:hover {
+    background: var(--rosa-escuro);
+    transform: translateY(-2px);
+}
+
+.btn-branco {
+    background: white;
+    color: var(--rosa);
+}
+
+.btn-branco:hover {
+    background: #fff0f6;
+}
+
+/* =========================
+   GERAL
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+section {
+    padding: 85px 0;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.titulo span {
+    color: var(--rosa);
+    text-transform: uppercase;
+    font-size: .78rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.titulo h2 {
+    font-family: Georgia, serif;
+    color: var(--vinho);
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+
+.titulo p {
+    color: var(--cinza);
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+}
+
+/* =========================
+   SERVIÇOS
+========================= */
+
+.servicos {
+    background: white;
+}
+
+.servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.servico {
+    background: var(--nude);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    overflow: hidden;
+    transition: .3s;
+}
+
+.servico:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--sombra);
+}
+
+.servico img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.servico-info {
+    padding: 22px;
+}
+
+.servico-info h3 {
+    color: var(--vinho);
+    margin-bottom: 10px;
+}
+
+.servico-info p {
+    color: var(--cinza);
+    line-height: 1.6;
+}
+
+.preco {
+    margin-top: 15px;
+    color: var(--rosa);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* =========================
+   SOBRE
+========================= */
+
+.sobre {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.sobre img {
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: var(--sombra);
+}
+
+.sobre h2 {
+    color: var(--vinho);
+    font-family: Georgia, serif;
+    font-size: 2.7rem;
+    margin: 12px 0 20px;
+}
+
+.sobre p {
+    color: var(--cinza);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   BENEFÍCIOS
+========================= */
+
+.beneficios {
+    background: var(--nude);
+}
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.beneficio {
+    background: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.icone {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.beneficio h3 {
+    color: var(--vinho);
+    margin-bottom: 8px;
+}
+
+.beneficio p {
+    color: var(--cinza);
+    line-height: 1.5;
+}
+
+/* =========================
+   DEPOIMENTOS
+========================= */
+
+.depoimentos {
+    background: white;
+}
+
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.depoimento {
+    background: var(--nude);
+    padding: 28px;
+    border-radius: var(--raio);
+    border: 1px solid var(--borda);
+}
+
+.estrelas {
+    color: #e0a83e;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+.depoimento p {
+    color: var(--cinza);
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+.cliente {
+    color: var(--vinho);
+    font-weight: bold;
+}
+
+/* =========================
+   AGENDAMENTO
+========================= */
+
+.agendamento {
     background:
         linear-gradient(
             135deg,
-            #d63384,
-            #e85d9e
+            #fff1f7,
+            #fff9f5
         );
-
-    color:white;
-
-    text-align:center;
-
-    padding:30px 20px;
-
-    box-shadow:
-        0 4px 15px
-        rgba(214,51,132,.25);
 }
 
-header h1{
-
-    font-size:30px;
-
-    margin-bottom:8px;
+.form-card {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 22px;
+    box-shadow: var(--sombra);
 }
 
-header p{
-
-    opacity:.9;
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
 }
 
-
-/* ================================
-   CONTAINER
-================================ */
-
-.container{
-
-    width:92%;
-
-    max-width:1250px;
-
-    margin:30px auto;
+.campo {
+    display: flex;
+    flex-direction: column;
 }
 
-
-/* ================================
-   RESUMO
-================================ */
-
-.resumo{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
-
-    margin-bottom:20px;
+.full {
+    grid-column: 1 / -1;
 }
 
-.resumo-card{
-
-    background:white;
-
-    padding:20px;
-
-    border-radius:14px;
-
-    box-shadow:var(--sombra);
-}
-
-.resumo-card span{
-
-    display:block;
-
-    color:var(--cinza);
-
-    font-size:14px;
-
-    margin-bottom:8px;
-}
-
-.resumo-card strong{
-
-    font-size:28px;
-}
-
-.total strong{
-    color:var(--rosa);
-}
-
-.agendado strong{
-    color:var(--azul);
-}
-
-.confirmado strong{
-    color:var(--verde);
-}
-
-.concluido strong{
-    color:var(--roxo);
-}
-
-
-/* ================================
-   CARD
-================================ */
-
-.card{
-
-    background:white;
-
-    padding:25px;
-
-    border-radius:16px;
-
-    box-shadow:var(--sombra);
-}
-
-
-/* ================================
-   CABEÇALHO DO CARD
-================================ */
-
-.card-topo{
-
-    display:flex;
-
-    justify-content:
-        space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-}
-
-.card-topo h2{
-
-    color:var(--rosa);
-}
-
-
-/* ================================
-   FILTROS
-================================ */
-
-.filtros{
-
-    display:grid;
-
-    grid-template-columns:
-        2fr
-        1fr
-        1fr
-        auto
-        auto;
-
-    gap:12px;
-
-    margin-bottom:20px;
+label {
+    font-weight: 700;
+    margin-bottom: 7px;
 }
 
 input,
-select{
+select,
+textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    background: white;
+}
 
-    width:100%;
-
-    padding:12px;
-
-    border:
-        1px solid
-        var(--borda);
-
-    border-radius:9px;
-
-    outline:none;
-
-    font-size:14px;
-
-    background:white;
-
-    transition:.2s;
+textarea {
+    resize: vertical;
+    min-height: 100px;
 }
 
 input:focus,
-select:focus{
-
-    border-color:
-        var(--rosa);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(214,51,132,.1);
+select:focus,
+textarea:focus {
+    border-color: var(--rosa);
+    box-shadow: 0 0 0 3px rgba(214,51,132,.12);
 }
 
-
-/* ================================
-   BOTÕES
-================================ */
-
-.btn{
-
-    border:none;
-
-    padding:
-        11px 16px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    transition:.2s;
+.form-botoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.btn:hover{
-
-    transform:
-        translateY(-1px);
+.btn-cancelar {
+    display: none;
+    background: #777;
 }
 
-.btn-pesquisar{
-
-    background:
-        var(--rosa);
-
-    color:white;
+.mensagem {
+    display: none;
+    max-width: 850px;
+    margin: 0 auto 20px;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
-.btn-pesquisar:hover{
-
-    background:
-        var(--rosa-escuro);
+.mensagem.sucesso {
+    display: block;
+    background: #e1f7eb;
+    color: #176b43;
 }
 
-.btn-limpar{
-
-    background:#eee;
-
-    color:#555;
+.mensagem.erro {
+    display: block;
+    background: #fde5e5;
+    color: #a52b2b;
 }
 
-.btn-limpar:hover{
+/* =========================
+   PAINEL
+========================= */
 
-    background:#ddd;
+.painel {
+    background: #fff;
 }
 
-
-/* ================================
-   TABELA
-================================ */
-
-.tabela-container{
-
-    width:100%;
-
-    overflow-x:auto;
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
-table{
-
-    width:100%;
-
-    border-collapse:
-        collapse;
-
-    min-width:900px;
+.resumo-card {
+    background: var(--nude);
+    border: 1px solid var(--borda);
+    border-radius: 15px;
+    padding: 20px;
 }
 
-th{
-
-    background:
-        var(--rosa);
-
-    color:white;
-
-    padding:13px;
+.resumo-card span {
+    display: block;
+    color: var(--cinza);
+    font-size: .85rem;
+    margin-bottom: 8px;
 }
 
-td{
-
-    padding:13px;
-
-    border-bottom:
-        1px solid #eee;
-
-    text-align:center;
+.resumo-card strong {
+    font-size: 1.9rem;
 }
 
-tbody tr:hover{
-
-    background:#fff8fb;
+.total strong {
+    color: var(--rosa);
 }
 
-
-/* ================================
-   STATUS
-================================ */
-
-.status{
-
-    display:inline-block;
-
-    padding:
-        6px 11px;
-
-    border-radius:
-        20px;
-
-    font-size:12px;
-
-    font-weight:bold;
+.confirmados strong {
+    color: var(--verde);
 }
 
-.status-agendado{
-
-    background:#dbeafe;
-
-    color:#0756b5;
+.concluidos strong {
+    color: #7045b5;
 }
 
-.status-confirmado{
-
-    background:#d1e7dd;
-
-    color:#0f5132;
+.cancelados strong {
+    color: var(--vermelho);
 }
 
-.status-concluido{
-
-    background:#ede3ff;
-
-    color:#5b2a9d;
+.painel-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+    padding: 25px;
+    border: 1px solid var(--borda);
 }
 
-.status-cancelado{
-
-    background:#f8d7da;
-
-    color:#842029;
+.busca {
+    margin-bottom: 20px;
 }
 
-
-/* ================================
-   AÇÕES
-================================ */
-
-.acoes{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:6px;
+.tabela {
+    overflow-x: auto;
 }
 
-.acao{
-
-    border:none;
-
-    padding:
-        7px 10px;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
-    color:white;
-
-    font-size:12px;
-
-    font-weight:bold;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
 }
 
-.editar{
-
-    background:
-        var(--azul);
+th {
+    background: var(--rosa);
+    color: white;
+    padding: 14px;
+    text-align: left;
 }
 
-.editar:hover{
-
-    background:#0a58ca;
+td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
 }
 
-.excluir{
-
-    background:
-        var(--vermelho);
+tbody tr:hover {
+    background: #fff8fb;
 }
 
-.excluir:hover{
-
-    background:#b02a37;
+.status {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: .75rem;
+    font-weight: bold;
 }
 
-
-/* ================================
-   NENHUM RESULTADO
-================================ */
-
-.sem-resultado{
-
-    text-align:center;
-
-    padding:45px;
-
-    color:var(--cinza);
+.status-Agendado {
+    background: #dbeafe;
+    color: #0756b5;
 }
 
-.sem-resultado .icone{
-
-    font-size:40px;
-
-    margin-bottom:10px;
+.status-Confirmado {
+    background: #d1e7dd;
+    color: #12633b;
 }
 
-
-/* ================================
-   RODAPÉ
-================================ */
-
-.rodape{
-
-    text-align:center;
-
-    color:var(--cinza);
-
-    font-size:13px;
-
-    padding:
-        20px 0 30px;
+.status-Concluído {
+    background: #ede3ff;
+    color: #5b2a9d;
 }
 
+.status-Cancelado {
+    background: #f8d7da;
+    color: #842029;
+}
 
-/* ================================
+.acoes {
+    display: flex;
+    gap: 7px;
+}
+
+.acao {
+    border: none;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.editar {
+    background: var(--azul);
+}
+
+.excluir {
+    background: var(--vermelho);
+}
+
+/* =========================
+   CONTATO
+========================= */
+
+.contato {
+    background: var(--vinho);
+    color: white;
+    text-align: center;
+}
+
+.contato h2 {
+    font-family: Georgia, serif;
+    font-size: 2.7rem;
+    margin-bottom: 15px;
+}
+
+.contato p {
+    margin-bottom: 25px;
+    opacity: .9;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #2e1924;
+    color: #d9cdd2;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+footer strong {
+    color: #ff8abd;
+}
+
+/* =========================
    RESPONSIVO
-================================ */
+========================= */
 
-@media(max-width:1000px){
+@media(max-width: 900px) {
 
-    .filtros{
-
-        grid-template-columns:
-            1fr 1fr;
-
+    .servicos-grid,
+    .depoimentos-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 
+    .beneficios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sobre {
+        grid-template-columns: 1fr;
+    }
+
+    .resumo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav ul {
+        display: none;
+    }
 }
 
-@media(max-width:700px){
+@media(max-width: 600px) {
 
-    header h1{
-
-        font-size:23px;
+    section {
+        padding: 60px 0;
     }
 
-    .container{
-
-        width:95%;
-
-        margin-top:20px;
+    .hero {
+        min-height: 560px;
     }
 
-    .resumo{
-
-        grid-template-columns:
-            repeat(2,1fr);
+    .hero h1 {
+        font-size: 3rem;
     }
 
-    .card{
-
-        padding:18px;
+    .servicos-grid,
+    .depoimentos-grid,
+    .beneficios-grid,
+    .resumo,
+    .form-grid {
+        grid-template-columns: 1fr;
     }
 
-    .filtros{
-
-        grid-template-columns:
-            1fr;
+    .full {
+        grid-column: auto;
     }
 
-    .card-topo{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:10px;
+    .form-card {
+        padding: 20px;
     }
 
+    .form-botoes {
+        flex-direction: column;
+    }
+
+    .titulo h2 {
+        font-size: 2rem;
+    }
 }
-
-@media(max-width:450px){
-
-    .resumo{
-
-        grid-template-columns:
-            1fr;
-    }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<!-- =========================
+     MENU
+========================= -->
 
-<!-- =================================
-     CABEÇALHO
-================================= -->
+<nav>
 
-<header>
+<div class="nav">
+
+    <div class="logo">
+        Bella <span>Beauty</span>
+    </div>
+
+    <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#agendamento">Agendamento</a></li>
+    </ul>
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero" id="inicio">
+
+<div class="hero-content">
+
+    <div class="hero-small">
+        ✨ Clínica de Estética & Beleza
+    </div>
 
     <h1>
-        ✨ Clínica de Estética Bella Pele
+        Sua beleza,<br>
+        seu momento
     </h1>
 
     <p>
-        Central de Agendamentos
+        Tratamentos estéticos personalizados para
+        cuidar da sua pele, valorizar sua beleza
+        e elevar sua autoestima.
     </p>
+
+    <a
+        href="#agendamento"
+        class="btn btn-branco"
+    >
+        Agendar meu horário
+    </a>
+
+</div>
 
 </header>
 
 
+<main>
+
+
+<!-- =========================
+     SERVIÇOS
+========================= -->
+
+<section id="servicos" class="servicos">
+
 <div class="container">
 
+<div class="titulo">
 
-<!-- =================================
-     RESUMO
-================================= -->
+    <span>Nossos tratamentos</span>
+
+    <h2>
+        Cuidados especiais para você
+    </h2>
+
+    <p>
+        Escolha o tratamento que mais combina
+        com o seu momento.
+    </p>
+
+</div>
+
+
+<div class="servicos-grid">
+
+
+<div class="servico">
+
+<img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80">
+
+<div class="servico-info">
+
+<h3>Limpeza de Pele</h3>
+
+<p>
+Higienização profunda para uma pele
+mais limpa, macia e iluminada.
+</p>
+
+<div class="preco">
+R$ 120
+</div>
+
+</div>
+
+</div>
+
+
+<div class="servico">
+
+<img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=80">
+
+<div class="servico-info">
+
+<h3>Tratamento Facial</h3>
+
+<p>
+Hidratação e revitalização para
+deixar sua pele mais saudável.
+</p>
+
+<div class="preco">
+R$ 150
+</div>
+
+</div>
+
+</div>
+
+
+<div class="servico">
+
+<img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80">
+
+<div class="servico-info">
+
+<h3>Drenagem Linfática</h3>
+
+<p>
+Massagem suave para promover
+relaxamento e bem-estar.
+</p>
+
+<div class="preco">
+R$ 100
+</div>
+
+</div>
+
+</div>
+
+
+<div class="servico">
+
+<img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80">
+
+<div class="servico-info">
+
+<h3>Massagem Relaxante</h3>
+
+<p>
+Um momento especial para aliviar
+tensões e relaxar.
+</p>
+
+<div class="preco">
+R$ 90
+</div>
+
+</div>
+
+</div>
+
+
+<div class="servico">
+
+<img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80">
+
+<div class="servico-info">
+
+<h3>Peeling Facial</h3>
+
+<p>
+Tratamento para melhorar a aparência
+e textura da pele.
+</p>
+
+<div class="preco">
+R$ 180
+</div>
+
+</div>
+
+</div>
+
+
+<div class="servico">
+
+<img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?auto=format&fit=crop&w=900&q=80">
+
+<div class="servico-info">
+
+<h3>Design de Sobrancelhas</h3>
+
+<p>
+Realce o olhar com um design
+personalizado para seu rosto.
+</p>
+
+<div class="preco">
+R$ 50
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     SOBRE
+========================= -->
+
+<section id="sobre">
+
+<div class="container">
+
+<div class="sobre">
+
+<img
+src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=1100&q=80"
+>
+
+<div>
+
+<span style="
+color:var(--rosa);
+font-weight:bold;
+letter-spacing:2px;
+font-size:.8rem;
+">
+SOBRE A BELLA BEAUTY
+</span>
+
+<h2>
+Beleza começa quando
+você se cuida
+</h2>
+
+<p>
+Nossa missão é proporcionar uma experiência
+de beleza acolhedora, tranquila e personalizada.
+</p>
+
+<p>
+Trabalhamos para que cada cliente tenha
+um momento especial de autocuidado,
+bem-estar e autoestima.
+</p>
+
+<a
+href="#agendamento"
+class="btn"
+>
+Quero agendar
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     BENEFÍCIOS
+========================= -->
+
+<section class="beneficios">
+
+<div class="container">
+
+<div class="titulo">
+
+<span>Por que escolher a Bella Beauty?</span>
+
+<h2>
+Um cuidado pensado em você
+</h2>
+
+</div>
+
+
+<div class="beneficios-grid">
+
+
+<div class="beneficio">
+
+<div class="icone">
+💆‍♀️
+</div>
+
+<h3>
+Atendimento personalizado
+</h3>
+
+<p>
+Cada cliente recebe atenção
+de acordo com suas necessidades.
+</p>
+
+</div>
+
+
+<div class="beneficio">
+
+<div class="icone">
+✨
+</div>
+
+<h3>
+Ambiente aconchegante
+</h3>
+
+<p>
+Um espaço preparado para
+você relaxar.
+</p>
+
+</div>
+
+
+<div class="beneficio">
+
+<div class="icone">
+💖
+</div>
+
+<h3>
+Foco no bem-estar
+</h3>
+
+<p>
+Seu conforto e autoestima
+são nossa prioridade.
+</p>
+
+</div>
+
+
+<div class="beneficio">
+
+<div class="icone">
+🌸
+</div>
+
+<h3>
+Experiência especial
+</h3>
+
+<p>
+Um momento de cuidado
+feito especialmente para você.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     DEPOIMENTOS
+========================= -->
+
+<section
+id="depoimentos"
+class="depoimentos"
+>
+
+<div class="container">
+
+<div class="titulo">
+
+<span>Clientes especiais</span>
+
+<h2>
+O que nossas clientes dizem
+</h2>
+
+</div>
+
+
+<div class="depoimentos-grid">
+
+
+<div class="depoimento">
+
+<div class="estrelas">
+★★★★★
+</div>
+
+<p>
+"Adorei o atendimento! O espaço é
+lindo e saí me sentindo maravilhosa."
+</p>
+
+<div class="cliente">
+— Mariana
+</div>
+
+</div>
+
+
+<div class="depoimento">
+
+<div class="estrelas">
+★★★★★
+</div>
+
+<p>
+"Profissionais muito atenciosas.
+Com certeza vou voltar."
+</p>
+
+<div class="cliente">
+— Juliana
+</div>
+
+</div>
+
+
+<div class="depoimento">
+
+<div class="estrelas">
+★★★★★
+</div>
+
+<p>
+"Minha pele ficou incrível depois
+do tratamento. Amei o resultado!"
+</p>
+
+<div class="cliente">
+— Camila
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     AGENDAMENTO
+========================= -->
+
+<section
+id="agendamento"
+class="agendamento"
+>
+
+<div class="container">
+
+<div class="titulo">
+
+<span>Reserve seu momento</span>
+
+<h2>
+Agende seu atendimento
+</h2>
+
+<p>
+Escolha o procedimento, data e horário.
+</p>
+
+</div>
+
+
+<div
+id="mensagem"
+class="mensagem"
+>
+</div>
+
+
+<div class="form-card">
+
+<form id="formAgendamento">
+
+<div class="form-grid">
+
+
+<div class="campo full">
+
+<label>
+Nome completo
+</label>
+
+<input
+type="text"
+id="nome"
+placeholder="Digite seu nome"
+maxlength="100"
+required
+>
+
+</div>
+
+
+<div class="campo">
+
+<label>
+Telefone
+</label>
+
+<input
+type="tel"
+id="telefone"
+placeholder="(00) 00000-0000"
+required
+>
+
+</div>
+
+
+<div class="campo">
+
+<label>
+Procedimento
+</label>
+
+<select
+id="servico"
+required
+>
+
+<option value="">
+Selecione
+</option>
+
+<option>
+Limpeza de Pele
+</option>
+
+<option>
+Tratamento Facial
+</option>
+
+<option>
+Drenagem Linfática
+</option>
+
+<option>
+Massagem Relaxante
+</option>
+
+<option>
+Peeling Facial
+</option>
+
+<option>
+Design de Sobrancelhas
+</option>
+
+</select>
+
+</div>
+
+
+<div class="campo">
+
+<label>
+Data
+</label>
+
+<input
+type="date"
+id="data"
+required
+>
+
+</div>
+
+
+<div class="campo">
+
+<label>
+Horário
+</label>
+
+<input
+type="time"
+id="hora"
+required
+>
+
+</div>
+
+
+<div class="campo full">
+
+<label>
+Observações
+</label>
+
+<textarea
+id="observacao"
+placeholder="Alguma observação?"
+></textarea>
+
+</div>
+
+
+<div class="campo full form-botoes">
+
+<button
+class="btn"
+type="submit"
+>
+Confirmar agendamento
+</button>
+
+<button
+type="button"
+class="btn btn-cancelar"
+id="btnCancelar"
+>
+Cancelar edição
+</button>
+
+</div>
+
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PAINEL
+========================= -->
+
+<section class="painel">
+
+<div class="container">
+
+<div class="titulo">
+
+<span>Área administrativa</span>
+
+<h2>
+Meus agendamentos
+</h2>
+
+</div>
+
 
 <div class="resumo">
 
-    <div class="resumo-card total">
 
-        <span>
-            Total
-        </span>
+<div class="resumo-card total">
 
-        <strong id="total">
-            0
-        </strong>
+<span>
+Total
+</span>
 
-    </div>
-
-
-    <div class="resumo-card agendado">
-
-        <span>
-            Agendados
-        </span>
-
-        <strong id="agendados">
-            0
-        </strong>
-
-    </div>
-
-
-    <div class="resumo-card confirmado">
-
-        <span>
-            Confirmados
-        </span>
-
-        <strong id="confirmados">
-            0
-        </strong>
-
-    </div>
-
-
-    <div class="resumo-card concluido">
-
-        <span>
-            Concluídos
-        </span>
-
-        <strong id="concluidos">
-            0
-        </strong>
-
-    </div>
+<strong id="total">
+0
+</strong>
 
 </div>
 
 
-<!-- =================================
-     CARD PRINCIPAL
-================================= -->
+<div class="resumo-card confirmados">
 
-<div class="card">
+<span>
+Confirmados
+</span>
 
-
-    <div class="card-topo">
-
-        <h2>
-            📋 Lista de Agendamentos
-        </h2>
-
-    </div>
-
-
-    <!-- =================================
-         FILTROS
-    ================================= -->
-
-    <div class="filtros">
-
-
-        <input
-            type="search"
-            id="pesquisa"
-            placeholder="🔎 Pesquisar cliente ou serviço..."
-        >
-
-
-        <input
-            type="date"
-            id="filtroData"
-        >
-
-
-        <select id="filtroStatus">
-
-            <option value="">
-                Todos os status
-            </option>
-
-            <option value="Agendado">
-                Agendado
-            </option>
-
-            <option value="Confirmado">
-                Confirmado
-            </option>
-
-            <option value="Concluído">
-                Concluído
-            </option>
-
-            <option value="Cancelado">
-                Cancelado
-            </option>
-
-        </select>
-
-
-        <button
-            class="btn btn-pesquisar"
-            onclick="filtrar()"
-        >
-            🔎 Pesquisar
-        </button>
-
-
-        <button
-            class="btn btn-limpar"
-            onclick="limparFiltros()"
-        >
-            Limpar
-        </button>
-
-
-    </div>
-
-
-    <!-- =================================
-         TABELA
-    ================================= -->
-
-    <div class="tabela-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>
-                        Cliente
-                    </th>
-
-                    <th>
-                        Serviço
-                    </th>
-
-                    <th>
-                        Data
-                    </th>
-
-                    <th>
-                        Horário
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
-
-                    <th>
-                        Ações
-                    </th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody id="lista">
-
-            </tbody>
-
-        </table>
-
-    </div>
-
+<strong id="confirmados">
+0
+</strong>
 
 </div>
 
 
-<div class="rodape">
+<div class="resumo-card concluidos">
 
-    Bella Pele © 2026
-    — Sistema de Agendamentos
+<span>
+Concluídos
+</span>
+
+<strong id="concluidos">
+0
+</strong>
+
+</div>
+
+
+<div class="resumo-card cancelados">
+
+<span>
+Cancelados
+</span>
+
+<strong id="cancelados">
+0
+</strong>
 
 </div>
 
 
 </div>
+
+
+<div class="painel-card">
+
+<div class="busca">
+
+<input
+type="search"
+id="busca"
+placeholder="🔎 Buscar cliente ou procedimento..."
+>
+
+</div>
+
+
+<div class="tabela">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Cliente
+</th>
+
+<th>
+Telefone
+</th>
+
+<th>
+Procedimento
+</th>
+
+<th>
+Data
+</th>
+
+<th>
+Horário
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Ações
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="lista">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CONTATO
+========================= -->
+
+<section class="contato">
+
+<div class="container">
+
+<h2>
+Pronta para cuidar de você?
+</h2>
+
+<p>
+Agende seu horário e reserve um momento
+especial para sua beleza.
+</p>
+
+<a
+class="btn btn-branco"
+href="https://wa.me/5500000000000"
+target="_blank"
+>
+💬 Falar no WhatsApp
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<p>
+<strong>Bella Beauty</strong> © 2026
+</p>
+
+<p>
+Estética • Beleza • Bem-estar
+</p>
+
+</footer>
 
 
 <script>
 
-/* =========================================
-   DADOS
-========================================= */
+/* =========================
+   CONFIGURAÇÃO
+========================= */
+
+const STORAGE =
+"bella_beauty_agendamentos";
 
 let agendamentos =
-    JSON.parse(
-        localStorage.getItem(
-            "agendamentos"
-        )
-    ) || [];
+JSON.parse(
+localStorage.getItem(STORAGE)
+) || [];
+
+let indiceEdicao = null;
 
 
-/* =========================================
+/* =========================
+   ELEMENTOS
+========================= */
+
+const form =
+document.getElementById(
+"formAgendamento"
+);
+
+const nome =
+document.getElementById("nome");
+
+const telefone =
+document.getElementById("telefone");
+
+const servico =
+document.getElementById("servico");
+
+const data =
+document.getElementById("data");
+
+const hora =
+document.getElementById("hora");
+
+const observacao =
+document.getElementById("observacao");
+
+const lista =
+document.getElementById("lista");
+
+const busca =
+document.getElementById("busca");
+
+const mensagem =
+document.getElementById("mensagem");
+
+const btnCancelar =
+document.getElementById("btnCancelar");
+
+
+/* =========================
+   DATA MÍNIMA
+========================= */
+
+const hoje =
+new Date().toISOString()
+.split("T")[0];
+
+data.min = hoje;
+
+
+/* =========================
    SALVAR
-========================================= */
+========================= */
 
-function salvar(){
+function salvar() {
 
-    localStorage.setItem(
-        "agendamentos",
-        JSON.stringify(
-            agendamentos
-        )
-    );
-
-}
-
-
-/* =========================================
-   FORMATAR DATA
-========================================= */
-
-function formatarData(data){
-
-    if(!data){
-
-        return "-";
-
-    }
-
-    const partes =
-        data.split("-");
-
-    if(partes.length !== 3){
-
-        return data;
-
-    }
-
-    return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
-    );
+localStorage.setItem(
+STORAGE,
+JSON.stringify(
+agendamentos
+)
+);
 
 }
 
 
-/* =========================================
+/* =========================
+   MENSAGEM
+========================= */
+
+function mostrarMensagem(
+texto,
+tipo = "sucesso"
+) {
+
+mensagem.textContent = texto;
+
+mensagem.className =
+"mensagem " + tipo;
+
+setTimeout(() => {
+
+mensagem.className =
+"mensagem";
+
+}, 3500);
+
+}
+
+
+/* =========================
+   DATA BR
+========================= */
+
+function dataBR(valor) {
+
+if(!valor) return "-";
+
+const p =
+valor.split("-");
+
+return `
+${p[2]}/${p[1]}/${p[0]}
+`;
+
+}
+
+
+/* =========================
    STATUS
-========================================= */
+========================= */
 
-function obterStatus(item){
+function status(item) {
 
-    return item.status ||
-        "Agendado";
-
-}
-
-
-function classeStatus(status){
-
-    if(status === "Confirmado"){
-
-        return "status-confirmado";
-
-    }
-
-    if(status === "Concluído"){
-
-        return "status-concluido";
-
-    }
-
-    if(status === "Cancelado"){
-
-        return "status-cancelado";
-
-    }
-
-    return "status-agendado";
+return item.status ||
+"Agendado";
 
 }
 
 
-/* =========================================
-   ATUALIZAR RESUMO
-========================================= */
+/* =========================
+   CONFLITO
+========================= */
 
-function atualizarResumo(){
+function horarioOcupado(
+dataAtual,
+horaAtual,
+ignorar = null
+) {
 
-    document.getElementById(
-        "total"
-    ).textContent =
-        agendamentos.length;
+return agendamentos.some(
+(item,index) => {
 
+if(index === ignorar)
+return false;
 
-    document.getElementById(
-        "agendados"
-    ).textContent =
-        agendamentos.filter(
-            item =>
-                obterStatus(item)
-                === "Agendado"
-        ).length;
+return (
+item.data === dataAtual &&
+item.hora === horaAtual &&
+status(item) !== "Cancelado"
+);
 
-
-    document.getElementById(
-        "confirmados"
-    ).textContent =
-        agendamentos.filter(
-            item =>
-                obterStatus(item)
-                === "Confirmado"
-        ).length;
-
-
-    document.getElementById(
-        "concluidos"
-    ).textContent =
-        agendamentos.filter(
-            item =>
-                obterStatus(item)
-                === "Concluído"
-        ).length;
+});
 
 }
 
 
-/* =========================================
-   CARREGAR
-========================================= */
+/* =========================
+   FORMULÁRIO
+========================= */
 
-function carregar(lista){
+form.addEventListener(
+"submit",
+function(event) {
 
-    const tbody =
-        document.getElementById(
-            "lista"
-        );
+event.preventDefault();
 
-    tbody.innerHTML = "";
 
+const dados = {
 
-    /* NENHUM RESULTADO */
+nome:
+nome.value.trim(),
 
-    if(lista.length === 0){
+telefone:
+telefone.value.trim(),
 
-        const linha =
-            document.createElement(
-                "tr"
-            );
+servico:
+servico.value,
 
-        linha.innerHTML = `
-            <td colspan="6">
+data:
+data.value,
 
-                <div class="sem-resultado">
+hora:
+hora.value,
 
-                    <div class="icone">
-                        📅
-                    </div>
+observacao:
+observacao.value.trim(),
 
-                    <strong>
-                        Nenhum agendamento encontrado
-                    </strong>
+status:
+indiceEdicao !== null
+?
+status(
+agendamentos[
+indiceEdicao
+]
+)
+:
+"Agendado"
 
-                    <p>
-                        Tente alterar os filtros.
-                    </p>
+};
 
-                </div>
 
-            </td>
-        `;
+if(
+!dados.nome ||
+!dados.telefone ||
+!dados.servico ||
+!dados.data ||
+!dados.hora
+) {
 
-        tbody.appendChild(
-            linha
-        );
+mostrarMensagem(
+"Preencha todos os campos obrigatórios.",
+"erro"
+);
 
-        atualizarResumo();
-
-        return;
-
-    }
-
-
-    /* ORDENAR */
-
-    lista.sort(
-        (a,b) => {
-
-            const dataA =
-                `${a.data || ""} ${a.hora || ""}`;
-
-            const dataB =
-                `${b.data || ""} ${b.hora || ""}`;
-
-            return dataA.localeCompare(
-                dataB
-            );
-
-        }
-    );
-
-
-    /* CRIAR LINHAS */
-
-    lista.forEach(
-        item => {
-
-            const indice =
-                agendamentos.indexOf(
-                    item
-                );
-
-
-            const linha =
-                document.createElement(
-                    "tr"
-                );
-
-
-            /* CLIENTE */
-
-            const tdNome =
-                document.createElement(
-                    "td"
-                );
-
-            tdNome.textContent =
-                item.nome || "-";
-
-
-            /* SERVIÇO */
-
-            const tdServico =
-                document.createElement(
-                    "td"
-                );
-
-            tdServico.textContent =
-                item.servico || "-";
-
-
-            /* DATA */
-
-            const tdData =
-                document.createElement(
-                    "td"
-                );
-
-            tdData.textContent =
-                formatarData(
-                    item.data
-                );
-
-
-            /* HORA */
-
-            const tdHora =
-                document.createElement(
-                    "td"
-                );
-
-            tdHora.textContent =
-                item.hora || "-";
-
-
-            /* STATUS */
-
-            const tdStatus =
-                document.createElement(
-                    "td"
-                );
-
-
-            const status =
-                obterStatus(item);
-
-
-            const span =
-                document.createElement(
-                    "span"
-                );
-
-
-            span.textContent =
-                status;
-
-
-            span.className =
-                `status ${classeStatus(status)}`;
-
-
-            tdStatus.appendChild(
-                span
-            );
-
-
-            /* AÇÕES */
-
-            const tdAcoes =
-                document.createElement(
-                    "td"
-                );
-
-
-            const acoes =
-                document.createElement(
-                    "div"
-                );
-
-
-            acoes.className =
-                "acoes";
-
-
-            /* EDITAR */
-
-            const btnEditar =
-                document.createElement(
-                    "button"
-                );
-
-
-            btnEditar.textContent =
-                "✏️ Editar";
-
-            btnEditar.className =
-                "acao editar";
-
-
-            btnEditar.onclick =
-                function(){
-
-                    editarStatus(
-                        indice
-                    );
-
-                };
-
-
-            /* EXCLUIR */
-
-            const btnExcluir =
-                document.createElement(
-                    "button"
-                );
-
-
-            btnExcluir.textContent =
-                "🗑️ Excluir";
-
-            btnExcluir.className =
-                "acao excluir";
-
-
-            btnExcluir.onclick =
-                function(){
-
-                    excluir(
-                        indice
-                    );
-
-                };
-
-
-            acoes.appendChild(
-                btnEditar
-            );
-
-            acoes.appendChild(
-                btnExcluir
-            );
-
-
-            tdAcoes.appendChild(
-                acoes
-            );
-
-
-            /* LINHA */
-
-            linha.appendChild(
-                tdNome
-            );
-
-            linha.appendChild(
-                tdServico
-            );
-
-            linha.appendChild(
-                tdData
-            );
-
-            linha.appendChild(
-                tdHora
-            );
-
-            linha.appendChild(
-                tdStatus
-            );
-
-            linha.appendChild(
-                tdAcoes
-            );
-
-
-            tbody.appendChild(
-                linha
-            );
-
-        }
-    );
-
-
-    atualizarResumo();
+return;
 
 }
 
 
-/* =========================================
-   FILTRAR
-========================================= */
+if(
+dados.data < hoje &&
+indiceEdicao === null
+) {
 
-function filtrar(){
+mostrarMensagem(
+"A data precisa ser hoje ou futura.",
+"erro"
+);
 
-    const nome =
-        document
-        .getElementById(
-            "pesquisa"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const data =
-        document
-        .getElementById(
-            "filtroData"
-        )
-        .value;
-
-
-    const status =
-        document
-        .getElementById(
-            "filtroStatus"
-        )
-        .value;
-
-
-    const resultado =
-        agendamentos.filter(
-            item => {
-
-                const nomeCliente =
-                    (
-                        item.nome || ""
-                    )
-                    .toLowerCase();
-
-
-                const servico =
-                    (
-                        item.servico || ""
-                    )
-                    .toLowerCase();
-
-
-                const okNome =
-                    nome === "" ||
-                    nomeCliente.includes(
-                        nome
-                    ) ||
-                    servico.includes(
-                        nome
-                    );
-
-
-                const okData =
-                    data === "" ||
-                    item.data === data;
-
-
-                const okStatus =
-                    status === "" ||
-                    obterStatus(item)
-                    === status;
-
-
-                return (
-                    okNome &&
-                    okData &&
-                    okStatus
-                );
-
-            }
-        );
-
-
-    carregar(resultado);
+return;
 
 }
 
 
-/* =========================================
-   LIMPAR FILTROS
-========================================= */
+if(
+horarioOcupado(
+dados.data,
+dados.hora,
+indiceEdicao
+)
+) {
 
-function limparFiltros(){
+mostrarMensagem(
+"Esse horário já está reservado.",
+"erro"
+);
 
-    document.getElementById(
-        "pesquisa"
-    ).value = "";
-
-
-    document.getElementById(
-        "filtroData"
-    ).value = "";
-
-
-    document.getElementById(
-        "filtroStatus"
-    ).value = "";
-
-
-    carregar(
-        [...agendamentos]
-    );
+return;
 
 }
 
 
-/* =========================================
-   EDITAR STATUS
-========================================= */
+if(
+indiceEdicao !== null
+) {
 
-function editarStatus(indice){
+agendamentos[
+indiceEdicao
+] = dados;
 
-    const item =
-        agendamentos[indice];
+mostrarMensagem(
+"Agendamento atualizado com sucesso!"
+);
 
+} else {
 
-    const statusAtual =
-        obterStatus(item);
+agendamentos.push(
+dados
+);
 
-
-    const novoStatus =
-        prompt(
-            "Digite o novo status:\n\n" +
-            "Agendado\n" +
-            "Confirmado\n" +
-            "Concluído\n" +
-            "Cancelado",
-            statusAtual
-        );
-
-
-    if(novoStatus === null){
-
-        return;
-
-    }
-
-
-    const statusValidos = [
-
-        "Agendado",
-
-        "Confirmado",
-
-        "Concluído",
-
-        "Cancelado"
-
-    ];
-
-
-    if(
-        !statusValidos.includes(
-            novoStatus
-        )
-    ){
-
-        alert(
-            "Status inválido."
-        );
-
-        return;
-
-    }
-
-
-    agendamentos[indice].status =
-        novoStatus;
-
-
-    salvar();
-
-
-    filtrar();
+mostrarMensagem(
+"Agendamento realizado com sucesso!"
+);
 
 }
 
 
-/* =========================================
+salvar();
+
+limparFormulario();
+
+renderizar();
+
+document
+.getElementById("painel")
+?.scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+
+/* =========================
+   LIMPAR FORMULÁRIO
+========================= */
+
+function limparFormulario() {
+
+form.reset();
+
+indiceEdicao = null;
+
+btnCancelar.style.display =
+"none";
+
+}
+
+
+/* =========================
+   CANCELAR
+========================= */
+
+btnCancelar.addEventListener(
+"click",
+limparFormulario
+);
+
+
+/* =========================
+   RENDERIZAR
+========================= */
+
+function renderizar() {
+
+const termo =
+busca.value
+.trim()
+.toLowerCase();
+
+
+const resultado =
+agendamentos
+.map(
+(item,index) => ({
+...item,
+index
+})
+)
+.filter(item => {
+
+const nome =
+(item.nome || "")
+.toLowerCase();
+
+const servico =
+(item.servico || "")
+.toLowerCase();
+
+return (
+nome.includes(termo) ||
+servico.includes(termo)
+);
+
+})
+.sort((a,b) => {
+
+return (
+`${a.data} ${a.hora}`
+).localeCompare(
+`${b.data} ${b.hora}`
+);
+
+});
+
+
+lista.innerHTML = "";
+
+
+if(!resultado.length) {
+
+lista.innerHTML = `
+<tr>
+<td colspan="7"
+style="
+text-align:center;
+padding:40px;
+color:#777;
+">
+📅 Nenhum agendamento encontrado.
+</td>
+</tr>
+`;
+
+} else {
+
+resultado.forEach(item => {
+
+const tr =
+document.createElement("tr");
+
+tr.innerHTML = `
+
+<td>
+<strong>
+${seguro(item.nome)}
+</strong>
+</td>
+
+<td>
+${seguro(item.telefone)}
+</td>
+
+<td>
+${seguro(item.servico)}
+</td>
+
+<td>
+${dataBR(item.data)}
+</td>
+
+<td>
+${seguro(item.hora)}
+</td>
+
+<td>
+
+<span class="
+status
+status-${status(item)}
+">
+
+${status(item)}
+
+</span>
+
+</td>
+
+<td>
+
+<div class="acoes">
+
+<button
+class="acao editar"
+onclick="editar(${item.index})"
+>
+✏️
+</button>
+
+<button
+class="acao excluir"
+onclick="excluir(${item.index})"
+>
+🗑️
+</button>
+
+</div>
+
+</td>
+
+`;
+
+lista.appendChild(tr);
+
+});
+
+}
+
+
+/* =========================
+   RESUMO
+========================= */
+
+document.getElementById(
+"total"
+).textContent =
+agendamentos.length;
+
+document.getElementById(
+"confirmados"
+).textContent =
+agendamentos.filter(
+item =>
+status(item) ===
+"Confirmado"
+).length;
+
+document.getElementById(
+"concluidos"
+).textContent =
+agendamentos.filter(
+item =>
+status(item) ===
+"Concluído"
+).length;
+
+document.getElementById(
+"cancelados"
+).textContent =
+agendamentos.filter(
+item =>
+status(item) ===
+"Cancelado"
+).length;
+
+}
+
+
+/* =========================
+   SEGURANÇA
+========================= */
+
+function seguro(texto) {
+
+return String(texto || "")
+.replace(
+/[&<>'"]/g,
+char => ({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"'":"&#39;",
+'"':"&quot;"
+
+})[char]
+);
+
+}
+
+
+/* =========================
+   EDITAR
+========================= */
+
+function editar(index) {
+
+const item =
+agendamentos[index];
+
+if(!item) return;
+
+
+nome.value =
+item.nome || "";
+
+telefone.value =
+item.telefone || "";
+
+servico.value =
+item.servico || "";
+
+data.value =
+item.data || "";
+
+hora.value =
+item.hora || "";
+
+observacao.value =
+item.observacao || "";
+
+indiceEdicao =
+index;
+
+btnCancelar.style.display =
+"inline-block";
+
+document
+.getElementById("agendamento")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
    EXCLUIR
-========================================= */
+========================= */
 
-function excluir(indice){
+function excluir(index) {
 
-    const item =
-        agendamentos[indice];
+const item =
+agendamentos[index];
 
-
-    if(!item){
-
-        return;
-
-    }
+if(!item) return;
 
 
-    const confirmar =
-        confirm(
-            `Deseja realmente excluir o agendamento de "${item.nome}"?`
-        );
+const confirmar =
+confirm(
+`Deseja excluir o agendamento de "${item.nome}"?`
+);
+
+if(!confirmar)
+return;
 
 
-    if(!confirmar){
+agendamentos.splice(
+index,
+1
+);
 
-        return;
+salvar();
 
-    }
+renderizar();
 
-
-    agendamentos.splice(
-        indice,
-        1
-    );
-
-
-    salvar();
-
-
-    filtrar();
+mostrarMensagem(
+"Agendamento excluído."
+);
 
 }
 
 
-/* =========================================
-   PESQUISA AUTOMÁTICA
-========================================= */
+/* =========================
+   ALTERAR STATUS
+========================= */
 
-document
-.getElementById("pesquisa")
-.addEventListener(
-    "input",
-    filtrar
+function alterarStatus(index) {
+
+const item =
+agendamentos[index];
+
+const novoStatus =
+prompt(
+"Digite o status:\n\n" +
+"Agendado\n" +
+"Confirmado\n" +
+"Concluído\n" +
+"Cancelado",
+status(item)
+);
+
+if(novoStatus === null)
+return;
+
+
+const validos = [
+
+"Agendado",
+"Confirmado",
+"Concluído",
+"Cancelado"
+
+];
+
+
+if(
+!validos.includes(
+novoStatus
+)
+) {
+
+alert(
+"Status inválido."
+);
+
+return;
+
+}
+
+
+item.status =
+novoStatus;
+
+salvar();
+
+renderizar();
+
+}
+
+
+/* =========================
+   BUSCA
+========================= */
+
+busca.addEventListener(
+"input",
+renderizar
 );
 
 
-document
-.getElementById("filtroData")
-.addEventListener(
-    "change",
-    filtrar
-);
+/* =========================
+   INICIALIZAR
+========================= */
 
-
-document
-.getElementById("filtroStatus")
-.addEventListener(
-    "change",
-    filtrar
-);
-
-
-/* =========================================
-   INICIAR
-========================================= */
-
-carregar(
-    [...agendamentos]
-);
+renderizar();
 
 </script>
 
 </body>
-
 </html>
