@@ -1,137 +1,1351 @@
-const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const express = require("express");
+const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
+
 const app = express();
+const PORT = 3000;
+
+
+// ============================================================
+// CONFIGURAÇÃO
+// ============================================================
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('.'));
 
-const db = new sqlite3.Database('./esteticaglow.db');
+app.use(
+    express.static(
+        path.join(__dirname)
+    )
+);
+
+
+// ============================================================
+// BANCO DE DADOS
+// ============================================================
+
+const db = new sqlite3.Database(
+    path.join(__dirname, "esteticaglow.db"),
+    (erro) => {
+
+        if (erro) {
+
+            console.error(
+                "Erro ao abrir banco:",
+                erro.message
+            );
+
+            return;
+        }
+
+        console.log(
+            "✨ Banco de dados conectado."
+        );
+
+    }
+);
+
+
+// ============================================================
+// CRIAÇÃO DAS TABELAS
+// ============================================================
 
 db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS clientes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        nome TEXT NOT NULL, 
-        cpf TEXT UNIQUE NOT NULL, 
-        telefone TEXT NOT NULL
-    )`);
 
-    db.run(`CREATE TABLE IF NOT EXISTS servicos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        descricao TEXT NOT NULL, 
-        categoria TEXT NOT NULL,
-        preco REAL NOT NULL, 
-        tempo_estimado INTEGER NOT NULL
-    )`);
+    db.run(`
+        PRAGMA foreign_keys = ON
+    `);
 
-    db.run(`CREATE TABLE IF NOT EXISTS agendamentos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        cliente_id INTEGER NOT NULL, 
-        data_hora TEXT NOT NULL, 
-        esteticista TEXT NOT NULL,
-        total REAL NOT NULL,
-        tempo_total INTEGER NOT NULL,
-        observacoes TEXT,
-        FOREIGN KEY (cliente_id) REFERENCES clientes (id)
-    )`);
 
-    db.run(`CREATE TABLE IF NOT EXISTS itens_agendamento (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        agendamento_id INTEGER NOT NULL, 
-        servico_id INTEGER NOT NULL, 
-        preco_cobrado REAL NOT NULL,
-        FOREIGN KEY (agendamento_id) REFERENCES agendamentos (id),
-        FOREIGN KEY (servico_id) REFERENCES servicos (id)
-    )`);
+    // --------------------------------------------------------
+    // CLIENTES
+    // --------------------------------------------------------
+
+    db.run(`
+        CREATE TABLE IF NOT EXISTS clientes (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            nome TEXT NOT NULL,
+
+            cpf TEXT UNIQUE NOT NULL,
+
+            telefone TEXT NOT NULL,
+
+            email TEXT,
+
+            nascimento TEXT,
+
+            observacoes TEXT,
+
+            criado_em TEXT DEFAULT CURRENT_TIMESTAMP
+
+        )
+    `);
+
+
+    // --------------------------------------------------------
+    // SERVIÇOS
+    // --------------------------------------------------------
+
+    db.run(`
+        CREATE TABLE IF NOT EXISTS servicos (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            descricao TEXT NOT NULL,
+
+            categoria TEXT NOT NULL,
+
+            preco REAL NOT NULL,
+
+            tempo_estimado INTEGER NOT NULL,
+
+            ativo INTEGER DEFAULT 1,
+
+            criado_em TEXT DEFAULT CURRENT_TIMESTAMP
+
+        )
+    `);
+
+
+    // --------------------------------------------------------
+    // AGENDAMENTOS
+    // --------------------------------------------------------
+
+    db.run(`
+        CREATE TABLE IF NOT EXISTS agendamentos (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            cliente_id INTEGER NOT NULL,
+
+            data_hora TEXT NOT NULL,
+
+            esteticista TEXT NOT NULL,
+
+            total REAL NOT NULL DEFAULT 0,
+
+            tempo_total INTEGER NOT NULL DEFAULT 0,
+
+            status TEXT NOT NULL DEFAULT 'Agendado',
+
+            observacoes TEXT,
+
+            criado_em TEXT DEFAULT CURRENT_TIMESTAMP,
+
+            FOREIGN KEY (cliente_id)
+                REFERENCES clientes(id)
+                ON DELETE CASCADE
+
+        )
+    `);
+
+
+    // --------------------------------------------------------
+    // ITENS DO AGENDAMENTO
+    // --------------------------------------------------------
+
+    db.run(`
+        CREATE TABLE IF NOT EXISTS itens_agendamento (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            agendamento_id INTEGER NOT NULL,
+
+            servico_id INTEGER NOT NULL,
+
+            preco_cobrado REAL NOT NULL,
+
+            FOREIGN KEY (agendamento_id)
+                REFERENCES agendamentos(id)
+                ON DELETE CASCADE,
+
+            FOREIGN KEY (servico_id)
+                REFERENCES servicos(id)
+
+        )
+    `);
+
 });
 
-// ROTAS: CLIENTES
-app.post('/salvar-cliente', (req, res) => {
-    const { nome, cpf, telefone } = req.body;
-    db.run(`INSERT INTO clientes (nome, cpf, telefone) VALUES (?, ?, ?)`, [nome, cpf, telefone], (err) => {
-        if (err) return res.status(400).json({ success: false, message: 'CPF já cadastrado ou erro no servidor.' });
-        res.redirect('/clientes.html');
-    });
-});
 
-app.get('/listar-clientes', (req, res) => {
-    db.all(`SELECT * FROM clientes ORDER BY nome ASC`, [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
-});
+// ============================================================
+// PÁGINA INICIAL
+// ============================================================
 
-// ROTAS: SERVIÇOS
-app.post('/salvar-servico', (req, res) => {
-    const { descricao, categoria, preco, tempo_estimado } = req.body;
-    db.run(
-        `INSERT INTO servicos (descricao, categoria, preco, tempo_estimado) VALUES (?, ?, ?, ?)`,
-        [descricao, categoria || 'Facial', parseFloat(preco), parseInt(tempo_estimado)],
-        (err) => {
-            if (err) return res.status(500).send("Erro ao salvar serviço: " + err.message);
-            res.redirect('/servicos.html');
-        }
+app.get("/", (req, res) => {
+
+    res.sendFile(
+        path.join(
+            __dirname,
+            "index.html"
+        )
     );
+
 });
 
-app.get('/listar-servicos', (req, res) => {
-    db.all(`SELECT * FROM servicos ORDER BY categoria ASC, descricao ASC`, [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
-});
 
-// ROTAS: AGENDAMENTOS (TRANSAÇÃO ATÔMICA)
-app.post('/finalizar-agendamento', (req, res) => {
-    const { cliente_id, data_hora, esteticista, total, tempo_total, observacoes, servicos } = req.body;
+// ============================================================
+// CLIENTES
+// ============================================================
 
-    if (!servicos || servicos.length === 0) {
-        return res.status(400).json({ success: false, error: "Selecione ao menos um procedimento." });
+// SALVAR CLIENTE
+
+app.post(
+    "/api/clientes",
+    (req, res) => {
+
+        const {
+            nome,
+            cpf,
+            telefone,
+            email,
+            nascimento,
+            observacoes
+        } = req.body;
+
+
+        if (
+            !nome ||
+            !cpf ||
+            !telefone
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Nome, CPF e telefone são obrigatórios."
+
+            });
+
+        }
+
+
+        const sql = `
+
+            INSERT INTO clientes
+            (
+                nome,
+                cpf,
+                telefone,
+                email,
+                nascimento,
+                observacoes
+            )
+
+            VALUES (?, ?, ?, ?, ?, ?)
+
+        `;
+
+
+        db.run(
+            sql,
+
+            [
+                nome.trim(),
+                cpf.trim(),
+                telefone.trim(),
+                email || "",
+                nascimento || "",
+                observacoes || ""
+            ],
+
+            function (erro) {
+
+                if (erro) {
+
+                    if (
+                        erro.message.includes(
+                            "UNIQUE"
+                        )
+                    ) {
+
+                        return res.status(409).json({
+
+                            success: false,
+
+                            message:
+                                "Este CPF já está cadastrado."
+
+                        });
+
+                    }
+
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.status(201).json({
+
+                    success: true,
+
+                    id: this.lastID,
+
+                    message:
+                        "Cliente cadastrado com sucesso."
+
+                });
+
+            }
+        );
+
     }
+);
 
-    db.serialize(() => {
-        db.run("BEGIN TRANSACTION");
 
-        const sqlMestre = `INSERT INTO agendamentos (cliente_id, data_hora, esteticista, total, tempo_total, observacoes) VALUES (?, ?, ?, ?, ?, ?)`;
-        
-        db.run(sqlMestre, [cliente_id, data_hora, esteticista, total, tempo_total, observacoes || ''], function(err) {
-            if (err) {
-                db.run("ROLLBACK");
-                return res.status(500).json({ success: false, error: err.message });
+// LISTAR CLIENTES
+
+app.get(
+    "/api/clientes",
+    (req, res) => {
+
+        db.all(
+            `
+                SELECT *
+
+                FROM clientes
+
+                ORDER BY nome ASC
+            `,
+
+            [],
+
+            (erro, clientes) => {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        error:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json(clientes);
+
+            }
+        );
+
+    }
+);
+
+
+// EXCLUIR CLIENTE
+
+app.delete(
+    "/api/clientes/:id",
+    (req, res) => {
+
+        const id =
+            Number(req.params.id);
+
+
+        db.run(
+            `
+                DELETE FROM clientes
+                WHERE id = ?
+            `,
+
+            [id],
+
+            function (erro) {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json({
+
+                    success:
+                        this.changes > 0
+
+                });
+
+            }
+        );
+
+    }
+);
+
+
+// ============================================================
+// SERVIÇOS
+// ============================================================
+
+// SALVAR SERVIÇO
+
+app.post(
+    "/api/servicos",
+    (req, res) => {
+
+        const {
+            descricao,
+            categoria,
+            preco,
+            tempo_estimado
+        } = req.body;
+
+
+        const valor =
+            Number(preco);
+
+        const tempo =
+            Number(tempo_estimado);
+
+
+        if (
+            !descricao ||
+            !categoria ||
+            !Number.isFinite(valor) ||
+            valor < 0 ||
+            !Number.isInteger(tempo) ||
+            tempo <= 0
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Dados do serviço inválidos."
+
+            });
+
+        }
+
+
+        db.run(
+
+            `
+                INSERT INTO servicos
+                (
+                    descricao,
+                    categoria,
+                    preco,
+                    tempo_estimado
+                )
+
+                VALUES (?, ?, ?, ?)
+            `,
+
+            [
+                descricao.trim(),
+                categoria,
+                valor,
+                tempo
+            ],
+
+            function (erro) {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.status(201).json({
+
+                    success: true,
+
+                    id: this.lastID
+
+                });
+
             }
 
-            const agendamentoId = this.lastID;
-            const stmt = db.prepare(`INSERT INTO itens_agendamento (agendamento_id, servico_id, preco_cobrado) VALUES (?, ?, ?)`);
+        );
 
-            servicos.forEach(item => {
-                stmt.run(agendamentoId, item.id, item.preco);
-            });
+    }
+);
 
-            stmt.finalize((errFinalize) => {
-                if (errFinalize) {
-                    db.run("ROLLBACK");
-                    return res.status(500).json({ success: false, error: errFinalize.message });
+
+// LISTAR SERVIÇOS
+
+app.get(
+    "/api/servicos",
+    (req, res) => {
+
+        db.all(
+
+            `
+                SELECT *
+
+                FROM servicos
+
+                WHERE ativo = 1
+
+                ORDER BY
+                    categoria ASC,
+                    descricao ASC
+            `,
+
+            [],
+
+            (erro, servicos) => {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        error:
+                            erro.message
+
+                    });
+
                 }
-                db.run("COMMIT");
-                res.json({ success: true, agendamentoId });
+
+
+                res.json(servicos);
+
+            }
+
+        );
+
+    }
+);
+
+
+// EXCLUIR / DESATIVAR SERVIÇO
+
+app.delete(
+    "/api/servicos/:id",
+    (req, res) => {
+
+        const id =
+            Number(req.params.id);
+
+
+        db.run(
+
+            `
+                UPDATE servicos
+
+                SET ativo = 0
+
+                WHERE id = ?
+            `,
+
+            [id],
+
+            function (erro) {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json({
+
+                    success:
+                        this.changes > 0
+
+                });
+
+            }
+
+        );
+
+    }
+);
+
+
+// ============================================================
+// AGENDAMENTOS
+// ============================================================
+
+app.post(
+    "/api/agendamentos",
+    (req, res) => {
+
+        const {
+            cliente_id,
+            data_hora,
+            esteticista,
+            observacoes,
+            servicos
+        } = req.body;
+
+
+        if (
+            !cliente_id ||
+            !data_hora ||
+            !esteticista
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Cliente, data/hora e esteticista são obrigatórios."
+
             });
+
+        }
+
+
+        if (
+            !Array.isArray(servicos) ||
+            servicos.length === 0
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Selecione pelo menos um procedimento."
+
+            });
+
+        }
+
+
+        const clienteId =
+            Number(cliente_id);
+
+
+        // ----------------------------------------------------
+        // BUSCAR SERVIÇOS
+        // ----------------------------------------------------
+
+        const ids =
+            servicos.map(
+                item =>
+                    Number(item.id)
+            );
+
+
+        const placeholders =
+            ids.map(() => "?").join(",");
+
+
+        db.all(
+
+            `
+                SELECT
+                    id,
+                    descricao,
+                    preco,
+                    tempo_estimado
+
+                FROM servicos
+
+                WHERE ativo = 1
+                AND id IN (${placeholders})
+            `,
+
+            ids,
+
+            (erro, servicosBanco) => {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                if (
+                    servicosBanco.length !==
+                    ids.length
+                ) {
+
+                    return res.status(400).json({
+
+                        success: false,
+
+                        message:
+                            "Um ou mais serviços não existem."
+
+                    });
+
+                }
+
+
+                // ------------------------------------------------
+                // CALCULAR TOTAL
+                // ------------------------------------------------
+
+                let total = 0;
+
+                let tempoTotal = 0;
+
+
+                servicosBanco.forEach(
+                    servico => {
+
+                        total +=
+                            Number(
+                                servico.preco
+                            );
+
+                        tempoTotal +=
+                            Number(
+                                servico.tempo_estimado
+                            );
+
+                    }
+                );
+
+
+                // ------------------------------------------------
+                // TRANSAÇÃO
+                // ------------------------------------------------
+
+                db.serialize(() => {
+
+                    db.run(
+                        "BEGIN TRANSACTION"
+                    );
+
+
+                    db.run(
+
+                        `
+                            INSERT INTO agendamentos
+                            (
+                                cliente_id,
+                                data_hora,
+                                esteticista,
+                                total,
+                                tempo_total,
+                                observacoes
+                            )
+
+                            VALUES (?, ?, ?, ?, ?, ?)
+                        `,
+
+                        [
+                            clienteId,
+                            data_hora,
+                            esteticista,
+                            total,
+                            tempoTotal,
+                            observacoes || ""
+                        ],
+
+                        function (erro) {
+
+                            if (erro) {
+
+                                db.run(
+                                    "ROLLBACK"
+                                );
+
+                                return res.status(500).json({
+
+                                    success: false,
+
+                                    message:
+                                        erro.message
+
+                                });
+
+                            }
+
+
+                            const agendamentoId =
+                                this.lastID;
+
+
+                            const stmt =
+                                db.prepare(`
+
+                                    INSERT INTO
+                                    itens_agendamento
+
+                                    (
+                                        agendamento_id,
+                                        servico_id,
+                                        preco_cobrado
+                                    )
+
+                                    VALUES (?, ?, ?)
+
+                                `);
+
+
+                            let erroItem = null;
+
+
+                            servicosBanco.forEach(
+                                servico => {
+
+                                    stmt.run(
+
+                                        [
+                                            agendamentoId,
+                                            servico.id,
+                                            servico.preco
+                                        ],
+
+                                        erro => {
+
+                                            if (
+                                                erro &&
+                                                !erroItem
+                                            ) {
+
+                                                erroItem =
+                                                    erro;
+
+                                            }
+
+                                        }
+
+                                    );
+
+                                }
+                            );
+
+
+                            stmt.finalize(
+                                () => {
+
+                                    if (erroItem) {
+
+                                        db.run(
+                                            "ROLLBACK"
+                                        );
+
+                                        return res.status(500).json({
+
+                                            success: false,
+
+                                            message:
+                                                erroItem.message
+
+                                        });
+
+                                    }
+
+
+                                    db.run(
+                                        "COMMIT"
+                                    );
+
+
+                                    res.status(201).json({
+
+                                        success: true,
+
+                                        id:
+                                            agendamentoId,
+
+                                        total,
+
+                                        tempo_total:
+                                            tempoTotal
+
+                                    });
+
+                                }
+                            );
+
+                        }
+
+                    );
+
+                });
+
+            }
+
+        );
+
+    }
+);
+
+
+// ============================================================
+// LISTAR AGENDAMENTOS
+// ============================================================
+
+app.get(
+    "/api/agendamentos",
+    (req, res) => {
+
+        const sql = `
+
+            SELECT
+
+                a.id,
+
+                a.data_hora,
+
+                a.esteticista,
+
+                a.total,
+
+                a.tempo_total,
+
+                a.status,
+
+                a.observacoes,
+
+                c.id AS cliente_id,
+
+                c.nome AS cliente,
+
+                c.telefone,
+
+                c.cpf
+
+            FROM agendamentos a
+
+            INNER JOIN clientes c
+                ON c.id = a.cliente_id
+
+            ORDER BY
+                a.data_hora ASC
+
+        `;
+
+
+        db.all(
+            sql,
+            [],
+            (erro, rows) => {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        error:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json(rows);
+
+            }
+        );
+
+    }
+);
+
+
+// ============================================================
+// SERVIÇOS DE UM AGENDAMENTO
+// ============================================================
+
+app.get(
+    "/api/agendamentos/:id/servicos",
+    (req, res) => {
+
+        const id =
+            Number(req.params.id);
+
+
+        db.all(
+
+            `
+                SELECT
+
+                    i.id,
+
+                    s.descricao,
+
+                    s.categoria,
+
+                    i.preco_cobrado
+
+                FROM itens_agendamento i
+
+                INNER JOIN servicos s
+                    ON s.id = i.servico_id
+
+                WHERE
+                    i.agendamento_id = ?
+
+                ORDER BY
+                    s.descricao ASC
+            `,
+
+            [id],
+
+            (erro, rows) => {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        error:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json(rows);
+
+            }
+
+        );
+
+    }
+);
+
+
+// ============================================================
+// ALTERAR STATUS
+// ============================================================
+
+app.patch(
+    "/api/agendamentos/:id/status",
+    (req, res) => {
+
+        const id =
+            Number(req.params.id);
+
+        const {
+            status
+        } = req.body;
+
+
+        const statusValidos = [
+
+            "Agendado",
+
+            "Confirmado",
+
+            "Concluído",
+
+            "Cancelado"
+
+        ];
+
+
+        if (
+            !statusValidos.includes(
+                status
+            )
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    "Status inválido."
+
+            });
+
+        }
+
+
+        db.run(
+
+            `
+                UPDATE agendamentos
+
+                SET status = ?
+
+                WHERE id = ?
+            `,
+
+            [
+                status,
+                id
+            ],
+
+            function (erro) {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json({
+
+                    success:
+                        this.changes > 0
+
+                });
+
+            }
+
+        );
+
+    }
+);
+
+
+// ============================================================
+// EXCLUIR AGENDAMENTO
+// ============================================================
+
+app.delete(
+    "/api/agendamentos/:id",
+    (req, res) => {
+
+        const id =
+            Number(req.params.id);
+
+
+        db.run(
+
+            `
+                DELETE FROM agendamentos
+
+                WHERE id = ?
+            `,
+
+            [id],
+
+            function (erro) {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        success: false,
+
+                        message:
+                            erro.message
+
+                    });
+
+                }
+
+
+                res.json({
+
+                    success:
+                        this.changes > 0
+
+                });
+
+            }
+
+        );
+
+    }
+);
+
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+
+app.get(
+    "/api/dashboard",
+    (req, res) => {
+
+        const resultado = {};
+
+
+        db.get(
+            `
+                SELECT COUNT(*) AS total
+                FROM clientes
+            `,
+            [],
+            (erro, row) => {
+
+                if (erro) {
+
+                    return res.status(500).json({
+
+                        error:
+                            erro.message
+
+                    });
+
+                }
+
+
+                resultado.clientes =
+                    row.total;
+
+
+                db.get(
+                    `
+                        SELECT COUNT(*) AS total
+                        FROM agendamentos
+                    `,
+                    [],
+                    (erro, row) => {
+
+                        resultado.agendamentos =
+                            row.total;
+
+
+                        db.get(
+                            `
+                                SELECT COUNT(*) AS total
+
+                                FROM agendamentos
+
+                                WHERE status =
+                                    'Confirmado'
+                            `,
+                            [],
+                            (erro, row) => {
+
+                                resultado.confirmados =
+                                    row.total;
+
+
+                                const hoje =
+                                    new Date()
+                                    .toISOString()
+                                    .slice(0, 10);
+
+
+                                db.get(
+
+                                    `
+                                        SELECT COUNT(*) AS total
+
+                                        FROM agendamentos
+
+                                        WHERE substr(
+                                            data_hora,
+                                            1,
+                                            10
+                                        ) = ?
+                                    `,
+
+                                    [hoje],
+
+                                    (erro, row) => {
+
+                                        resultado.hoje =
+                                            row.total;
+
+
+                                        res.json(
+                                            resultado
+                                        );
+
+                                    }
+
+                                );
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+            }
+
+        );
+
+    }
+);
+
+
+// ============================================================
+// ERRO 404
+// ============================================================
+
+app.use(
+    (req, res) => {
+
+        res.status(404).json({
+
+            success: false,
+
+            message:
+                "Página ou rota não encontrada."
+
         });
-    });
-});
 
-app.get('/listar-agendamentos', (req, res) => {
-    const sql = `
-        SELECT a.id, a.data_hora, a.esteticista, a.total, a.tempo_total, a.observacoes, c.nome as nome_cliente 
-        FROM agendamentos a 
-        INNER JOIN clientes c ON a.cliente_id = c.id 
-        ORDER BY a.data_hora DESC`;
-        
-    db.all(sql, [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
-});
+    }
+);
 
-app.listen(3000, () => {
-    console.log('✨ Servidor EstéticaGlow rodando na porta 3000');
-});
+
+// ============================================================
+// INICIAR SERVIDOR
+// ============================================================
+
+app.listen(
+    PORT,
+    () => {
+
+        console.log("");
+        console.log(
+            "╔════════════════════════════════════╗"
+        );
+        console.log(
+            "║     ✨ ESTÉTICAGLOW ONLINE ✨      ║"
+        );
+        console.log(
+            "╠════════════════════════════════════╣"
+        );
+        console.log(
+            `║  http://localhost:${PORT}             ║`
+        );
+        console.log(
+            "╚════════════════════════════════════╝"
+        );
+        console.log("");
+
+    }
+);
