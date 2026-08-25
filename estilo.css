@@ -1,1645 +1,2439 @@
-/* =========================================================
-   CLÍNICA DE ESTÉTICA BELLA PELE
-   STYLE.CSS
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bella Beauty | Estética & Beleza</title>
 
-/* =========================================================
-   VARIÁVEIS
-   ========================================================= */
-
+<style>
 :root {
+    --rosa: #d63384;
+    --rosa-escuro: #a91d62;
+    --rosa-claro: #fde7f0;
+    --rosa-suave: #fff7fa;
+    --vinho: #75234d;
+    --dourado: #c99a4a;
 
-    --primary: #d63384;
-    --primary-dark: #b8236d;
-    --primary-light: #fce4ef;
+    --branco: #fff;
+    --fundo: #fff9fb;
+    --texto: #30252b;
+    --cinza: #756c72;
+    --borda: #eadde4;
 
-    --secondary: #f06292;
+    --verde: #198754;
+    --vermelho: #dc3545;
+    --azul: #0d6efd;
 
-    --success: #198754;
-    --success-dark: #146c43;
-    --success-light: #d1e7dd;
+    --sombra: 0 10px 30px rgba(100, 30, 65, .10);
 
-    --danger: #dc3545;
-    --danger-dark: #b02a37;
-    --danger-light: #f8d7da;
-
-    --warning: #ffc107;
-    --warning-dark: #d39e00;
-    --warning-light: #fff3cd;
-
-    --info: #0d6efd;
-    --info-dark: #0a58ca;
-    --info-light: #dbeafe;
-
-    --background: #f7f5f6;
-    --white: #ffffff;
-
-    --text: #333333;
-    --text-light: #666666;
-    --muted: #888888;
-
-    --border: #e2e2e2;
-
-    --shadow-sm:
-        0 2px 8px rgba(0, 0, 0, .06);
-
-    --shadow:
-        0 6px 20px rgba(0, 0, 0, .08);
-
-    --shadow-lg:
-        0 12px 35px rgba(0, 0, 0, .12);
-
-    --radius-sm: 8px;
-    --radius: 12px;
-    --radius-lg: 16px;
-
-    --transition: .25s ease;
-
+    --raio: 18px;
 }
 
-
-/* =========================================================
-   RESET
-   ========================================================= */
+/* RESET */
 
 * {
-
     margin: 0;
     padding: 0;
-
     box-sizing: border-box;
-
-    font-family:
-        'Segoe UI',
-        Tahoma,
-        Geneva,
-        Verdana,
-        sans-serif;
-
+    font-family: "Segoe UI", Arial, sans-serif;
 }
-
 
 html {
-
     scroll-behavior: smooth;
-
 }
-
 
 body {
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff9fb 0%,
-            #f7f5f6 50%,
-            #f4f0f2 100%
-        );
-
-    color: var(--text);
-
-    min-height: 100vh;
-
-    line-height: 1.5;
-
+    background: var(--fundo);
+    color: var(--texto);
 }
 
-
-/* =========================================================
-   SELEÇÃO DE TEXTO
-   ========================================================= */
-
-::selection {
-
-    background: var(--primary);
-    color: white;
-
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
+/* HEADER */
 
 header {
+    min-height: 650px;
 
     background:
         linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
+            rgba(92, 18, 57, .68),
+            rgba(210, 51, 132, .55)
+        ),
+        url("https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
 
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     text-align: center;
-
-    padding: 35px 20px;
-
-    box-shadow:
-        0 4px 15px
-        rgba(214, 51, 132, .25);
-
+    color: white;
+    padding: 40px 20px;
 }
 
-
-header h1 {
-
-    font-size: 32px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-
+.hero {
+    max-width: 850px;
 }
 
-
-header p {
-
-    font-size: 17px;
-
-    opacity: .95;
-
+.logo {
+    color: #ffe5ef;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom: 22px;
+    font-weight: bold;
 }
 
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 1;
+    margin-bottom: 25px;
+}
 
-/* =========================================================
-   CONTAINER
-   ========================================================= */
+.hero p {
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: auto auto 32px;
+    line-height: 1.7;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border: none;
+    padding: 14px 25px;
+
+    border-radius: 30px;
+
+    background: var(--rosa);
+    color: white;
+
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.btn:hover {
+    background: var(--rosa-escuro);
+    transform: translateY(-2px);
+}
+
+.btn-branco {
+    background: white;
+    color: var(--rosa);
+}
+
+.btn-branco:hover {
+    background: #fff0f6;
+}
+
+/* NAV */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    background: rgba(255,255,255,.96);
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid var(--borda);
+}
+
+.nav-container {
+    max-width: 1150px;
+    margin: auto;
+
+    padding: 15px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-nav {
+    color: var(--rosa);
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 600;
+    transition: .2s;
+}
+
+nav a:hover {
+    color: var(--rosa);
+}
+
+/* GERAL */
 
 .container {
-
     width: 92%;
-
-    max-width: 1200px;
-
-    margin: 30px auto;
-
+    max-width: 1150px;
+    margin: auto;
 }
 
+section {
+    padding: 85px 0;
+}
 
-/* =========================================================
-   CARDS
-   ========================================================= */
+.titulo {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.titulo span {
+    color: var(--rosa);
+    font-size: .8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.titulo h2 {
+    font-family: Georgia, serif;
+    color: var(--vinho);
+    font-size: 2.5rem;
+    margin: 8px 0 12px;
+}
+
+.titulo p {
+    max-width: 650px;
+    margin: auto;
+    color: var(--cinza);
+    line-height: 1.7;
+}
+
+/* SERVIÇOS */
+
+.servicos {
+    background: white;
+}
+
+.grid-servicos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.servico {
+    background: var(--rosa-suave);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    overflow: hidden;
+    transition: .3s;
+}
+
+.servico:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--sombra);
+}
+
+.servico img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.servico-conteudo {
+    padding: 23px;
+}
+
+.servico h3 {
+    color: var(--vinho);
+    margin-bottom: 9px;
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+}
+
+.servico p {
+    color: var(--cinza);
+    line-height: 1.6;
+}
+
+.preco {
+    margin-top: 16px;
+    color: var(--rosa);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* SOBRE */
+
+.sobre {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.sobre img {
+    width: 100%;
+    border-radius: 28px;
+    box-shadow: var(--sombra);
+}
+
+.sobre h2 {
+    font-family: Georgia, serif;
+    color: var(--vinho);
+    font-size: 2.7rem;
+    margin: 12px 0 20px;
+}
+
+.sobre p {
+    color: var(--cinza);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+/* BENEFÍCIOS */
+
+.beneficios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.beneficio {
+    text-align: center;
+    background: white;
+    padding: 35px 25px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+}
+
+.icone {
+    width: 65px;
+    height: 65px;
+
+    margin: auto auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--rosa-claro);
+
+    font-size: 30px;
+}
+
+.beneficio h3 {
+    color: var(--vinho);
+    margin-bottom: 10px;
+}
+
+.beneficio p {
+    color: var(--cinza);
+    line-height: 1.6;
+}
+
+/* AGENDAMENTO */
+
+.agendamento {
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f6,
+            #fce4ef
+        );
+}
 
 .card {
-
-    background: var(--white);
-
-    border-radius: var(--radius-lg);
-
-    padding: 25px;
-
-    margin-bottom: 25px;
-
-    box-shadow: var(--shadow);
-
-    border:
-        1px solid
-        rgba(0, 0, 0, .03);
-
-    transition:
-        transform var(--transition),
-        box-shadow var(--transition);
-
+    background: white;
+    padding: 35px;
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
 }
 
-
-.card:hover {
-
-    box-shadow: var(--shadow-lg);
-
-}
-
-
-/* =========================================================
-   TÍTULOS
-   ========================================================= */
-
-h1,
-h2,
-h3,
-h4 {
-
-    line-height: 1.2;
-
-}
-
-
-h2 {
-
-    color: var(--primary);
-
-    font-size: 24px;
-
-    margin-bottom: 20px;
-
-}
-
-
-h3 {
-
-    font-size: 18px;
-
-}
-
-
-.titulo-secao {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 20px;
-
-}
-
-
-.titulo-secao h2 {
-
-    margin-bottom: 0;
-
-}
-
-
-/* =========================================================
-   GRID
-   ========================================================= */
-
-.grid {
-
+.form-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(250px, 1fr)
-        );
-
-    gap: 20px;
-
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
 }
-
-
-/* =========================================================
-   CAMPOS
-   ========================================================= */
 
 .campo {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 7px;
-
 }
 
-
-.campo-full {
-
+.full {
     grid-column: 1 / -1;
-
 }
-
 
 label {
-
-    color: var(--text);
-
-    font-size: 14px;
-
-    font-weight: 600;
-
+    font-weight: 700;
 }
-
-
-label .obrigatorio {
-
-    color: var(--danger);
-
-}
-
-
-/* =========================================================
-   INPUTS
-   ========================================================= */
 
 input,
-select,
-textarea {
-
+select {
     width: 100%;
+    padding: 13px 15px;
 
-    padding: 12px 14px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:
-        var(--radius-sm);
-
-    background: white;
-
-    color: var(--text);
-
-    font-size: 15px;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
 
     outline: none;
+    font-size: 1rem;
 
-    transition:
-        border-color var(--transition),
-        box-shadow var(--transition),
-        background var(--transition);
-
+    background: white;
 }
-
-
-input::placeholder,
-textarea::placeholder {
-
-    color: #aaa;
-
-}
-
-
-input:hover,
-select:hover,
-textarea:hover {
-
-    border-color: #ccc;
-
-}
-
 
 input:focus,
-select:focus,
-textarea:focus {
-
-    border-color:
-        var(--primary);
+select:focus {
+    border-color: var(--rosa);
 
     box-shadow:
         0 0 0 3px
-        rgba(214, 51, 132, .12);
-
+        rgba(214,51,132,.12);
 }
 
-
-textarea {
-
-    min-height: 110px;
-
-    resize: vertical;
-
-}
-
-
-/* =========================================================
-   CAMPOS INVÁLIDOS
-   ========================================================= */
-
-input:invalid:not(:placeholder-shown),
-select:invalid,
-textarea:invalid {
-
-    border-color:
-        var(--danger);
-
-}
-
-
-input:valid:not(:placeholder-shown) {
-
-    border-color:
-        #cfcfcf;
-
-}
-
-
-/* =========================================================
-   FORMULÁRIOS
-   ========================================================= */
-
-form {
-
+.form-botoes {
     display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-
-}
-
-
-.form-acoes {
-
-    display: flex;
-
     gap: 10px;
-
-    margin-top: 5px;
-
+    margin-top: 10px;
 }
 
-
-/* =========================================================
-   BOTÕES
-   ========================================================= */
-
-button {
-
-    border: none;
-
-    padding:
-        12px 20px;
-
-    border-radius:
-        var(--radius-sm);
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    transition:
-        background var(--transition),
-        transform var(--transition),
-        box-shadow var(--transition);
-
+.btn-cancelar {
+    display: none;
+    background: #777;
 }
 
-
-button:hover {
-
-    transform:
-        translateY(-2px);
-
+.btn-cancelar:hover {
+    background: #555;
 }
 
+/* MENSAGEM */
 
-button:active {
-
-    transform:
-        translateY(0);
-
+.mensagem {
+    display: none;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
-
-button:focus-visible {
-
-    outline:
-        3px solid
-        rgba(214, 51, 132, .3);
-
-    outline-offset: 2px;
-
-}
-
-
-/* =========================================================
-   BOTÃO PRINCIPAL
-   ========================================================= */
-
-.btn {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    background:
-        var(--primary);
-
-    color: white;
-
-}
-
-
-.btn:hover {
-
-    background:
-        var(--primary-dark);
-
-    box-shadow:
-        0 5px 15px
-        rgba(214, 51, 132, .25);
-
-}
-
-
-/* =========================================================
-   BOTÃO VERDE
-   ========================================================= */
-
-.btn-verde {
-
-    background:
-        var(--success);
-
-    color: white;
-
-}
-
-
-.btn-verde:hover {
-
-    background:
-        var(--success-dark);
-
-}
-
-
-/* =========================================================
-   BOTÃO VERMELHO
-   ========================================================= */
-
-.btn-vermelho {
-
-    background:
-        var(--danger);
-
-    color: white;
-
-}
-
-
-.btn-vermelho:hover {
-
-    background:
-        var(--danger-dark);
-
-}
-
-
-/* =========================================================
-   BOTÃO AZUL
-   ========================================================= */
-
-.btn-azul {
-
-    background:
-        var(--info);
-
-    color: white;
-
-}
-
-
-.btn-azul:hover {
-
-    background:
-        var(--info-dark);
-
-}
-
-
-/* =========================================================
-   BOTÃO AMARELO
-   ========================================================= */
-
-.btn-amarelo {
-
-    background:
-        var(--warning);
-
-    color: #333;
-
-}
-
-
-.btn-amarelo:hover {
-
-    background:
-        var(--warning-dark);
-
-}
-
-
-/* =========================================================
-   BOTÃO SECUNDÁRIO
-   ========================================================= */
-
-.btn-secundario {
-
-    background: #eeeeee;
-
-    color: #555;
-
-}
-
-
-.btn-secundario:hover {
-
-    background: #dddddd;
-
-}
-
-
-/* =========================================================
-   TABELAS
-   ========================================================= */
-
-.tabela-container {
-
-    width: 100%;
-
-    overflow-x: auto;
-
-    border-radius:
-        var(--radius);
-
-}
-
-
-table {
-
-    width: 100%;
-
-    border-collapse:
-        collapse;
-
-    margin-top: 20px;
-
-    min-width: 700px;
-
-    background: white;
-
-}
-
-
-table th {
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-
-    color: white;
-
-    padding: 14px;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    white-space: nowrap;
-
-}
-
-
-table td {
-
-    padding: 13px;
-
-    border-bottom:
-        1px solid #eeeeee;
-
-    text-align: center;
-
-    font-size: 14px;
-
-}
-
-
-table tbody tr {
-
-    transition:
-        background var(--transition);
-
-}
-
-
-table tbody tr:nth-child(even) {
-
-    background:
-        #fafafa;
-
-}
-
-
-table tbody tr:hover {
-
-    background:
-        #fff1f7;
-
-}
-
-
-/* =========================================================
-   BADGES / STATUS
-   ========================================================= */
-
-.badge {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding:
-        6px 11px;
-
-    border-radius:
-        20px;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-}
-
-
-.badge-agendado {
-
-    background:
-        var(--info-light);
-
-    color:
-        #0756b5;
-
-}
-
-
-.badge-confirmado {
-
-    background:
-        var(--success-light);
-
-    color:
-        #0f5132;
-
-}
-
-
-.badge-concluido {
-
-    background:
-        #ede3ff;
-
-    color:
-        #5b2a9d;
-
-}
-
-
-.badge-cancelado {
-
-    background:
-        var(--danger-light);
-
-    color:
-        #842029;
-
-}
-
-
-/* =========================================================
-   MENU
-   ========================================================= */
-
-nav {
-
-    background:
-        rgba(255,255,255,.96);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 12px 15px;
-
-    box-shadow:
-        var(--shadow-sm);
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
-
-}
-
-
-nav a {
-
-    text-decoration: none;
-
-    color:
-        var(--primary);
-
-    font-weight: 600;
-
-    padding:
-        10px 15px;
-
-    border-radius:
-        var(--radius-sm);
-
-    transition:
-        background var(--transition),
-        color var(--transition),
-        transform var(--transition);
-
-}
-
-
-nav a:hover {
-
-    background:
-        var(--primary);
-
-    color: white;
-
-    transform:
-        translateY(-1px);
-
-}
-
-
-nav a.active {
-
-    background:
-        var(--primary);
-
-    color: white;
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-.dashboard {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px, 1fr)
-        );
-
-    gap: 20px;
-
-}
-
-
-.box {
-
-    background:
-        white;
-
-    padding: 22px;
-
-    border-radius:
-        var(--radius-lg);
-
-    text-align: center;
-
-    box-shadow:
-        var(--shadow);
-
-    border-top:
-        4px solid
-        var(--primary);
-
-    transition:
-        transform var(--transition),
-        box-shadow var(--transition);
-
-}
-
-
-.box:hover {
-
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        var(--shadow-lg);
-
-}
-
-
-.box h3 {
-
-    color:
-        var(--primary);
-
-    margin-bottom:
-        10px;
-
-    font-size:
-        16px;
-
-}
-
-
-.box span {
-
+.mensagem.sucesso {
     display: block;
-
-    font-size:
-        35px;
-
-    font-weight:
-        700;
-
-    color:
-        var(--text);
-
+    background: #d1e7dd;
+    color: #0f5132;
 }
 
-
-/* =========================================================
-   BOXES COLORIDOS
-   ========================================================= */
-
-.box.rosa {
-
-    border-top-color:
-        var(--primary);
-
+.mensagem.erro {
+    display: block;
+    background: #f8d7da;
+    color: #842029;
 }
 
+/* PAINEL */
 
-.box.verde {
-
-    border-top-color:
-        var(--success);
-
+.painel {
+    background: white;
 }
 
-
-.box.azul {
-
-    border-top-color:
-        var(--info);
-
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
-
-.box.vermelho {
-
-    border-top-color:
-        var(--danger);
-
+.resumo-card {
+    padding: 22px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--sombra);
+    border-top: 4px solid var(--rosa);
 }
 
-
-/* =========================================================
-   ALERTAS
-   ========================================================= */
-
-.alert {
-
-    padding:
-        14px 16px;
-
-    border-radius:
-        var(--radius-sm);
-
-    margin-bottom:
-        20px;
-
-    border-left:
-        4px solid transparent;
-
-    font-size:
-        14px;
-
+.resumo-card span {
+    color: var(--cinza);
+    font-size: .9rem;
 }
 
-
-.alert-success {
-
-    background:
-        var(--success-light);
-
-    color:
-        #0f5132;
-
-    border-left-color:
-        var(--success);
-
+.resumo-card strong {
+    display: block;
+    font-size: 2rem;
+    margin-top: 5px;
+    color: var(--rosa);
 }
 
-
-.alert-danger {
-
-    background:
-        var(--danger-light);
-
-    color:
-        #842029;
-
-    border-left-color:
-        var(--danger);
-
+.resumo-card.azul {
+    border-color: var(--azul);
 }
 
-
-.alert-warning {
-
-    background:
-        var(--warning-light);
-
-    color:
-        #664d03;
-
-    border-left-color:
-        var(--warning);
-
+.resumo-card.azul strong {
+    color: var(--azul);
 }
 
-
-.alert-info {
-
-    background:
-        var(--info-light);
-
-    color:
-        #084298;
-
-    border-left-color:
-        var(--info);
-
+.resumo-card.verde {
+    border-color: var(--verde);
 }
 
+.resumo-card.verde strong {
+    color: var(--verde);
+}
 
-/* =========================================================
-   PESQUISA / FILTROS
-   ========================================================= */
+.resumo-card.vermelho {
+    border-color: var(--vermelho);
+}
+
+.resumo-card.vermelho strong {
+    color: var(--vermelho);
+}
+
+/* FILTROS */
 
 .filtros {
-
     display: grid;
-
-    grid-template-columns:
-        2fr 1fr 1fr auto;
-
+    grid-template-columns: 2fr 1fr 1fr auto;
     gap: 12px;
-
     margin-bottom: 20px;
-
 }
 
+/* TABELA */
 
-/* =========================================================
-   AÇÕES DA TABELA
-   ========================================================= */
+.tabela {
+    overflow-x: auto;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+th {
+    background: var(--rosa);
+    color: white;
+    padding: 14px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-top: 1px solid var(--borda);
+}
+
+tbody tr:hover {
+    background: #fff7fa;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.status-agendado {
+    background: #dbeafe;
+    color: #0756b5;
+}
+
+.status-confirmado {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-concluido {
+    background: #ede3ff;
+    color: #5b2a9d;
+}
+
+.status-cancelado {
+    background: #f8d7da;
+    color: #842029;
+}
+
+/* AÇÕES */
 
 .acoes {
-
     display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 6px;
-
+    gap: 7px;
 }
 
-
-.acoes button {
-
-    padding:
-        7px 10px;
-
-    font-size:
-        12px;
-
+.acao {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-
-/* =========================================================
-   ESTADO VAZIO
-   ========================================================= */
-
-.sem-dados {
-
-    text-align: center;
-
-    padding:
-        40px 20px;
-
-    color:
-        var(--muted);
-
+.editar {
+    background: var(--azul);
 }
 
-
-.sem-dados .icone {
-
-    display: block;
-
-    font-size:
-        40px;
-
-    margin-bottom:
-        10px;
-
+.excluir {
+    background: var(--vermelho);
 }
 
+/* CONTATO */
 
-/* =========================================================
-   LOADING
-   ========================================================= */
-
-.loading {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding:
-        30px;
-
-    color:
-        var(--muted);
-
+.contato {
+    background: var(--rosa-suave);
 }
 
-
-.spinner {
-
-    width:
-        22px;
-
-    height:
-        22px;
-
-    border:
-        3px solid
-        #eee;
-
-    border-top-color:
-        var(--primary);
-
-    border-radius:
-        50%;
-
-    animation:
-        girar .8s linear infinite;
-
-}
-
-
-@keyframes girar {
-
-    to {
-
-        transform:
-            rotate(360deg);
-
-    }
-
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-.modal {
-
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(0,0,0,.5);
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    z-index: 1000;
-
-}
-
-
-.modal.active {
-
-    display: flex;
-
-}
-
-
-.modal-conteudo {
-
-    background: white;
-
-    width: 100%;
-
-    max-width: 550px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    border-radius:
-        var(--radius-lg);
-
-    padding: 25px;
-
-    box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.2);
-
-    animation:
-        aparecer .25s ease;
-
-}
-
-
-@keyframes aparecer {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(20px)
-            scale(.98);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
-}
-
-
-.modal-header {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    margin-bottom:
-        20px;
-
-}
-
-
-.modal-fechar {
-
-    background:
-        transparent;
-
-    color:
-        #777;
-
-    font-size:
-        24px;
-
-    padding:
-        4px 8px;
-
-}
-
-
-.modal-fechar:hover {
-
-    background:
-        #eee;
-
-    color:
-        #333;
-
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-footer {
-
+.contato-box {
     background:
         linear-gradient(
             135deg,
-            var(--primary),
-            var(--secondary)
+            var(--vinho),
+            var(--rosa)
         );
 
-    color:
-        white;
+    color: white;
+    text-align: center;
 
-    text-align:
-        center;
+    padding: 60px 25px;
 
-    padding:
-        25px 20px;
-
-    margin-top:
-        40px;
-
+    border-radius: 28px;
 }
 
-
-footer p {
-
-    margin:
-        4px 0;
-
-    font-size:
-        14px;
-
+.contato-box h2 {
+    font-family: Georgia, serif;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 
-
-/* =========================================================
-   LINKS
-   ========================================================= */
-
-a {
-
-    color:
-        var(--primary);
-
+.contato-box p {
+    margin-bottom: 25px;
 }
 
+/* FOOTER */
 
-a:hover {
-
-    color:
-        var(--primary-dark);
-
+footer {
+    background: #301a25;
+    color: #eadde4;
+    text-align: center;
+    padding: 30px 20px;
 }
 
+footer strong {
+    color: #ff8abd;
+}
 
-/* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
+/* RESPONSIVO */
 
 @media(max-width: 900px) {
 
-    .filtros {
-
-        grid-template-columns:
-            1fr 1fr;
-
+    .grid-servicos,
+    .beneficios,
+    .sobre {
+        grid-template-columns: 1fr 1fr;
     }
 
+    .resumo {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .filtros {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-
-@media(max-width: 768px) {
+@media(max-width: 700px) {
 
     header {
-
-        padding:
-            25px 15px;
-
+        min-height: 550px;
     }
 
-
-    header h1 {
-
-        font-size:
-            26px;
-
+    .hero h1 {
+        font-size: 3rem;
     }
 
-
-    header p {
-
-        font-size:
-            15px;
-
+    nav ul {
+        display: none;
     }
 
-
-    .container {
-
-        width:
-            94%;
-
-        margin:
-            20px auto;
-
+    .grid-servicos,
+    .beneficios,
+    .sobre {
+        grid-template-columns: 1fr;
     }
 
-
-    .card {
-
-        padding:
-            20px;
-
+    .form-grid {
+        grid-template-columns: 1fr;
     }
 
-
-    nav {
-
-        flex-direction:
-            column;
-
-        align-items:
-            stretch;
-
+    .full {
+        grid-column: auto;
     }
 
-
-    nav a {
-
-        text-align:
-            center;
-
-        width:
-            100%;
-
+    .resumo {
+        grid-template-columns: 1fr 1fr;
     }
-
-
-    .dashboard {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
 
     .filtros {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
 
-
-    .form-acoes {
-
-        flex-direction:
-            column;
-
+    .form-botoes {
+        flex-direction: column;
     }
-
-
-    .form-acoes button {
-
-        width:
-            100%;
-
-    }
-
-
-    table {
-
-        font-size:
-            13px;
-
-    }
-
-
-    table th,
-    table td {
-
-        padding:
-            10px 8px;
-
-    }
-
-
-    .acoes {
-
-        flex-direction:
-            column;
-
-    }
-
-
-    .acoes button {
-
-        width:
-            100%;
-
-    }
-
 }
 
+@media(max-width: 450px) {
 
-@media(max-width:480px) {
-
-    header h1 {
-
-        font-size:
-            22px;
-
+    section {
+        padding: 55px 0;
     }
-
-
-    .container {
-
-        width:
-            96%;
-
-    }
-
 
     .card {
-
-        padding:
-            16px;
-
-        border-radius:
-            12px;
-
+        padding: 20px;
     }
 
-
-    h2 {
-
-        font-size:
-            20px;
-
+    .resumo {
+        grid-template-columns: 1fr;
     }
 
-
-    input,
-    select,
-    textarea {
-
-        font-size:
-            14px;
-
+    .hero h1 {
+        font-size: 2.5rem;
     }
 
-
-    button {
-
-        width:
-            100%;
-
+    .sobre h2 {
+        font-size: 2rem;
     }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header id="inicio">
+
+    <div class="hero">
+
+        <div class="logo">
+            ✨ Bella Beauty Estética
+        </div>
+
+        <h1>
+            Sua beleza,<br>
+            seu momento
+        </h1>
+
+        <p>
+            Tratamentos de estética e beleza para
+            cuidar da sua pele, corpo e autoestima
+            com carinho e profissionalismo.
+        </p>
+
+        <a
+            href="#agendamento"
+            class="btn btn-branco"
+        >
+            💖 Agendar meu horário
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= NAV ================= -->
+
+<nav>
+
+    <div class="nav-container">
+
+        <div class="logo-nav">
+            Bella Beauty
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="#inicio">
+                    Início
+                </a>
+            </li>
+
+            <li>
+                <a href="#servicos">
+                    Serviços
+                </a>
+            </li>
+
+            <li>
+                <a href="#sobre">
+                    Sobre
+                </a>
+            </li>
+
+            <li>
+                <a href="#agendamento">
+                    Agendamento
+                </a>
+            </li>
+
+            <li>
+                <a href="#painel">
+                    Agendamentos
+                </a>
+            </li>
+
+            <li>
+                <a href="#contato">
+                    Contato
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+<main>
+
+<!-- ================= SERVIÇOS ================= -->
+
+<section
+    id="servicos"
+    class="servicos"
+>
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>
+                Nossos tratamentos
+            </span>
+
+            <h2>
+                Beleza e cuidado para você
+            </h2>
+
+            <p>
+                Escolha o tratamento que combina
+                com o seu momento e cuide de você.
+            </p>
+
+        </div>
+
+
+        <div class="grid-servicos">
+
+
+            <div class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80"
+                    alt="Limpeza de pele"
+                >
+
+                <div class="servico-conteudo">
+
+                    <h3>
+                        Limpeza de Pele
+                    </h3>
+
+                    <p>
+                        Higienização profunda para
+                        uma pele limpa, macia e
+                        revitalizada.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 120
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=80"
+                    alt="Tratamento facial"
+                >
+
+                <div class="servico-conteudo">
+
+                    <h3>
+                        Tratamento Facial
+                    </h3>
+
+                    <p>
+                        Cuidados personalizados para
+                        hidratação, luminosidade e
+                        revitalização.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 150
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80"
+                    alt="Massagem"
+                >
+
+                <div class="servico-conteudo">
+
+                    <h3>
+                        Massagem Relaxante
+                    </h3>
+
+                    <p>
+                        Um momento especial para
+                        aliviar tensões e relaxar
+                        corpo e mente.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 90
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80"
+                    alt="Drenagem linfática"
+                >
+
+                <div class="servico-conteudo">
+
+                    <h3>
+                        Drenagem Linfática
+                    </h3>
+
+                    <p>
+                        Massagem com movimentos suaves
+                        para promover sensação de
+                        bem-estar.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 100
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
+                    alt="Peeling facial"
+                >
+
+                <div class="servico-conteudo">
+
+                    <h3>
+                        Peeling Facial
+                    </h3>
+
+                    <p>
+                        Procedimento estético para
+                        melhorar textura e aparência
+                        da pele.
+                    </p>
+
+                    <div class="preco">
+                        A partir de R$ 180
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="servico">
+
+                <img
+                    src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=800&q=80"
+                    alt="Depilação"
+                >
+
+                <div class="servico-conteudo">
+
+                    <h3>
+                        Depilação
+                    </h3>
+
+                    <p>
+                        Procedimentos de depilação
+                        pensando no conforto e
+                        cuidado da sua pele.
+                    </p>
+
+                    <div class="preco">
+                        Consulte valores
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SOBRE ================= -->
+
+<section id="sobre">
+
+    <div class="container">
+
+        <div class="sobre">
+
+            <img
+                src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1000&q=85"
+                alt="Profissional de estética"
+            >
+
+            <div>
+
+                <span
+                    style="
+                        color:var(--rosa);
+                        font-weight:bold;
+                        letter-spacing:2px;
+                        font-size:.8rem;
+                    "
+                >
+                    SOBRE A BELLA BEAUTY
+                </span>
+
+                <h2>
+                    Seu momento de autocuidado começa aqui
+                </h2>
+
+                <p>
+                    A Bella Beauty nasceu para oferecer
+                    uma experiência de beleza acolhedora,
+                    elegante e personalizada.
+                </p>
+
+                <p>
+                    Nosso objetivo é valorizar sua beleza
+                    natural e proporcionar momentos de
+                    cuidado, relaxamento e autoestima.
+                </p>
+
+                <a
+                    href="#agendamento"
+                    class="btn"
+                >
+                    Quero agendar
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= BENEFÍCIOS ================= -->
+
+<section>
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>
+                Por que escolher a Bella Beauty?
+            </span>
+
+            <h2>
+                Uma experiência feita para você
+            </h2>
+
+        </div>
+
+
+        <div class="beneficios">
+
+            <div class="beneficio">
+
+                <div class="icone">
+                    💆‍♀️
+                </div>
+
+                <h3>
+                    Atendimento personalizado
+                </h3>
+
+                <p>
+                    Cada cliente recebe atenção
+                    de acordo com suas necessidades.
+                </p>
+
+            </div>
+
+
+            <div class="beneficio">
+
+                <div class="icone">
+                    ✨
+                </div>
+
+                <h3>
+                    Ambiente acolhedor
+                </h3>
+
+                <p>
+                    Um espaço preparado para você
+                    relaxar e aproveitar seu momento.
+                </p>
+
+            </div>
+
+
+            <div class="beneficio">
+
+                <div class="icone">
+                    💖
+                </div>
+
+                <h3>
+                    Beleza e autoestima
+                </h3>
+
+                <p>
+                    Cuidamos da sua beleza para
+                    você se sentir ainda melhor.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AGENDAMENTO ================= -->
+
+<section
+    id="agendamento"
+    class="agendamento"
+>
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>
+                Reserve seu horário
+            </span>
+
+            <h2>
+                Agende seu atendimento
+            </h2>
+
+            <p>
+                Preencha os dados abaixo para
+                reservar seu horário.
+            </p>
+
+        </div>
+
+
+        <div
+            id="mensagem"
+            class="mensagem"
+        ></div>
+
+
+        <div class="card">
+
+            <form id="formAgendamento">
+
+                <div class="form-grid">
+
+
+                    <div class="campo full">
+
+                        <label for="nome">
+                            Nome completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            maxlength="100"
+                            placeholder="Digite seu nome"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo full">
+
+                        <label for="servico">
+                            Procedimento
+                        </label>
+
+                        <select
+                            id="servico"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione um procedimento
+                            </option>
+
+                            <option>
+                                Limpeza de Pele
+                            </option>
+
+                            <option>
+                                Tratamento Facial
+                            </option>
+
+                            <option>
+                                Massagem Relaxante
+                            </option>
+
+                            <option>
+                                Drenagem Linfática
+                            </option>
+
+                            <option>
+                                Peeling Facial
+                            </option>
+
+                            <option>
+                                Depilação
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="data">
+                            Data
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="hora">
+                            Horário
+                        </label>
+
+                        <input
+                            type="time"
+                            id="hora"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="campo full form-botoes">
+
+                        <button
+                            type="submit"
+                            class="btn"
+                            id="btnSalvar"
+                        >
+                            💖 Confirmar agendamento
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-cancelar"
+                            id="btnCancelar"
+                        >
+                            Cancelar edição
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PAINEL ================= -->
+
+<section
+    id="painel"
+    class="painel"
+>
+
+    <div class="container">
+
+        <div class="titulo">
+
+            <span>
+                Administração
+            </span>
+
+            <h2>
+                Meus Agendamentos
+            </h2>
+
+            <p>
+                Consulte, pesquise e gerencie
+                seus horários.
+            </p>
+
+        </div>
+
+
+        <!-- RESUMO -->
+
+        <div class="resumo">
+
+            <div class="resumo-card">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="total">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-card azul">
+
+                <span>
+                    Agendados
+                </span>
+
+                <strong id="agendados">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-card verde">
+
+                <span>
+                    Confirmados
+                </span>
+
+                <strong id="confirmados">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="resumo-card vermelho">
+
+                <span>
+                    Cancelados
+                </span>
+
+                <strong id="cancelados">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTROS -->
+
+        <div class="filtros">
+
+            <input
+                type="search"
+                id="busca"
+                placeholder="🔎 Buscar cliente ou procedimento..."
+            >
+
+            <input
+                type="date"
+                id="filtroData"
+            >
+
+            <select id="filtroStatus">
+
+                <option value="">
+                    Todos os status
+                </option>
+
+                <option value="Agendado">
+                    Agendado
+                </option>
+
+                <option value="Confirmado">
+                    Confirmado
+                </option>
+
+                <option value="Concluído">
+                    Concluído
+                </option>
+
+                <option value="Cancelado">
+                    Cancelado
+                </option>
+
+            </select>
+
+            <button
+                class="btn"
+                type="button"
+                onclick="filtrar()"
+            >
+                Pesquisar
+            </button>
+
+        </div>
+
+
+        <!-- TABELA -->
+
+        <div class="tabela">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Cliente
+                        </th>
+
+                        <th>
+                            Procedimento
+                        </th>
+
+                        <th>
+                            Data
+                        </th>
+
+                        <th>
+                            Horário
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="lista">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTATO ================= -->
+
+<section
+    id="contato"
+    class="contato"
+>
+
+    <div class="container">
+
+        <div class="contato-box">
+
+            <h2>
+                Pronta para cuidar de você?
+            </h2>
+
+            <p>
+                Entre em contato com a Bella Beauty
+                e marque seu momento especial.
+            </p>
+
+            <a
+                class="btn btn-branco"
+                href="https://wa.me/5500000000000"
+                target="_blank"
+            >
+                💬 Falar pelo WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        <strong>
+            Bella Beauty Estética
+        </strong>
+        © 2026
+    </p>
+
+    <p>
+        Beleza • Cuidado • Autoestima
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   BANCO DE DADOS LOCAL
+===================================================== */
+
+const STORAGE_KEY =
+    "bella_beauty_agendamentos";
+
+
+let agendamentos =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+    ) || [];
+
+
+let indiceEdicao = null;
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const form =
+    document.getElementById(
+        "formAgendamento"
+    );
+
+const nome =
+    document.getElementById(
+        "nome"
+    );
+
+const servico =
+    document.getElementById(
+        "servico"
+    );
+
+const data =
+    document.getElementById(
+        "data"
+    );
+
+const hora =
+    document.getElementById(
+        "hora"
+    );
+
+const mensagem =
+    document.getElementById(
+        "mensagem"
+    );
+
+const lista =
+    document.getElementById(
+        "lista"
+    );
+
+const busca =
+    document.getElementById(
+        "busca"
+    );
+
+const filtroData =
+    document.getElementById(
+        "filtroData"
+    );
+
+const filtroStatus =
+    document.getElementById(
+        "filtroStatus"
+    );
+
+const btnSalvar =
+    document.getElementById(
+        "btnSalvar"
+    );
+
+const btnCancelar =
+    document.getElementById(
+        "btnCancelar"
+    );
+
+
+/* =====================================================
+   DATA MÍNIMA
+===================================================== */
+
+const hoje =
+    new Date()
+    .toISOString()
+    .split("T")[0];
+
+data.min = hoje;
+
+
+/* =====================================================
+   SALVAR
+===================================================== */
+
+function salvarDados() {
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(
+            agendamentos
+        )
+    );
 
 }
 
 
-/* =========================================================
-   ACESSIBILIDADE
-   ========================================================= */
+/* =====================================================
+   MENSAGEM
+===================================================== */
 
-@media(prefers-reduced-motion: reduce) {
+function mostrarMensagem(
+    texto,
+    tipo = "sucesso"
+) {
 
-    *,
-    *::before,
-    *::after {
+    mensagem.textContent =
+        texto;
 
-        animation-duration:
-            .01ms !important;
+    mensagem.className =
+        "mensagem " + tipo;
 
-        animation-iteration-count:
-            1 !important;
 
-        transition-duration:
-            .01ms !important;
+    setTimeout(() => {
 
-        scroll-behavior:
-            auto !important;
+        mensagem.className =
+            "mensagem";
 
-    }
+    }, 3500);
 
 }
 
 
+/* =====================================================
+   DATA BR
+===================================================== */
+
+function dataBR(valor) {
+
+    if (!valor) {
+        return "-";
+    }
+
+    const partes =
+        valor.split("-");
+
+    return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+    );
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function obterStatus(item) {
+
+    return item.status ||
+        "Agendado";
+
+}
+
+
+function classeStatus(status) {
+
+    if (
+        status === "Confirmado"
+    ) {
+        return "status-confirmado";
+    }
+
+    if (
+        status === "Concluído"
+    ) {
+        return "status-concluido";
+    }
+
+    if (
+        status === "Cancelado"
+    ) {
+        return "status-cancelado";
+    }
+
+    return "status-agendado";
+
+}
+
+
+/* =====================================================
+   VERIFICAR HORÁRIO
+===================================================== */
+
+function horarioOcupado(
+    novaData,
+    novaHora,
+    ignorar = null
+) {
+
+    return agendamentos.some(
+        (item, index) => {
+
+            if (
+                index === ignorar
+            ) {
+                return false;
+            }
+
+            return (
+                item.data === novaData &&
+                item.hora === novaHora &&
+                obterStatus(item) !== "Cancelado"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const nomeValor =
+            nome.value.trim();
+
+        const servicoValor =
+            servico.value;
+
+        const dataValor =
+            data.value;
+
+        const horaValor =
+            hora.value;
+
+
+        if (
+            !nomeValor ||
+            !servicoValor ||
+            !dataValor ||
+            !horaValor
+        ) {
+
+            mostrarMensagem(
+                "Preencha todos os campos.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            dataValor < hoje
+        ) {
+
+            mostrarMensagem(
+                "Escolha uma data atual ou futura.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            horarioOcupado(
+                dataValor,
+                horaValor,
+                indiceEdicao
+            )
+        ) {
+
+            mostrarMensagem(
+                "Esse horário já está reservado.",
+                "erro"
+            );
+
+            return;
+
+        }
+
+
+        const agendamento = {
+
+            nome:
+                nomeValor,
+
+            servico:
+                servicoValor,
+
+            data:
+                dataValor,
+
+            hora:
+                horaValor,
+
+            status:
+                indiceEdicao !== null
+                    ? obterStatus(
+                        agendamentos[
+                            indiceEdicao
+                        ]
+                    )
+                    : "Agendado"
+
+        };
+
+
+        if (
+            indiceEdicao !== null
+        ) {
+
+            agendamentos[
+                indiceEdicao
+            ] =
+                agendamento;
+
+
+            mostrarMensagem(
+                "Agendamento atualizado com sucesso!"
+            );
+
+        } else {
+
+            agendamentos.push(
+                agendamento
+            );
+
+
+            mostrarMensagem(
+                "Agendamento realizado com sucesso!"
+            );
+
+        }
+
+
+        salvarDados();
+
+        limparFormulario();
+
+        renderizar();
+
+    }
+);
+
+
+/* =====================================================
+   LIMPAR FORMULÁRIO
+===================================================== */
+
+function limparFormulario() {
+
+    form.reset();
+
+    indiceEdicao = null;
+
+    btnSalvar.innerHTML =
+        "💖 Confirmar agendamento";
+
+    btnCancelar.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   CANCELAR
+===================================================== */
+
+btnCancelar.addEventListener(
+    "click",
+    limparFormulario
+);
+
+
+/* =====================================================
+   EDITAR
+===================================================== */
+
+function editar(index) {
+
+    const item =
+        agendamentos[index];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    nome.value =
+        item.nome;
+
+    servico.value =
+        item.servico;
+
+    data.value =
+        item.data;
+
+    hora.value =
+        item.hora;
+
+
+    indiceEdicao =
+        index;
+
+
+    btnSalvar.innerHTML =
+        "💾 Salvar alterações";
+
+    btnCancelar.style.display =
+        "inline-flex";
+
+
+    document
+        .getElementById(
+            "agendamento"
+        )
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =====================================================
+   EXCLUIR
+===================================================== */
+
+function excluir(index) {
+
+    const item =
+        agendamentos[index];
+
+
+    if (!item) {
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            `Deseja excluir o agendamento de "${item.nome}"?`
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    agendamentos.splice(
+        index,
+        1
+    );
+
+
+    salvarDados();
+
+    renderizar();
+
+    mostrarMensagem(
+        "Agendamento excluído."
+    );
+
+}
+
+
+/* =====================================================
+   ALTERAR STATUS
+===================================================== */
+
+function alterarStatus(index) {
+
+    const item =
+        agendamentos[index];
+
+
+    const atual =
+        obterStatus(item);
+
+
+    const novo =
+        prompt(
+            "Digite o novo status:\n\n" +
+            "Agendado\n" +
+            "Confirmado\n" +
+            "Concluído\n" +
+            "Cancelado",
+            atual
+        );
+
+
+    if (novo === null) {
+        return;
+    }
+
+
+    const validos = [
+        "Agendado",
+        "Confirmado",
+        "Concluído",
+        "Cancelado"
+    ];
+
+
+    if (
+        !validos.includes(novo)
+    ) {
+
+        alert(
+            "Status inválido."
+        );
+
+        return;
+
+    }
+
+
+    agendamentos[index].status =
+        novo;
+
+
+    salvarDados();
+
+    renderizar();
+
+}
+
+
+/* =====================================================
+   RENDERIZAR
+===================================================== */
+
+function renderizar() {
+
+    const termo =
+        busca.value
+        .trim()
+        .toLowerCase();
+
+    const dataFiltro =
+        filtroData.value;
+
+    const statusFiltro =
+        filtroStatus.value;
+
+
+    let resultado =
+        agendamentos.filter(
+            item => {
+
+                const nomeItem =
+                    (
+                        item.nome ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                const servicoItem =
+                    (
+                        item.servico ||
+                        ""
+                    )
+                    .toLowerCase();
+
+
+                const combinaTexto =
+                    termo === "" ||
+                    nomeItem.includes(
+                        termo
+                    ) ||
+                    servicoItem.includes(
+                        termo
+                    );
+
+
+                const combinaData =
+                    dataFiltro === "" ||
+                    item.data === dataFiltro;
+
+
+                const combinaStatus =
+                    statusFiltro === "" ||
+                    obterStatus(item) ===
+                    statusFiltro;
+
+
+                return (
+                    combinaTexto &&
+                    combinaData &&
+                    combinaStatus
+                );
+
+            }
+        );
+
+
+    resultado.sort(
+        (a, b) => {
+
+            const primeiro =
+                `${a.data} ${a.hora}`;
+
+            const segundo =
+                `${b.data} ${b.hora}`;
+
+            return primeiro.localeCompare(
+                segundo
+            );
+
+        }
+    );
+
+
+    lista.innerHTML = "";
+
+
+    if (
+        resultado.length === 0
+    ) {
+
+        lista.innerHTML = `
+            <tr>
+                <td colspan="6"
+                    style="
+                        text-align:center;
+                        padding:45px;
+                        color:#777;
+                    "
+                >
+                    📅<br><br>
+                    Nenhum agendamento encontrado.
+                </td>
+            </tr>
+        `;
+
+        atualizarResumo();
+
+        return;
+
+    }
+
+
+    resultado.forEach(
+        item => {
+
+            const index =
+                agendamentos.indexOf(
+                    item
+                );
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    <strong>
+                        ${escapeHTML(item.nome)}
+                    </strong>
+                </td>
+
+                <td>
+                    ${escapeHTML(item.servico)}
+                </td>
+
+                <td>
+                    ${dataBR(item.data)}
+                </td>
+
+                <td>
+                    ${escapeHTML(item.hora)}
+                </td>
+
+                <td>
+                    <span class="
+                        status
+                        ${classeStatus(
+                            obterStatus(item)
+                        )}
+                    ">
+                        ${escapeHTML(
+                            obterStatus(item)
+                        )}
+                    </span>
+                </td>
+
+                <td>
+
+                    <div class="acoes">
+
+                        <button
+                            class="acao editar"
+                            onclick="editar(${index})"
+                        >
+                            ✏️
+                        </button>
+
+                        <button
+                            class="acao"
+                            style="background:#198754"
+                            onclick="alterarStatus(${index})"
+                        >
+                            🔄
+                        </button>
+
+                        <button
+                            class="acao excluir"
+                            onclick="excluir(${index})"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+                </td>
+            `;
+
+
+            lista.appendChild(
+                tr
+            );
+
+        }
+    );
+
+
+    atualizarResumo();
+
+}
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
+
+function escapeHTML(texto) {
+
+    return String(texto)
+        .replace(
+            /[&<>'"]/g,
+            caractere => {
+
+                const mapa = {
+
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    "'": "&#39;",
+                    '"': "&quot;"
+
+                };
+
+                return mapa[
+                    caractere
+                ];
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+function atualizarResumo() {
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        agendamentos.length;
+
+
+    document.getElementById(
+        "agendados"
+    ).textContent =
+        agendamentos.filter(
+            item =>
+                obterStatus(item)
+                === "Agendado"
+        ).length;
+
+
+    document.getElementById(
+        "confirmados"
+    ).textContent =
+        agendamentos.filter(
+            item =>
+                obterStatus(item)
+                === "Confirmado"
+        ).length;
+
+
+    document.getElementById(
+        "cancelados"
+    ).textContent =
+        agendamentos.filter(
+            item =>
+                obterStatus(item)
+                === "Cancelado"
+        ).length;
+
+}
+
+
+/* =====================================================
+   FILTRAR
+===================================================== */
+
+function filtrar() {
+
+    renderizar();
+
+}
+
+
+/* =====================================================
+   EVENTOS DOS FILTROS
+===================================================== */
+
+busca.addEventListener(
+    "input",
+    renderizar
+);
+
+filtroData.addEventListener(
+    "change",
+    renderizar
+);
+
+filtroStatus.addEventListener(
+    "change",
+    renderizar
+);
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+renderizar();
+
+</script>
+
+</body>
+</html>
