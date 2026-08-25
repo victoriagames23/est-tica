@@ -1,97 +1,946 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Catálogo de procedimentos da Clínica de Estética Bella Vita"
+    >
+
+    <title>Bella Vita | Procedimentos</title>
+
     <link rel="stylesheet" href="estilo.css">
-    <title>EstéticaGlow - Cadastro de Serviços</title>
+
 </head>
+
+
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Clientes</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="agendamentos.html">Agendamentos</a>
-        <a href="consulta_agendamentos.html">Consulta Agendamentos</a>
-    </nav>
 
-    <header class="banner">
-        <h1>Gestão de Serviços de Estética</h1>
-        <p>Cadastre e configure o catálogo de procedimentos da clínica</p>
-    </header>
 
-    <div class="container">
-        <div class="card">
-            <h2>Novo Procedimento Estético</h2>
-            <form action="/salvar-servico" method="POST">
-                <label for="descricao">Nome / Descrição do Procedimento:</label>
-                <input type="text" id="descricao" name="descricao" placeholder="Ex: Limpeza de Pele Profunda com Peeling" required>
-                
-                <label for="categoria">Categoria:</label>
-                <select id="categoria" name="categoria" required>
-                    <option value="" disabled selected>Selecione uma categoria</option>
-                    <option value="Facial">Estética Facial</option>
-                    <option value="Corporal">Estética Corporal</option>
-                    <option value="Sobrancelhas e Cílios">Sobrancelhas e Cílios</option>
-                    <option value="Massoterapia">Massoterapia / Relaxamento</option>
-                    <option value="Outros">Outros</option>
-                </select>
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
-                <label for="preco">Preço (R$):</label>
-                <input type="number" step="0.01" id="preco" name="preco" placeholder="0.00" min="0" required>
-                
-                <label for="tempo_estimado">Duração Estimada (em minutos):</label>
-                <input type="number" id="tempo_estimado" name="tempo_estimado" placeholder="Ex: 60" min="15" step="15" required>
-                
-                <button type="submit">Salvar Procedimento</button>
-            </form>
-        </div>
+<header class="topo">
 
-        <div class="card" style="margin-top: 20px;">
-            <h2>Procedimentos Disponíveis</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
-                Catálogo de serviços estéticos oferecidos aos clientes.
-            </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Procedimento</th>
-                        <th>Categoria</th>
-                        <th>Preço (R$)</th>
-                        <th>Duração</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-servicos">
-                    <!-- Preenchido via JavaScript -->
-                </tbody>
-            </table>
-        </div>
+    <div class="logo">
+        ✨ Bella Vita
     </div>
 
-    <script>
-        fetch('/listar-servicos')
-            .then(res => res.json())
-            .then(servicos => {
-                const corpoTabela = document.getElementById('lista-servicos');
-                corpoTabela.innerHTML = '';
-                
-                servicos.forEach(s => {
-                    corpoTabela.innerHTML += `
-                        <tr>
-                            <td><strong>${s.descricao}</strong></td>
-                            <td>${s.categoria || 'Geral'}</td>
-                            <td>R$ ${parseFloat(s.preco).toFixed(2)}</td>
-                            <td>${s.tempo_estimado} min</td>
-                        </tr>`;
-                });
-            })
-            .catch(err => console.error("Erro ao listar serviços de estética:", err));
-    </script>
+    <p>
+        Clínica de Estética & Bem-Estar
+    </p>
+
+</header>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<nav class="menu">
+
+    <a href="index.html">
+        🏠 Início
+    </a>
+
+    <a href="clientes.html">
+        👤 Clientes
+    </a>
+
+    <a
+        href="servicos.html"
+        class="ativo"
+    >
+        💆 Procedimentos
+    </a>
+
+    <a href="agendamentos.html">
+        📅 Agendamentos
+    </a>
+
+    <a href="consulta_agendamentos.html">
+        📋 Agenda
+    </a>
+
+</nav>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="container">
+
+
+    <!-- =================================================
+         TÍTULO
+    ================================================= -->
+
+    <section class="titulo">
+
+        <span class="tag">
+            BELEZA • ESTÉTICA • BEM-ESTAR
+        </span>
+
+        <h1>
+            Procedimentos Estéticos
+        </h1>
+
+        <p>
+            Cadastre e organize os tratamentos
+            oferecidos pela Bella Vita.
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         FORMULÁRIO
+    ================================================= -->
+
+    <section class="card">
+
+        <div class="card-titulo">
+
+            <div class="icone">
+                ✨
+            </div>
+
+            <div>
+
+                <h2>
+                    Novo Procedimento
+                </h2>
+
+                <p>
+                    Adicione um novo serviço ao catálogo.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="/salvar-servico"
+            method="POST"
+            id="formServico"
+        >
+
+
+            <div class="grid">
+
+
+                <!-- NOME -->
+
+                <div class="campo campo-grande">
+
+                    <label for="descricao">
+                        Nome do procedimento
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="descricao"
+                        name="descricao"
+                        placeholder="Ex.: Limpeza de Pele Profunda"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORIA -->
+
+                <div class="campo">
+
+                    <label for="categoria">
+                        Categoria
+                        <span>*</span>
+                    </label>
+
+                    <select
+                        id="categoria"
+                        name="categoria"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            disabled
+                            selected
+                        >
+                            Selecione
+                        </option>
+
+                        <option value="Facial">
+                            💆 Estética Facial
+                        </option>
+
+                        <option value="Corporal">
+                            🌸 Estética Corporal
+                        </option>
+
+                        <option value="Sobrancelhas e Cílios">
+                            👁️ Sobrancelhas e Cílios
+                        </option>
+
+                        <option value="Massoterapia">
+                            💗 Massoterapia
+                        </option>
+
+                        <option value="Depilação">
+                            🌷 Depilação
+                        </option>
+
+                        <option value="Outros">
+                            ✨ Outros
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PREÇO -->
+
+                <div class="campo">
+
+                    <label for="preco">
+                        Preço
+                        <span>*</span>
+                    </label>
+
+                    <div class="input-preco">
+
+                        <span>
+                            R$
+                        </span>
+
+                        <input
+                            type="number"
+                            id="preco"
+                            name="preco"
+                            min="0"
+                            step="0.01"
+                            placeholder="0,00"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DURAÇÃO -->
+
+                <div class="campo">
+
+                    <label for="tempo_estimado">
+                        Duração
+                        <span>*</span>
+                    </label>
+
+                    <select
+                        id="tempo_estimado"
+                        name="tempo_estimado"
+                        required
+                    >
+
+                        <option
+                            value=""
+                            disabled
+                            selected
+                        >
+                            Selecione
+                        </option>
+
+                        <option value="30">
+                            30 minutos
+                        </option>
+
+                        <option value="45">
+                            45 minutos
+                        </option>
+
+                        <option value="60">
+                            1 hora
+                        </option>
+
+                        <option value="75">
+                            1h15
+                        </option>
+
+                        <option value="90">
+                            1h30
+                        </option>
+
+                        <option value="120">
+                            2 horas
+                        </option>
+
+                        <option value="150">
+                            2h30
+                        </option>
+
+                        <option value="180">
+                            3 horas
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="acoes-formulario">
+
+                <button
+                    type="reset"
+                    class="btn-secundario"
+                >
+                    Limpar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-principal"
+                >
+                    ✨ Cadastrar Procedimento
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- =================================================
+         ESTATÍSTICAS
+    ================================================= -->
+
+    <section class="resumo">
+
+
+        <div class="resumo-card">
+
+            <div class="resumo-icone rosa">
+                💆
+            </div>
+
+            <div>
+
+                <span>
+                    Total de procedimentos
+                </span>
+
+                <strong id="totalServicos">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+            <div class="resumo-icone azul">
+                💰
+            </div>
+
+            <div>
+
+                <span>
+                    Preço médio
+                </span>
+
+                <strong id="precoMedio">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="resumo-card">
+
+            <div class="resumo-icone verde">
+                ⏱️
+            </div>
+
+            <div>
+
+                <span>
+                    Duração média
+                </span>
+
+                <strong id="duracaoMedia">
+                    0 min
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         CATÁLOGO
+    ================================================= -->
+
+    <section class="card">
+
+
+        <div class="cabecalho-lista">
+
+            <div>
+
+                <h2>
+                    🌸 Catálogo de Procedimentos
+                </h2>
+
+                <p>
+                    Serviços disponíveis para agendamento.
+                </p>
+
+            </div>
+
+
+            <input
+                type="search"
+                id="pesquisa"
+                placeholder="🔎 Buscar procedimento..."
+            >
+
+        </div>
+
+
+        <div class="tabela-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Procedimento
+                        </th>
+
+                        <th>
+                            Categoria
+                        </th>
+
+                        <th>
+                            Preço
+                        </th>
+
+                        <th>
+                            Duração
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="lista-servicos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="semResultados"
+            class="sem-resultados"
+            style="display:none;"
+        >
+
+            <div>
+                🌸
+            </div>
+
+            <strong>
+                Nenhum procedimento encontrado
+            </strong>
+
+            <p>
+                Tente pesquisar por outro nome.
+            </p>
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     RODAPÉ
+===================================================== -->
+
+<footer>
+
+    <strong>
+        ✨ Bella Vita
+    </strong>
+
+    <p>
+        Clínica de Estética & Bem-Estar
+    </p>
+
+    <small>
+        © 2026 — Sistema de Gestão
+    </small>
+
+</footer>
+
+
+<script>
+
+let servicos = [];
+
+
+/* =====================================================
+   FORMATAR MOEDA
+===================================================== */
+
+function moeda(valor) {
+
+    return Number(valor).toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CARREGAR SERVIÇOS
+===================================================== */
+
+async function carregarServicos() {
+
+    const tabela =
+        document.getElementById(
+            "lista-servicos"
+        );
+
+    try {
+
+        const resposta =
+            await fetch(
+                "/listar-servicos"
+            );
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro ao consultar o servidor."
+            );
+
+        }
+
+        servicos =
+            await resposta.json();
+
+
+        atualizarResumo();
+
+        mostrarServicos(
+            servicos
+        );
+
+    } catch (erro) {
+
+        console.error(
+            erro
+        );
+
+        tabela.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="erro"
+                >
+
+                    ❌ Não foi possível
+                    carregar os procedimentos.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOSTRAR SERVIÇOS
+===================================================== */
+
+function mostrarServicos(lista) {
+
+    const tabela =
+        document.getElementById(
+            "lista-servicos"
+        );
+
+    const vazio =
+        document.getElementById(
+            "semResultados"
+        );
+
+
+    tabela.innerHTML = "";
+
+
+    if (lista.length === 0) {
+
+        vazio.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    vazio.style.display =
+        "none";
+
+
+    lista.forEach(
+        servico => {
+
+            const linha =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const nome =
+                document.createElement(
+                    "td"
+                );
+
+            nome.innerHTML = `
+
+                <div class="servico-nome">
+
+                    <div class="mini-icone">
+                        ✨
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${escapar(
+                                servico.descricao
+                            )}
+                        </strong>
+
+                        <small>
+                            Procedimento estético
+                        </small>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const categoria =
+                document.createElement(
+                    "td"
+                );
+
+            categoria.innerHTML = `
+
+                <span class="badge">
+                    ${escapar(
+                        servico.categoria ||
+                        "Geral"
+                    )}
+                </span>
+
+            `;
+
+
+            const preco =
+                document.createElement(
+                    "td"
+                );
+
+            preco.innerHTML = `
+
+                <strong class="preco">
+                    ${moeda(
+                        servico.preco
+                    )}
+                </strong>
+
+            `;
+
+
+            const duracao =
+                document.createElement(
+                    "td"
+                );
+
+            duracao.innerHTML = `
+
+                <span class="duracao">
+                    ⏱️
+                    ${servico.tempo_estimado}
+                    min
+                </span>
+
+            `;
+
+
+            linha.appendChild(
+                nome
+            );
+
+            linha.appendChild(
+                categoria
+            );
+
+            linha.appendChild(
+                preco
+            );
+
+            linha.appendChild(
+                duracao
+            );
+
+
+            tabela.appendChild(
+                linha
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+function atualizarResumo() {
+
+    const total =
+        servicos.length;
+
+
+    document.getElementById(
+        "totalServicos"
+    ).textContent =
+        total;
+
+
+    if (total === 0) {
+
+        document.getElementById(
+            "precoMedio"
+        ).textContent =
+            "R$ 0,00";
+
+        document.getElementById(
+            "duracaoMedia"
+        ).textContent =
+            "0 min";
+
+        return;
+
+    }
+
+
+    const somaPrecos =
+        servicos.reduce(
+            (
+                total,
+                item
+            ) =>
+                total +
+                Number(
+                    item.preco
+                ),
+            0
+        );
+
+
+    const somaDuracoes =
+        servicos.reduce(
+            (
+                total,
+                item
+            ) =>
+                total +
+                Number(
+                    item.tempo_estimado
+                ),
+            0
+        );
+
+
+    const mediaPreco =
+        somaPrecos / total;
+
+
+    const mediaDuracao =
+        Math.round(
+            somaDuracoes / total
+        );
+
+
+    document.getElementById(
+        "precoMedio"
+    ).textContent =
+        moeda(
+            mediaPreco
+        );
+
+
+    document.getElementById(
+        "duracaoMedia"
+    ).textContent =
+        `${mediaDuracao} min`;
+
+}
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+document
+.getElementById(
+    "pesquisa"
+)
+.addEventListener(
+    "input",
+    function () {
+
+        const termo =
+            this.value
+                .trim()
+                .toLowerCase();
+
+
+        const resultado =
+            servicos.filter(
+                servico => {
+
+                    const nome =
+                        (
+                            servico.descricao ||
+                            ""
+                        )
+                        .toLowerCase();
+
+
+                    const categoria =
+                        (
+                            servico.categoria ||
+                            ""
+                        )
+                        .toLowerCase();
+
+
+                    return (
+                        nome.includes(
+                            termo
+                        ) ||
+                        categoria.includes(
+                            termo
+                        )
+                    );
+
+                }
+            );
+
+
+        mostrarServicos(
+            resultado
+        );
+
+    }
+);
+
+
+/* =====================================================
+   SEGURANÇA
+===================================================== */
+
+function escapar(valor) {
+
+    return String(valor)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+carregarServicos();
+
+</script>
+
+
 </body>
 
-<footer class="rodape">
-    <div class="container-rodape">
-        <p>&copy; 2026 EstéticaGlow - Sistema de Gestão de Estética</p>
-        <p>Todos os direitos reservados</p>
-    </div>
-</footer>
 </html>
